@@ -3,12 +3,6 @@ package com.semakin.lection5.serializer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-/*
-    <object type = “Student”>
-     <field type = “String” id = “name” value = “John”/>
-     <field type = “Integer” id = “age” value = “20”/>
-    </object>
- */
 public class ReflectionSerializator implements ISerializatorable<String>{
     public String serialize(Object obj) throws IllegalAccessException {
         Class<?> objClass =  obj.getClass();
