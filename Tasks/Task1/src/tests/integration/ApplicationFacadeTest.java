@@ -1,13 +1,11 @@
-package com.test.semakin.integration;
+package tests.integration;
 
 import com.semakin.ApplicationFacade;
-import com.semakin.LogPrinter;
-import com.semakin.ResultSumKeeper;
+import com.semakin.ResultPrinter;
 import com.semakin.exceptions.InnerResourceException;
-import com.semakin.resourceGetters.ReaderGetterDecorator;
 import com.semakin.resourceGetters.ReaderGetterable;
-import com.semakin.resourceGetters.ResourceStringGetter;
-import com.test.semakin.mocks.ReaderGetterMock;
+import tests.unit.ResultPrinterMock;
+import tests.unit.mocks.ReaderGetterMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -29,15 +27,14 @@ class ApplicationFacadeTest {
             put("qwert","2");
             put("кирилица","1");
         }};
-        Integer expectedSum = 68;
-        LogPrinter logPrinter = getNewLogPrinter();
-        ResultSumKeeper sumKeeper = new ResultSumKeeper(logPrinter);
+        int expectedSum = 68;
+        ResultPrinterMock resultPrinter = getResultPrinterMock();
 
-        runApp(resourcesStub, sumKeeper);
-        waitThreads(5000);
-        Integer actual = sumKeeper.getResult();
+        runApp(resourcesStub, resultPrinter);
+        String actualLastMessage = resultPrinter.getLastMessage();
+        int actualSum = Integer.parseInt(actualLastMessage);
 
-        Assertions.assertEquals(expectedSum, actual);
+        Assertions.assertEquals(expectedSum, actualSum);
     }
 
     @Test
@@ -50,31 +47,30 @@ class ApplicationFacadeTest {
             put("abcdefef","0 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1  1- it is invalid");
         }};
         Integer expectedSum = 68;
-        LogPrinter logPrinter = getNewLogPrinter();
-        ResultSumKeeper sumKeeper = new ResultSumKeeper(logPrinter);
+        ResultPrinter resultPrinter = getResultPrinterMock();
 
-        runApp(resourcesStub, sumKeeper);
+        runApp(resourcesStub, resultPrinter);
         waitThreads(5000);
-        try {
-            Integer actual = sumKeeper.getResult();
-        }
-        catch(InnerResourceException ex){
-            System.out.println("то что надо");
-            return;
-        }
+//        try {
+//            Integer actual = sumKeeper.getResult();
+//        }
+//        catch(InnerResourceException ex){
+//            System.out.println("то что надо");
+//            return;
+//        }
         Assertions.fail("При ошибке не должен был вернуться результат!");
     }
 
-    private void runApp(HashMap<String, String> resourcesStub, ResultSumKeeper sumKeeper){
-        ApplicationFacade app = getApplicationFacadeByMockResources(resourcesStub, sumKeeper);
+    private void runApp(HashMap<String, String> resourcesStub, ResultPrinter resultPrinter){
+        ApplicationFacade app = getApplicationFacadeByMockResources(resourcesStub, resultPrinter);
         Object[] keyObjects = resourcesStub.keySet().toArray();
         String[] resourceAddresses = Arrays.copyOf(keyObjects, keyObjects.length, String[].class);
 
         app.Run(resourceAddresses);
     }
 
-    private ApplicationFacade getApplicationFacadeByMockResources(HashMap<String, String> resourcesMock, ResultSumKeeper resultSumKeeper){
-        return new ApplicationFacade(resultSumKeeper){
+    private ApplicationFacade getApplicationFacadeByMockResources(HashMap<String, String> resourcesMock, ResultPrinter resultPrinter){
+        return new ApplicationFacade(resultPrinter){
             @Override
             protected ReaderGetterable getReaderGetter() {
                 return new ReaderGetterMock(resourcesMock);
@@ -82,18 +78,8 @@ class ApplicationFacadeTest {
         };
     }
 
-    private ResourceStringGetter getResourceStringGetterMock(HashMap<String, String> resourcesMock){
-        ReaderGetterDecorator readerGetterDecorator = null;
-        return new ResourceStringGetter(readerGetterDecorator){
-            @Override
-            public String getResourceString(String resourceAddress) throws InnerResourceException {
-                return resourcesMock.get(resourceAddress);
-            }
-        };
-    }
-
-    private LogPrinter getNewLogPrinter(){
-        return new LogPrinter();
+    private ResultPrinterMock getResultPrinterMock(){
+        return new ResultPrinterMock();
     }
 
     private void waitThreads(int millis){

@@ -1,4 +1,4 @@
-package com.test.semakin.validation;
+package tests.unit.validation;
 
 import com.semakin.validation.StringNumberValidator;
 import org.junit.jupiter.api.Assertions;

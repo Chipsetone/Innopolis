@@ -1,4 +1,4 @@
-package com.test.semakin.parsers;
+package tests.unit.parsers;
 
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.parsers.StringConverter;

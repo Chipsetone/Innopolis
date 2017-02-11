@@ -1,19 +1,19 @@
-package com.semakin;
+package com.semakin.threading;
 
+import com.semakin.ResultPrinter;
 import com.semakin.exceptions.InnerResourceException;
 
-/**
- * Created by Chi on 06.02.2017.
- */
-public class ResultSumKeeper {
+@Deprecated
+public class ResultSummator{
+
     private int resultSum;
-    private LogPrinter logPrinter;
+    private ResultPrinter resultPrinter;
     private boolean isFail = false;
 
-    public ResultSumKeeper(LogPrinter logPrinter)
+    public ResultSummator(ResultPrinter resultPrinter)
     {
         resultSum = 0;
-        this.logPrinter = logPrinter;
+        this.resultPrinter = resultPrinter;
     }
 
     public synchronized void addResult(int sum) throws InnerResourceException {
@@ -38,6 +38,6 @@ public class ResultSumKeeper {
     }
 
     private void log(String message){
-        logPrinter.println(message);
+        resultPrinter.println(message);
     }
 }

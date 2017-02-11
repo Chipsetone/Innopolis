@@ -1,4 +1,4 @@
-package com.test.semakin.resourceGetters;
+package tests.unit.resourceGetters;
 
 import com.semakin.resourceGetters.FileReaderGetterDecorator;
 import com.semakin.resourceGetters.InvalidResourceGetter;

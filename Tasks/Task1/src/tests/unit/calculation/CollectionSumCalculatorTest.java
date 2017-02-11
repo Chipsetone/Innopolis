@@ -1,4 +1,4 @@
-package com.test.semakin.calculation;
+package tests.unit.calculation;
 
 import com.semakin.calculation.CollectionSumCalculator;
 import com.semakin.validation.EvenPositiveNumberValidator;

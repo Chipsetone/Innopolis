@@ -1,17 +1,17 @@
-package com.test.semakin;
+package tests.unit.threading;
 
-import com.semakin.LogPrinter;
-import com.semakin.ResultSumKeeper;
+import com.semakin.ResultPrinter;
+import com.semakin.threading.ResultSummator;
 import com.semakin.exceptions.InnerResourceException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 /**
  * Created by Chi on 06.02.2017.
  */
-class ResultSumKeeperTest {
+class ResultSummatorTest {
     @Test
     void getResult() throws InnerResourceException {
-        ResultSumKeeper sumPrinter = getNewResultSumKeeper();
+        ResultSummator sumPrinter = getNewResultSumKeeper();
         int expectedOnInit = 0;
         int expectedAfterAdding = 4;
 
@@ -26,7 +26,7 @@ class ResultSumKeeperTest {
 
     @Test
     void addResult() throws InnerResourceException {
-        ResultSumKeeper sumPrinter = getNewResultSumKeeper();
+        ResultSummator sumPrinter = getNewResultSumKeeper();
         int expected = 5;
 
         sumPrinter.addResult(5);
@@ -36,7 +36,7 @@ class ResultSumKeeperTest {
     }
 
     void addResult_Fail_Exception(){
-        ResultSumKeeper sumPrinter = getNewResultSumKeeper();
+        ResultSummator sumPrinter = getNewResultSumKeeper();
         sumPrinter.fail();
         int someNumber = 5;
         try {
@@ -46,11 +46,11 @@ class ResultSumKeeperTest {
         }
     }
 
-    private ResultSumKeeper getNewResultSumKeeper(){
-        return new ResultSumKeeper(getLogPrinter());
+    private ResultSummator getNewResultSumKeeper(){
+        return new ResultSummator(getLogPrinter());
     }
 
-    private LogPrinter getLogPrinter(){
-        return new LogPrinter();
+    private ResultPrinter getLogPrinter(){
+        return new ResultPrinter();
     }
 }

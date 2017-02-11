@@ -1,4 +1,4 @@
-package com.test.semakin.calculation;
+package tests.unit.calculation;
 
 import com.semakin.calculation.StreamSumCalculator;
 import com.semakin.exceptions.InnerResourceException;
@@ -8,7 +8,7 @@ import com.semakin.resourceGetters.ReaderGetterable;
 import com.semakin.validation.EvenPositiveNumberValidator;
 import com.semakin.validation.NumberValidatorable;
 import com.semakin.validation.StringNumberValidator;
-import com.test.semakin.mocks.ReaderGetterMock;
+import tests.unit.mocks.ReaderGetterMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -16,7 +16,7 @@ class SumAccumulator{
         this.stringConverter = stringConverter;
     }
 
-    protected void processSymbol(char symbol) throws InnerResourceException {
+    public void processSymbol(char symbol) throws InnerResourceException {
         checkAllowedChar(symbol);
 
         if(symbol == ResourceSymbols.space){
@@ -26,7 +26,7 @@ class SumAccumulator{
         }
     }
 
-    protected void completeCalculations() throws InnerResourceException {
+    public void completeCalculations() throws InnerResourceException {
         if(strAsNumberBuffer.length() > 0){
             pullBuffer();
         }
@@ -35,14 +35,14 @@ class SumAccumulator{
         }
     }
 
+    public int getResult(){
+        return sumResult;
+    }
+
     private void pullBuffer() throws InnerResourceException {
         int number = stringConverter.toInt(strAsNumberBuffer);
         sumResult += number;
         strAsNumberBuffer = "";
-    }
-
-    protected int getResult(){
-        return sumResult;
     }
 
     private void checkAllowedChar(char symbol) throws InnerResourceException {

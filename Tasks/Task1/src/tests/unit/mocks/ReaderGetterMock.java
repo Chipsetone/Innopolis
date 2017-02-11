@@ -1,4 +1,4 @@
-package com.test.semakin.mocks;
+package tests.unit.mocks;
 
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.resourceGetters.ReaderGetterable;

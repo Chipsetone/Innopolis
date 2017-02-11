@@ -1,20 +1,17 @@
-package com.test.semakin.calculation;
+package tests.unit.calculation;
 
 import com.semakin.calculation.CollectionSumCalculatorFactory;
 import com.semakin.calculation.SumCalculatorable;
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.parsers.CollectionParser;
-import com.semakin.resourceGetters.ReaderGetterDecorator;
 import com.semakin.resourceGetters.ReaderGetterable;
 import com.semakin.resourceGetters.ResourceStringGetter;
+import tests.unit.mocks.ReaderGetterMock;
 import com.semakin.validation.NumberValidatorable;
 import com.semakin.validation.StringNumberValidator;
-import com.test.semakin.mocks.ReaderGetterMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.Reader;
 import java.util.HashMap;
 
 /**

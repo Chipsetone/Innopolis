@@ -1,4 +1,4 @@
-package com.test.semakin.threading;
+package tests.unit.threading;
 
 import com.semakin.threading.RunnableService;
 import org.junit.jupiter.api.Test;
