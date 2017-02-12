@@ -34,29 +34,29 @@ public class ApplicationFacade {
         init(resultKeeper);
     }
 
+    /**
+     * Обработка ресурсов по их адресу в мнгогопоточном режиме
+     * @param resourceAddresses адреса ресурсов
+     */
     public void Run(String resourceAddresses[]) {
         List<ResourceCalculator> resourceCalculators = getResourceCalculators(resourceAddresses);
         calculateResources(resourceCalculators);
-
-//        Runnable run = new Runnable() {
-//            @Override
-//            public void run() {
         while (true){
             messageProcessor.runProcessingMessages();
-            // TODO: придумано: если очередь остановлена и все потоки завершены, то выходить
+
             if (isComplete.get() && messageProcessor.isStopped()){
-                System.out.println("Выполнение программы прервано.");
                 break;
             }
         }
         int result = messageProcessor.getSum();
         System.out.println("Завершено. Результат " + result);
-//            }
-//        };
-//        Thread thread = new Thread(run);
-//        thread.start();
     }
 
+    /**
+     * Возвращает получатель потока из ресурса
+     * Переопределяется в целях тестирования
+     * @return возвращатель читателя потока (Stream) на основании адреса
+     */
     protected ReaderGetterable getReaderGetter() {
         ReaderGetterFactory readerGetterFactory = new ReaderGetterFactory();
         return readerGetterFactory.getReaderGetter();
@@ -90,7 +90,14 @@ public class ApplicationFacade {
 
     private List<ResourceCalculator> getResourceCalculators(String resourceAddresses[]) {
         List<ResourceCalculator> resourceCalculators = new ArrayList<ResourceCalculator>();
+
         for (String resourceAddress : resourceAddresses) {
+
+            resourceAddress = resourceAddress.trim();
+            if(resourceAddress.length() == 0){
+                continue;
+            }
+
             ResourceCalculator resourceCalculator = new ResourceCalculator(resourceAddress, sumCalculatorFactory);
             resourceCalculators.add(resourceCalculator);
         }
