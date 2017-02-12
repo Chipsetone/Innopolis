@@ -8,13 +8,22 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by Chi on 06.02.2017.
+ * Получатель доступа к ресурсу сети
+ * {@inheritDoc}
+ * @see ReaderGetterDecorator
+ * @author Виктор Семакин
  */
 public class HttpReaderGetterDecorator extends ReaderGetterDecorator {
+    /**
+     * {@inheritDoc}
+     */
     public HttpReaderGetterDecorator(ReaderGetterable readerGetter) {
         super(readerGetter);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Reader getResourceReader(String resourceAddress) throws InnerResourceException {
         try{

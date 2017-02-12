@@ -5,5 +5,10 @@ package com.semakin.validation;
  * @author Виктор Семакин
  */
 public interface NumberValidatorable {
+    /**
+     * Проверяет число
+     * @param number число
+     * @return true - соответствует условиям
+     */
     boolean isNumberValid(int number);
 }

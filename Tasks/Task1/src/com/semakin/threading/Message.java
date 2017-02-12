@@ -1,35 +1,58 @@
 package com.semakin.threading;
 
-import com.semakin.exceptions.InnerResourceException;
 import com.semakin.exceptions.ThreadMessageException;
 
 /**
- * Сообщение, которое хранит передаваемое значение или исключение
+ * Сообщение , которое хранит передаваемое значение или исключение
+ * @author Виктор Семакин
  */
 public class Message {
-    private Exception resourceException;
+    private Exception exception;
     private Integer message;
     private String description;
 
-    public Message(Exception resourceException) {
-        this(resourceException, "");
+    /**
+     * Сообщение, содержащее исключение
+     * @param exception
+     */
+    public Message(Exception exception) {
+        this(exception, "");
     }
 
-    public Message(Exception resourceException, String description){
-        this.resourceException = resourceException;
+    /**
+     * Сообщение, содержащее исключение с описанием
+     * @param exception
+     * @param description
+     */
+    public Message(Exception exception, String description){
+        this.exception = exception;
         this.description = description;
     }
 
+    /**
+     * Сообщение, содержащее число
+     * @param message
+     */
     public Message(Integer message) {
         this(message, "");
     }
 
+    /**
+     * Сообщение, содержащее число с описанием
+     * @param message
+     * @param description
+     */
     public Message(Integer message, String description) {
         this.message = message;
         this.description = description;
     }
 
-    public Integer getMessage() {
+    /**
+     * получает число, хранящееся в сообщении
+     * @return число
+     * @throws ThreadMessageException если в сообщении хранится не число, а исключение
+     */
+    public Integer getMessage() throws ThreadMessageException{
         if(isInvalidMessage()){
             throw new ThreadMessageException("Невалидное сообщение. Нужно использовать isInvalidMessage()!", getException());
         }
@@ -39,10 +62,10 @@ public class Message {
 
     /**
      * Проверяет содержимое сообщения
-     * @return true если в сообщении хранится Exception
+     * @return true если в сообщении хранится Exception, false - если число
      */
     public boolean isInvalidMessage(){
-        return resourceException != null;
+        return exception != null;
     }
 
     /**
@@ -50,9 +73,12 @@ public class Message {
      * @return исключение
      */
     public Exception getException(){
-        return resourceException;
+        return exception;
     }
 
+    /**
+     * @return текст описания, переданный в сообщении
+     */
     public String getDescription() {
         return description;
     }

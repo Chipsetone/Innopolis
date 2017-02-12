@@ -5,18 +5,26 @@ import com.semakin.ResultPrinter;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- *
+ * @see IMessageQueueProcessorable
+ * @see com.semakin.threading.IMessagePushable
+ * @author Виктор Семакин
  */
-public class MessageProcessor implements  IMessageProcessorable, IMessagePushable {
+public class MessageQueueProcessor implements IMessageQueueProcessorable, IMessagePushable {
     private ConcurrentLinkedQueue<Message> messageQueue = new ConcurrentLinkedQueue<>();
     private ResultPrinter resultPrinter;
     private volatile int sum = 0;
     private boolean isError = false;
 
-    public MessageProcessor(ResultPrinter resultPrinter) {
+    /**
+     * @param resultPrinter отображатель результата
+     */
+    public MessageQueueProcessor(ResultPrinter resultPrinter) {
         this.resultPrinter = resultPrinter;
     }
 
+    /**
+     * {@inheritDoc }
+     */
     @Override
     public void pushMessage(Message message) {
         messageQueue.add(message);
@@ -24,7 +32,7 @@ public class MessageProcessor implements  IMessageProcessorable, IMessagePushabl
 
     /**
      * Метод не ориентирован на вызов из нескольких потоков!
-     * запускает процесс расчета доступных элементов очереди
+     * {@inheritDoc }
      */
     @Override
     public void runProcessingMessages() {
@@ -52,11 +60,9 @@ public class MessageProcessor implements  IMessageProcessorable, IMessagePushabl
         }
     }
 
-    @Override
-    public int getSum() {
-        return sum;
-    }
-
+    /**
+     * {@inheritDoc }
+     */
     @Override
     public boolean isStopped() {
         return isError || isQueueEmpty();

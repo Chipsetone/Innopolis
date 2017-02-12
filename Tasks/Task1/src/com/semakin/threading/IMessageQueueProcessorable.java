@@ -4,16 +4,16 @@ package com.semakin.threading;
  * Обработчик очереди сообщений
  * @author Виктор Семакин
  */
-public interface IMessageProcessorable{//} extends IMessagePushable {
-
+public interface IMessageQueueProcessorable {
     /**
-     * Запуск обработки сообщений.
+     * Запуск процесса расчета очереди сообщений
      * Работает до тех пор пока очередь не достигнет опустошения
-     * @author Виктор Семакин
      */
     void runProcessingMessages();
 
-    int getSum();
-
+    /**
+     * Проверяет отработала ли очередь
+     * @return true - очередь отбработана и остановлена
+     */
     boolean isStopped();
 }

@@ -5,7 +5,7 @@ import com.semakin.parsers.StringConverter;
 import com.semakin.parsers.StringValidConverter;
 import com.semakin.resourceGetters.ReaderGetterFactory;
 import com.semakin.resourceGetters.ReaderGetterable;
-import com.semakin.threading.MessageProcessor;
+import com.semakin.threading.MessageQueueProcessor;
 import com.semakin.threading.ResourceCalculator;
 import com.semakin.threading.RunnableService;
 import com.semakin.validation.EvenPositiveNumberValidator;
@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ApplicationFacade {
     private SumCalculatorFactory sumCalculatorFactory;
     private RunnableService runService;
-    private MessageProcessor messageProcessor;
+    private MessageQueueProcessor messageProcessor;
     private AtomicBoolean isComplete = new AtomicBoolean(false);
     private final ResultPrinter resultKeeper;
 
@@ -52,8 +52,7 @@ public class ApplicationFacade {
                 break;
             }
         }
-        int result = messageProcessor.getSum();
-        System.out.println("Завершено. Результат " + result);
+        System.out.println("Завершено.");
     }
 
     /**
@@ -68,7 +67,7 @@ public class ApplicationFacade {
 
     private void init(ResultPrinter resultPrinter) {
         runService = new RunnableService();
-        messageProcessor = new MessageProcessor(resultPrinter);
+        messageProcessor = new MessageQueueProcessor(resultPrinter);
         sumCalculatorFactory = newSumCalculationFactory();
     }
 

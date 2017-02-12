@@ -35,10 +35,9 @@ class ApplicationFacadeTest {
         ResultPrinterMock resultPrinter = getResultPrinterMock();
 
         runApp(resourcesStub, resultPrinter);
-        //waitThreads(1000);
 
         String actualLastMessage = resultPrinter.getLastMessage();
-        System.out.println(actualLastMessage);
+        System.out.println("последнее сообщение " + actualLastMessage);
         int actualSum = Integer.parseInt(actualLastMessage);
 
         Assertions.assertEquals(expectedSum, actualSum);

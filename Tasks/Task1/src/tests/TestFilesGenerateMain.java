@@ -2,10 +2,11 @@ package tests;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
 
 /**
- * Created by Chi on 11.02.2017.
+ * Вспомогательный модуль.
+ * Генерирует валидные файлы для тестирования программы.
+ * Количество файлов задается в FILE_COUNT
  */
 public class TestFilesGenerateMain {
 
@@ -14,12 +15,16 @@ public class TestFilesGenerateMain {
 
         FileGenerator generator = new FileGenerator(150);
 
-        try {
+        try(FileWriter fileListWriter = new FileWriter("validFileNames.txt")) {
             for (int i = 0; i < FILE_COUNT; i++) {
-                generator.generateValidFile("validData" + i +".txt", 500);
+                String fileName = "validData" + i +".txt";
+                generator.generateValidFile(fileName, 500);
+
+                fileListWriter.write(fileName + "\r\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

@@ -6,13 +6,22 @@ import java.io.FileReader;
 import java.io.Reader;
 
 /**
- * Created by Chi on 07.02.2017.
+ * Получатель доступа к ресурсу файловой системы
+ * {@inheritDoc}
+ * @see ReaderGetterDecorator
+ * @author Виктор Семакин
  */
 public class FileReaderGetterDecorator extends ReaderGetterDecorator {
+    /**
+     * {@inheritDoc}
+     */
     public FileReaderGetterDecorator(ReaderGetterable readerGetter) {
         super(readerGetter);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final Reader getResourceReader(String resourceAddress) throws InnerResourceException {
         try{

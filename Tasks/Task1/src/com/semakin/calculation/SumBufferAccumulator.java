@@ -4,7 +4,7 @@ import com.semakin.exceptions.InnerResourceException;
 import com.semakin.parsers.StringConverter;
 import com.semakin.threading.IMessagePushable;
 import com.semakin.threading.Message;
-import com.semakin.validation.ResourceSymbols;
+import com.semakin.validation.ValidSymbols;
 
 /**
  * Буфер символов.
@@ -41,7 +41,7 @@ public class SumBufferAccumulator {
             return;
         }
 
-        if(symbol == ResourceSymbols.space){
+        if(symbol == ValidSymbols.space){
             tryReleaseBuffer();
         }else{
             strAsNumberBuffer += symbol;
@@ -63,10 +63,10 @@ public class SumBufferAccumulator {
     private void pullBuffer(){
         Message message;
         try {
-            // TODO вытащить сюда проверку и конвертацию
+            // TODO вытащить сюда проверку и конвертацию когда-нибудь
             int number = stringConverter.toInt(strAsNumberBuffer);
             if(number == 0){
-                clearBuffer();
+                releaseBuffer();
                 return;
             }
             message = new Message(number, strAsNumberBuffer);
@@ -76,15 +76,15 @@ public class SumBufferAccumulator {
         }
 
         messagePusher.pushMessage(message);
-        clearBuffer();
+        releaseBuffer();
     }
 
     private boolean isNotAllowedChar(char symbol) {
-        return (!(ResourceSymbols.allowedSymbols.contains(symbol) ||
+        return (!(ValidSymbols.allowedSymbols.contains(symbol) ||
                 Character.isDigit(symbol)));
     }
 
-    private void clearBuffer(){
+    private void releaseBuffer(){
         strAsNumberBuffer = "";
     }
 }

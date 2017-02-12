@@ -1,7 +1,7 @@
 package com.semakin.parsers;
 
 import com.semakin.exceptions.InnerResourceException;
-import com.semakin.validation.ResourceSymbols;
+import com.semakin.validation.ValidSymbols;
 import com.semakin.validation.StringAsNumberValidator;
 
 import java.util.Arrays;
@@ -13,10 +13,10 @@ import java.util.List;
  */
 @Deprecated
 public class CollectionParser {
-    private final Character hyphenSign = ResourceSymbols.hyphen;
-    private final Character minusSign = ResourceSymbols.minus;
-    private final Character space = ResourceSymbols.space;
-    private final List<Character> allowedCharacters = ResourceSymbols.allowedSymbols;
+    private final Character hyphenSign = ValidSymbols.hyphen;
+    private final Character minusSign = ValidSymbols.minus;
+    private final Character space = ValidSymbols.space;
+    private final List<Character> allowedCharacters = ValidSymbols.allowedSymbols;
 
     private StringAsNumberValidator numberValidator;
 

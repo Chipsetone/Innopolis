@@ -1,7 +1,8 @@
 package com.semakin.resourceGetters;
 
 /**
- * @au
+ * Фабрика получателей ресурсов
+ * @author Виктор Семакин
  */
 public class ReaderGetterFactory {
     /**
@@ -10,7 +11,7 @@ public class ReaderGetterFactory {
      *  - сначала пытается получить доступ к локальному файлу,
      *  - затем к Http-ресурсу.
      *  - при неуспешных попытках подключения к Http- и File-ресурсам возникает исключение InnerResourceException
-     * @return Получатель читателя потока(Stream) - ReaderGetterable
+     * @return ReaderGetter - получатель читателя потока(Stream) -
      */
     public ReaderGetterable getReaderGetter(){
         ReaderGetterable invalidResource = new InvalidResourceGetter();

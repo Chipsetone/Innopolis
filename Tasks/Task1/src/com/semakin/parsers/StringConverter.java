@@ -1,7 +1,7 @@
 package com.semakin.parsers;
 
 import com.semakin.exceptions.InnerResourceException;
-import com.semakin.validation.ResourceSymbols;
+import com.semakin.validation.ValidSymbols;
 import com.semakin.validation.StringAsNumberValidator;
 
 /**
@@ -15,7 +15,7 @@ public class StringConverter {
     }
 
     public int toInt(String value) throws InnerResourceException {
-        value = value.replace(ResourceSymbols.hyphen, ResourceSymbols.minus);
+        value = value.replace(ValidSymbols.hyphen, ValidSymbols.minus);
         value = value.trim();
 
         if(stringAsNumberValidator.isNumber(value)){

@@ -2,7 +2,7 @@ package tests.unit.parsers;
 
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.parsers.StringConverter;
-import com.semakin.validation.ResourceSymbols;
+import com.semakin.validation.ValidSymbols;
 import com.semakin.validation.StringAsNumberValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -67,7 +67,7 @@ class StringConverterTest {
     @Test
     void toInt_ValidNumberWithHyphen_Valid() throws InnerResourceException {
         StringConverter converter = getStringConverter();
-        String hyphenable = ResourceSymbols.hyphen + "123";
+        String hyphenable = ValidSymbols.hyphen + "123";
         int expected = -123;
 
         int actual = converter.toInt(hyphenable);
