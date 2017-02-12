@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Lections/Lection5/Lection5_Serializer/Lection5_Serializer.iml" filepath="$PROJECT_DIR$/Lections/Lection5/Lection5_Serializer/Lection5_Serializer.iml" group="Lection5" />
+      <module fileurl="file://$PROJECT_DIR$/Tasks/Task1/Task1.iml" filepath="$PROJECT_DIR$/Tasks/Task1/Task1.iml" group="Tasks" />
+    </modules>
+  </component>
+</project>

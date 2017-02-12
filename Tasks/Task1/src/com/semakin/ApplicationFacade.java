@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ApplicationFacade {
     private SumCalculatorFactory sumCalculatorFactory;
     private RunnableService runService;
-    private IMessageProcessorable messageProcessor;
+    private MessageProcessor messageProcessor;
     private AtomicBoolean isComplete = new AtomicBoolean(false);
     private final ResultPrinter resultKeeper;
 
@@ -36,33 +36,25 @@ public class ApplicationFacade {
 
     public void Run(String resourceAddresses[]) {
         List<ResourceCalculator> resourceCalculators = getResourceCalculators(resourceAddresses);
-
-        Runnable run = new Runnable() {
-            @Override
-            public void run() {
-                while (true){
-                    if(isComplete.get()){
-                        break;
-                    }
-                    messageProcessor.runProcessingMessages();
-                    Message lastMessage = messageProcessor.getLastMessage();
-
-                    //TODO подумать над правильностью условия для выхода из цикла
-                    if ((lastMessage != null) && lastMessage.isInvalidMessage()) {
-                        int result = messageProcessor.getSum();
-                        System.out.println("Выполнение программы прервано.");
-                        break;
-                    }
-                }
-                int result = messageProcessor.getSum();
-                System.out.println("Завершено. Результат " + result);
-            }
-        };
-        Thread thread = new Thread(run);
-        thread.setDaemon(true);
-        thread.start();
-
         calculateResources(resourceCalculators);
+
+//        Runnable run = new Runnable() {
+//            @Override
+//            public void run() {
+        while (true){
+            messageProcessor.runProcessingMessages();
+            // TODO: придумано: если очередь остановлена и все потоки завершены, то выходить
+            if (isComplete.get() && messageProcessor.isStopped()){
+                System.out.println("Выполнение программы прервано.");
+                break;
+            }
+        }
+        int result = messageProcessor.getSum();
+        System.out.println("Завершено. Результат " + result);
+//            }
+//        };
+//        Thread thread = new Thread(run);
+//        thread.start();
     }
 
     protected ReaderGetterable getReaderGetter() {

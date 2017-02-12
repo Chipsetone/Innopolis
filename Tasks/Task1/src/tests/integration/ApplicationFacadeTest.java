@@ -34,7 +34,7 @@ class ApplicationFacadeTest {
         ResultPrinterMock resultPrinter = getResultPrinterMock();
 
         runApp(resourcesStub, resultPrinter);
-        waitThreads(1000);
+        //waitThreads(1000);
 
         String actualLastMessage = resultPrinter.getLastMessage();
         System.out.println(actualLastMessage);
@@ -56,7 +56,7 @@ class ApplicationFacadeTest {
         ResultPrinterMock resultPrinter = getResultPrinterMock();
 
         runApp(resourcesStub, resultPrinter);
-        waitThreads(1000);
+        //waitThreads(1000);
         String lastMessage = resultPrinter.getLastMessage();
         System.out.println("последнее сообщение: " + lastMessage);
         int actualLastSum = Integer.parseInt(lastMessage);

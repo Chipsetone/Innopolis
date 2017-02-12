@@ -5,7 +5,7 @@ import com.semakin.ResultPrinter;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 
-public class MessageProcessor implements  IMessageProcessorable {
+public class MessageProcessor implements  IMessageProcessorable, IMessagePushable {
     private ConcurrentLinkedQueue<Message> messageQueue = new ConcurrentLinkedQueue<>();
     private ResultPrinter resultPrinter;
     private volatile int sum = 0;
@@ -62,6 +62,16 @@ public class MessageProcessor implements  IMessageProcessorable {
     public int getSum() {
         return sum;
     }
+
+    @Override
+    public boolean isStopped() {
+        return isError || isQueueEmpty();
+    }
+
+    private boolean isQueueEmpty(){
+        return messageQueue.isEmpty();
+    }
+
 
     private Message pollMessage(){
         return messageQueue.poll();
