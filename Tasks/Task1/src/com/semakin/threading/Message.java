@@ -1,5 +1,6 @@
 package com.semakin.threading;
 
+import com.semakin.exceptions.InnerResourceException;
 import com.semakin.exceptions.ThreadMessageException;
 
 /**
@@ -8,18 +9,29 @@ import com.semakin.exceptions.ThreadMessageException;
 public class Message {
     private Exception resourceException;
     private Integer message;
+    private String description;
 
     public Message(Exception resourceException) {
+        this(resourceException, "");
+    }
+
+    public Message(Exception resourceException, String description){
         this.resourceException = resourceException;
+        this.description = description;
     }
 
     public Message(Integer message) {
-        this.message = message;
+        this(message, "");
     }
 
-    public Integer getMessage(){
+    public Message(Integer message, String description) {
+        this.message = message;
+        this.description = description;
+    }
+
+    public Integer getMessage() {
         if(isInvalidMessage()){
-            throw new ThreadMessageException("Невалидное сообщение. Пользуйтесь isInvalidMessage()!", getException());
+            throw new ThreadMessageException("Невалидное сообщение. Нужно использовать isInvalidMessage()!", getException());
         }
 
         return message;
@@ -39,5 +51,9 @@ public class Message {
      */
     public Exception getException(){
         return resourceException;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

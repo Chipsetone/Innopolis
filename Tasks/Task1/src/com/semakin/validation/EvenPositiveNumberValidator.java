@@ -3,7 +3,7 @@ package com.semakin.validation;
 /**
  * Created by Chi on 06.02.2017.
  */
-public class EvenPositiveNumberValidator implements NumberValidatorable {
+public class EvenPositiveNumberValidator implements NumberValidatorable{
     /**
      * Проверяет целое число на четность и положительность
      * @param number

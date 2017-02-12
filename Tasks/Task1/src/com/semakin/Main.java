@@ -12,7 +12,10 @@ public class Main {
     Все ошибки должны быть корректно обработаны, все API покрыто модульными тестами*/
 
     public static void main(String[] args) {
-        // создать класс парсер
+
+        ResultPrinter printer = new ResultPrinter();
+        ApplicationFacade application = new ApplicationFacade(printer);
+        application.Run(args);
 
     }
 }

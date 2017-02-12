@@ -22,32 +22,7 @@ class RunnableServiceTest {
                 }
             };
 
-            service.runAction(actionToAdd);
-        }
-
-        log("Добавление потоков закончено. Главный поток завершен.");
-    }
-
-    @Test
-    void terminateAllThreads() {
-        RunnableService service = new RunnableService();
-        Integer actionsCount = 150;
-
-        for (int i = 0; i < actionsCount; i++) {
-            final Integer threadnumber = i;
-            Runnable actionToAdd = new Runnable() {
-                @Override
-                public void run() {
-                    Thread current = Thread.currentThread();
-                    log(threadnumber + " name: " + current.getName());
-                    if(threadnumber == 75){
-                        service.terminateAllThreads();
-                        log(threadnumber + "TERMINATE_ALL!");
-                    }
-                }
-            };
-
-            service.runAction(actionToAdd);
+            service.addAction(actionToAdd);
         }
 
         log("Добавление потоков закончено. Главный поток завершен.");

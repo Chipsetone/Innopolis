@@ -1,9 +1,9 @@
 package com.semakin.calculation;
 
 import com.semakin.exceptions.InnerResourceException;
-import com.semakin.parsers.StringConverter;
 import com.semakin.resourceGetters.ReaderGetterable;
-import com.semakin.validation.*;
+import com.semakin.threading.IMessagePushable;
+import com.semakin.threading.Message;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -11,36 +11,38 @@ import java.io.Reader;
 /**
  * Created by Chi on 08.02.2017.
  */
-// допилить и заменить им CollectionSumCalculator
-public class StreamSumCalculator implements SumCalculatorable{
+public class StreamSumCalculator{
     private ReaderGetterable readerGetter;
     private String resourceAddress;
     private SumAccumulator sumAccumulator;
+    private IMessagePushable messagePusher;
 
-    public StreamSumCalculator(StringConverter stringConverter, ReaderGetterable readerGetter, String resourceAddress){
+    public StreamSumCalculator(ReaderGetterable readerGetter, String resourceAddress, SumAccumulator sumAccumulator, IMessagePushable messagePusher){
         this.readerGetter = readerGetter;
         this.resourceAddress = resourceAddress;
-        this.sumAccumulator = new SumAccumulator(stringConverter);
+        this.sumAccumulator = sumAccumulator;
+        this.messagePusher = messagePusher;
     }
 
-    @Override
-    public int getCalculatedSum() throws InnerResourceException {
-        int resultSum = 0;
-
-        try(Reader reader = readerGetter.getBufferedReader(resourceAddress)){
+    public void calculateSum() {
+        try (Reader reader = readerGetter.getBufferedReader(resourceAddress)) {
             int charCode;
             Character currentChar;
 
-            while((charCode=reader.read())!=-1){
-                currentChar = ((char)charCode);
+            while ((charCode = reader.read()) != -1) {
+                currentChar = ((char) charCode);
                 sumAccumulator.processSymbol(currentChar);
             }
-
             sumAccumulator.completeCalculations();
-
-            return sumAccumulator.getResult();
-        } catch (IOException e)  {
-            throw new InnerResourceException(e);
+        } catch (IOException e) {
+            pushException(e);
+        } catch (InnerResourceException e) {
+            pushException(e);
         }
+    }
+
+    private void pushException(Exception exception){
+        Message message = new Message(exception);
+        messagePusher.pushMessage(message);
     }
 }

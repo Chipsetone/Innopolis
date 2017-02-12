@@ -1,6 +1,7 @@
 package tests.unit.calculation;
 
 import com.semakin.calculation.StreamSumCalculator;
+import com.semakin.calculation.SumAccumulator;
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.parsers.StringConverter;
 import com.semakin.parsers.StringValidConverter;
@@ -8,6 +9,7 @@ import com.semakin.resourceGetters.ReaderGetterable;
 import com.semakin.validation.EvenPositiveNumberValidator;
 import com.semakin.validation.NumberValidatorable;
 import com.semakin.validation.StringNumberValidator;
+import tests.unit.mocks.MessagePusherMock;
 import tests.unit.mocks.ReaderGetterMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,57 +26,59 @@ class StreamSumCalculatorTest {
         Map<String, String> resourceStub = new HashMap<>();
         String validNumericResourceAddress = "address";
         resourceStub.put(validNumericResourceAddress, "1 6 24 100 -500 160");
+        MessagePusherMock messagePusher = getMessagePusherMock();
         int expected = 6 + 24 + 100 + 160;
 
-        StreamSumCalculator sumCalculator = getStreamSumCalculator(resourceStub, validNumericResourceAddress);
+        StreamSumCalculator sumCalculator = getStreamSumCalculator(resourceStub, validNumericResourceAddress, messagePusher);
 
-        int actual = sumCalculator.getCalculatedSum();
+        sumCalculator.calculateSum();
+        int actual = messagePusher.getLocalSum();
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void getCalculatedSum_InvalidResourceAddress_Exception() {
+    void calculateSum_InvalidResourceAddress_NoCalculation() {
         Map<String, String> validResourceStub = new HashMap<>();
         String invalidResourceAddress = "badAddress";
         validResourceStub.put("valid Address", "1 5 25 100 -500 160");
+        MessagePusherMock messagePusher = getMessagePusherMock();
 
-        StreamSumCalculator sumCalculator = getStreamSumCalculator(validResourceStub, invalidResourceAddress);
+        StreamSumCalculator sumCalculator = getStreamSumCalculator(validResourceStub, invalidResourceAddress, messagePusher);
 
-        try {
-            int actual = sumCalculator.getCalculatedSum();
-        } catch (InnerResourceException e) {
-            System.out.println("ok");
-            return;
-        }
+        sumCalculator.calculateSum();
 
-        Assertions.fail("всё плохо... всё очень и очень плохо.");
+        boolean actualStopped = messagePusher.isStopped();
+
+        Assertions.assertTrue(actualStopped);
     }
 
     @Test
-    void getCalculatedSum_InvalidResourceContent_Exception() {
+    void getCalculatedSum_InvalidResourceContent_NotStartedNotStopped() {
         Map<String, String> invalidResource = null;
         String resourceAddress = "someAddress";
+        MessagePusherMock messagePusher = getMessagePusherMock();
 
-        StreamSumCalculator sumCalculator = getStreamSumCalculator(invalidResource, resourceAddress);
+        StreamSumCalculator sumCalculator = getStreamSumCalculator(invalidResource, resourceAddress, messagePusher);
 
-        try {
-            int actual = sumCalculator.getCalculatedSum();
-        } catch (InnerResourceException e) {
-            System.out.println("ok");
-            return;
-        }
+        sumCalculator.calculateSum();
 
-        Assertions.fail("всё плохо... всё очень и очень плохо.");
+        Assertions.assertFalse(messagePusher.isStarted());
+        Assertions.assertTrue(messagePusher.isStopped());
     }
 
-    private StreamSumCalculator getStreamSumCalculator(Map<String, String> resourceStub, String resourceName){
+    private StreamSumCalculator getStreamSumCalculator(Map<String, String> resourceStub, String resourceName, MessagePusherMock messagePusher){
         StringNumberValidator stringNumberValidator = new StringNumberValidator();
         NumberValidatorable evenValidator = new EvenPositiveNumberValidator();
 
         StringConverter stringConverter = new StringValidConverter(stringNumberValidator, evenValidator);
         ReaderGetterable readerGetter = new ReaderGetterMock(resourceStub);
 
-        return new StreamSumCalculator(stringConverter, readerGetter, resourceName);
+        SumAccumulator sumAccumulator = new SumAccumulator(stringConverter, messagePusher, resourceName);
+        return new StreamSumCalculator(readerGetter, resourceName, sumAccumulator, messagePusher);
+    }
+
+    private MessagePusherMock getMessagePusherMock(){
+        return new MessagePusherMock();
     }
 }

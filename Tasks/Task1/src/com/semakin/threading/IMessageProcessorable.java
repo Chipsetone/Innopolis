@@ -8,4 +8,6 @@ public interface IMessageProcessorable extends IMessagePushable {
     void runProcessingMessages();
 
     Message getLastMessage();
+
+    int getSum();
 }

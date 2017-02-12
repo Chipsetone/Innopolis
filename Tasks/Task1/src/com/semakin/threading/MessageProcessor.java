@@ -8,10 +8,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class MessageProcessor implements  IMessageProcessorable {
     private ConcurrentLinkedQueue<Message> messageQueue = new ConcurrentLinkedQueue<>();
     private ResultPrinter resultPrinter;
-    private int sum = 0;
+    private volatile int sum = 0;
     private boolean isError = false;
     private Message lastMessage;
-
 
     public MessageProcessor(ResultPrinter resultPrinter) {
         this.resultPrinter = resultPrinter;
@@ -35,13 +34,19 @@ public class MessageProcessor implements  IMessageProcessorable {
         Message currentMessage = pollMessage();
 
         while(currentMessage != null){
+            String description = currentMessage.getDescription();
+
             if(currentMessage.isInvalidMessage()){
                 isError = true;
                 lastMessage = currentMessage;
+                System.out.println("Ошибка! " + description);
+
+                Exception exception = currentMessage.getException();
+                System.out.println(exception.getMessage());
                 return;
             }
             int messageValue = currentMessage.getMessage();
-            updateAndPrintSum(messageValue);
+            updateAndPrintSum(messageValue, description);
 
             lastMessage = currentMessage;
             currentMessage = pollMessage();
@@ -53,12 +58,20 @@ public class MessageProcessor implements  IMessageProcessorable {
         return lastMessage;
     }
 
+    @Override
+    public int getSum() {
+        return sum;
+    }
+
     private Message pollMessage(){
         return messageQueue.poll();
     }
 
-    private void updateAndPrintSum(int added){
+    private void updateAndPrintSum(int added, String description){
         sum += added;
         resultPrinter.println("" + sum);
+        System.out.println("description: " + description + " added: " + added + " sum: " + sum);
     }
+
+
 }

@@ -31,7 +31,10 @@ class ApplicationFacadeTest {
         ResultPrinterMock resultPrinter = getResultPrinterMock();
 
         runApp(resourcesStub, resultPrinter);
+        waitThreads(1000);
+
         String actualLastMessage = resultPrinter.getLastMessage();
+        System.out.println(actualLastMessage);
         int actualSum = Integer.parseInt(actualLastMessage);
 
         Assertions.assertEquals(expectedSum, actualSum);
@@ -42,23 +45,20 @@ class ApplicationFacadeTest {
         HashMap<String, String> resourcesStub = new HashMap<String, String>(){{
             put("abc","1 2 1 1 1 1 1 1 ");
             put("def","2 0 2 5 6 4 57");
+            put("abcdefef","0 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1  1- it is invalid");
             put("ghi","1 2 3 4 5 6 7 8 9 7");
             put("abcdefef","0 1 -1 2 -5 7 -13 24");
-            put("abcdefef","0 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1  1- it is invalid");
         }};
-        Integer expectedSum = 68;
-        ResultPrinter resultPrinter = getResultPrinterMock();
+        int unExpectedSum = 68;
+        ResultPrinterMock resultPrinter = getResultPrinterMock();
 
         runApp(resourcesStub, resultPrinter);
-        waitThreads(5000);
-//        try {
-//            Integer actual = sumKeeper.getResult();
-//        }
-//        catch(InnerResourceException ex){
-//            System.out.println("то что надо");
-//            return;
-//        }
-        Assertions.fail("При ошибке не должен был вернуться результат!");
+        waitThreads(1000);
+        String lastMessage = resultPrinter.getLastMessage();
+        System.out.println("последнее сообщение: " + lastMessage);
+        int actualLastSum = Integer.parseInt(lastMessage);
+
+        Assertions.assertNotEquals(unExpectedSum, actualLastSum);
     }
 
     private void runApp(HashMap<String, String> resourcesStub, ResultPrinter resultPrinter){
