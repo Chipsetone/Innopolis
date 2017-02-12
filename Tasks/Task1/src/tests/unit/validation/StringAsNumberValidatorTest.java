@@ -1,16 +1,16 @@
 package tests.unit.validation;
 
-import com.semakin.validation.StringNumberValidator;
+import com.semakin.validation.StringAsNumberValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * Created by Chi on 07.02.2017.
  */
-class StringNumberValidatorTest {
+class StringAsNumberValidatorTest {
     @Test
     void isNumber_Valid_true() {
-        StringNumberValidator validator = new StringNumberValidator();
+        StringAsNumberValidator validator = new StringAsNumberValidator();
         String validString = "35";
 
         boolean actual = validator.isNumber(validString);
@@ -20,7 +20,7 @@ class StringNumberValidatorTest {
 
     @Test
     void isNumber_ValidNegative_true() {
-        StringNumberValidator validator = new StringNumberValidator();
+        StringAsNumberValidator validator = new StringAsNumberValidator();
         String validNegative = "-100";
 
         boolean actual = validator.isNumber(validNegative);
@@ -30,7 +30,7 @@ class StringNumberValidatorTest {
 
     @Test
     void isNumber_Zero_true() {
-        StringNumberValidator validator = new StringNumberValidator();
+        StringAsNumberValidator validator = new StringAsNumberValidator();
         String zero = "0";
 
         boolean actual = validator.isNumber(zero);
@@ -40,7 +40,7 @@ class StringNumberValidatorTest {
 
     @Test
     void isNumber_InvalidString_false() {
-        StringNumberValidator validator = new StringNumberValidator();
+        StringAsNumberValidator validator = new StringAsNumberValidator();
         String invalid = "bk^&";
 
         boolean actual  = validator.isNumber(invalid);
@@ -50,7 +50,7 @@ class StringNumberValidatorTest {
 
     @Test
     void isNumber_EmptyString_false() {
-        StringNumberValidator validator = new StringNumberValidator();
+        StringAsNumberValidator validator = new StringAsNumberValidator();
         String emptyString = "";
 
         boolean actual = validator.isNumber(emptyString);
@@ -60,7 +60,7 @@ class StringNumberValidatorTest {
 
     @Test
     void isNumber_MinusSuffix_false() {
-        StringNumberValidator validator = new StringNumberValidator();
+        StringAsNumberValidator validator = new StringAsNumberValidator();
         String minusSuffix = "45-";
 
         boolean actual = validator.isNumber(minusSuffix);
@@ -70,7 +70,7 @@ class StringNumberValidatorTest {
 
     @Test
     void isNumber_MoreThenOneMinus_false() {
-        StringNumberValidator validator = new StringNumberValidator();
+        StringAsNumberValidator validator = new StringAsNumberValidator();
         String doubleMinusAtStart = "--5";
         String doubleMinusAtEnd = "45--";
         String doubleMinusOnly = "--";

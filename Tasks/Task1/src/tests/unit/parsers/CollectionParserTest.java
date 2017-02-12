@@ -2,7 +2,7 @@ package tests.unit.parsers;
 
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.parsers.CollectionParser;
-import com.semakin.validation.StringNumberValidator;
+import com.semakin.validation.StringAsNumberValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -123,6 +123,6 @@ class CollectionParserTest {
     }
 
     private CollectionParser getCollectionParser(){
-        return new CollectionParser(new StringNumberValidator());
+        return new CollectionParser(new StringAsNumberValidator());
     }
 }

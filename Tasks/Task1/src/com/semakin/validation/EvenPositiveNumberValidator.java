@@ -1,13 +1,14 @@
 package com.semakin.validation;
 
 /**
- * Created by Chi on 06.02.2017.
+ * Валидатор целых чисел по условиям задания (целые и пололжительные)
+ * @author Виктор Семакин
  */
 public class EvenPositiveNumberValidator implements NumberValidatorable{
     /**
      * Проверяет целое число на четность и положительность
-     * @param number
-     * @return
+     * @param number любое целое число
+     * @return true - число четное и положительное
      */
     @Override
     public boolean isNumberValid(int number){

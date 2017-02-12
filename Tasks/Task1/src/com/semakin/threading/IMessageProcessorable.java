@@ -1,13 +1,17 @@
 package com.semakin.threading;
 
 /**
- * Created by Chi on 11.02.2017.
+ * Обработчик очереди сообщений
+ * @author Виктор Семакин
  */
 public interface IMessageProcessorable{//} extends IMessagePushable {
 
+    /**
+     * Запуск обработки сообщений.
+     * Работает до тех пор пока очередь не достигнет опустошения
+     * @author Виктор Семакин
+     */
     void runProcessingMessages();
-
-    Message getLastMessage();
 
     int getSum();
 

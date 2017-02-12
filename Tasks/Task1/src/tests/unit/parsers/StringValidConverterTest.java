@@ -4,7 +4,7 @@ import com.semakin.exceptions.InnerResourceException;
 import com.semakin.parsers.StringValidConverter;
 import com.semakin.validation.EvenPositiveNumberValidator;
 import com.semakin.validation.NumberValidatorable;
-import com.semakin.validation.StringNumberValidator;
+import com.semakin.validation.StringAsNumberValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +35,7 @@ class StringValidConverterTest {
     }
 
     private StringValidConverter getEvenPositiveConverter() {
-        StringNumberValidator stringValidator = new StringNumberValidator();
+        StringAsNumberValidator stringValidator = new StringAsNumberValidator();
         NumberValidatorable numberValidator = new EvenPositiveNumberValidator();
 
         return new StringValidConverter(stringValidator, numberValidator);

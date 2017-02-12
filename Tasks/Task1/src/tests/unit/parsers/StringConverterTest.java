@@ -3,7 +3,7 @@ package tests.unit.parsers;
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.parsers.StringConverter;
 import com.semakin.validation.ResourceSymbols;
-import com.semakin.validation.StringNumberValidator;
+import com.semakin.validation.StringAsNumberValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -108,7 +108,7 @@ class StringConverterTest {
     }
 
     private StringConverter getStringConverter() {
-        StringNumberValidator stringValidator = new StringNumberValidator();
+        StringAsNumberValidator stringValidator = new StringAsNumberValidator();
         return new StringConverter(stringValidator);
     }
 }

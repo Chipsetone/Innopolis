@@ -8,7 +8,7 @@ import com.semakin.parsers.StringValidConverter;
 import com.semakin.resourceGetters.ReaderGetterable;
 import com.semakin.validation.EvenPositiveNumberValidator;
 import com.semakin.validation.NumberValidatorable;
-import com.semakin.validation.StringNumberValidator;
+import com.semakin.validation.StringAsNumberValidator;
 import tests.mocks.MessagePusherMock;
 import tests.mocks.ReaderGetterMock;
 import org.junit.jupiter.api.Assertions;
@@ -68,10 +68,10 @@ class StreamSumCalculatorTest {
     }
 
     private StreamSumCalculator getStreamSumCalculator(Map<String, String> resourceStub, String resourceName, MessagePusherMock messagePusher){
-        StringNumberValidator stringNumberValidator = new StringNumberValidator();
+        StringAsNumberValidator stringAsNumberValidator = new StringAsNumberValidator();
         NumberValidatorable evenValidator = new EvenPositiveNumberValidator();
 
-        StringConverter stringConverter = new StringValidConverter(stringNumberValidator, evenValidator);
+        StringConverter stringConverter = new StringValidConverter(stringAsNumberValidator, evenValidator);
         ReaderGetterable readerGetter = new ReaderGetterMock(resourceStub);
 
         SumBufferAccumulator sumBufferAccumulator = new SumBufferAccumulator(stringConverter, messagePusher, resourceName);

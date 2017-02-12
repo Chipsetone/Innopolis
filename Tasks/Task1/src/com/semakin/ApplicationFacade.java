@@ -5,18 +5,21 @@ import com.semakin.parsers.StringConverter;
 import com.semakin.parsers.StringValidConverter;
 import com.semakin.resourceGetters.ReaderGetterFactory;
 import com.semakin.resourceGetters.ReaderGetterable;
-import com.semakin.threading.*;
+import com.semakin.threading.MessageProcessor;
+import com.semakin.threading.ResourceCalculator;
+import com.semakin.threading.RunnableService;
 import com.semakin.validation.EvenPositiveNumberValidator;
 import com.semakin.validation.NumberValidatorable;
-import com.semakin.validation.StringNumberValidator;
+import com.semakin.validation.StringAsNumberValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Фасад приложения для обработки ресурсов,
+ * Приложение для обработки ресурсов,
  * скрывает в себе всю инициализацию/конфигурацию
+ * @author Виктор Семакин
  */
 public class ApplicationFacade {
     private SumCalculatorFactory sumCalculatorFactory;
@@ -35,7 +38,8 @@ public class ApplicationFacade {
     }
 
     /**
-     * Обработка ресурсов по их адресу в мнгогопоточном режиме
+     * Запуск обработки ресурсов
+     * Обработка каждого ресурса происходит в отдельном потоке.
      * @param resourceAddresses адреса ресурсов
      */
     public void Run(String resourceAddresses[]) {
@@ -53,7 +57,7 @@ public class ApplicationFacade {
     }
 
     /**
-     * Возвращает получатель потока из ресурса
+     * Возвращает получатель считывателя потока из ресурса
      * Переопределяется в целях тестирования
      * @return возвращатель читателя потока (Stream) на основании адреса
      */
@@ -70,7 +74,7 @@ public class ApplicationFacade {
 
     private SumCalculatorFactory newSumCalculationFactory() {
         NumberValidatorable numberValidator = new EvenPositiveNumberValidator();
-        StringNumberValidator stringValidator = new StringNumberValidator();
+        StringAsNumberValidator stringValidator = new StringAsNumberValidator();
         StringConverter stringConverter = new StringValidConverter(stringValidator, numberValidator);
         ReaderGetterable readerGetter = getReaderGetter();
 

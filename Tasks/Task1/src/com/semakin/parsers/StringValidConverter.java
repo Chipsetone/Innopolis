@@ -2,19 +2,19 @@ package com.semakin.parsers;
 
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.validation.NumberValidatorable;
-import com.semakin.validation.StringNumberValidator;
+import com.semakin.validation.StringAsNumberValidator;
 
 /**
  * Created by Chi on 10.02.2017.
  */
 public class StringValidConverter extends StringConverter{
     NumberValidatorable numberValidator;
-    public StringValidConverter(StringNumberValidator stringValidator, NumberValidatorable numberValidator){
+    public StringValidConverter(StringAsNumberValidator stringValidator, NumberValidatorable numberValidator){
         super(stringValidator);
         this.numberValidator = numberValidator;
     }
 
-    private StringValidConverter(StringNumberValidator stringValidator) {
+    private StringValidConverter(StringAsNumberValidator stringValidator) {
         super(stringValidator);
     }
 

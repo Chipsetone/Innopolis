@@ -2,7 +2,7 @@ package com.semakin.parsers;
 
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.validation.ResourceSymbols;
-import com.semakin.validation.StringNumberValidator;
+import com.semakin.validation.StringAsNumberValidator;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -18,9 +18,9 @@ public class CollectionParser {
     private final Character space = ResourceSymbols.space;
     private final List<Character> allowedCharacters = ResourceSymbols.allowedSymbols;
 
-    private StringNumberValidator numberValidator;
+    private StringAsNumberValidator numberValidator;
 
-    public CollectionParser(StringNumberValidator numberValidator){
+    public CollectionParser(StringAsNumberValidator numberValidator){
         this.numberValidator = numberValidator;
     }
 

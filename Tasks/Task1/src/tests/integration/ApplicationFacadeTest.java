@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * тесты приложения.
@@ -56,7 +57,6 @@ class ApplicationFacadeTest {
         ResultPrinterMock resultPrinter = getResultPrinterMock();
 
         runApp(resourcesStub, resultPrinter);
-        //waitThreads(1000);
         String lastMessage = resultPrinter.getLastMessage();
         System.out.println("последнее сообщение: " + lastMessage);
         int actualLastSum = Integer.parseInt(lastMessage);

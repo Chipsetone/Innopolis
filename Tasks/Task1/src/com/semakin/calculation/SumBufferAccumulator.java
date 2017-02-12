@@ -7,7 +7,8 @@ import com.semakin.threading.Message;
 import com.semakin.validation.ResourceSymbols;
 
 /**
- * Нако
+ * Буфер символов.
+ * @author Виктор Семакин
  */
 public class SumBufferAccumulator {
     private int sumResult = 0;
@@ -23,6 +24,11 @@ public class SumBufferAccumulator {
         this.resourceAddress = resourceAddress;
     }
 
+    /**
+     * Добавляет символ в обработчик. Последним вызовом буфера должно быть освобождение буфера tryReleaseBuffer()
+     * TODO перевести всё на finalize и использовать try-with-resources - понять как работает
+     * @param symbol
+     */
     public void processSymbol(char symbol) {
         if(isStopped){
             return;
@@ -36,13 +42,16 @@ public class SumBufferAccumulator {
         }
 
         if(symbol == ResourceSymbols.space){
-            completeCalculations();
+            tryReleaseBuffer();
         }else{
             strAsNumberBuffer += symbol;
         }
     }
 
-    public void completeCalculations() {
+    /**
+     * Освобождает буфер
+     */
+    public void tryReleaseBuffer() {
         if(strAsNumberBuffer.length() > 0){
             pullBuffer();
         }
@@ -54,6 +63,7 @@ public class SumBufferAccumulator {
     private void pullBuffer(){
         Message message;
         try {
+            // TODO вытащить сюда проверку и конвертацию
             int number = stringConverter.toInt(strAsNumberBuffer);
             if(number == 0){
                 clearBuffer();

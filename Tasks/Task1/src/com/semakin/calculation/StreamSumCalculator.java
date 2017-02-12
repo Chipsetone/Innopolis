@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * Created by Chi on 08.02.2017.
+ * Считыватель символов из ресурса
+ * @author Виктор Семакин
  */
 public class StreamSumCalculator{
     private ReaderGetterable readerGetter;
@@ -24,6 +25,9 @@ public class StreamSumCalculator{
         this.messagePusher = messagePusher;
     }
 
+    /**
+     * Считает символы ресурса и записывает их в sumBufferClculator, а также
+     */
     public void calculateSum() {
         try (Reader reader = readerGetter.getBufferedReader(resourceAddress)) {
             int charCode;
@@ -33,7 +37,7 @@ public class StreamSumCalculator{
                 currentChar = ((char) charCode);
                 sumBufferAccumulator.processSymbol(currentChar);
             }
-            sumBufferAccumulator.completeCalculations();
+            sumBufferAccumulator.tryReleaseBuffer();
         } catch (IOException e) {
             pushException(e);
         } catch (InnerResourceException e) {

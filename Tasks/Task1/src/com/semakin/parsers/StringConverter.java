@@ -1,27 +1,24 @@
 package com.semakin.parsers;
 
 import com.semakin.exceptions.InnerResourceException;
-import com.semakin.validation.NumberValidatorable;
 import com.semakin.validation.ResourceSymbols;
-import com.semakin.validation.StringNumberValidator;
-
-import javax.annotation.Resource;
+import com.semakin.validation.StringAsNumberValidator;
 
 /**
  * Created by Chi on 10.02.2017.
  */
 public class StringConverter {
-    private StringNumberValidator stringNumberValidator;
+    private StringAsNumberValidator stringAsNumberValidator;
 
-    public StringConverter(StringNumberValidator stringNumberValidator){
-        this.stringNumberValidator = stringNumberValidator;
+    public StringConverter(StringAsNumberValidator stringAsNumberValidator){
+        this.stringAsNumberValidator = stringAsNumberValidator;
     }
 
     public int toInt(String value) throws InnerResourceException {
         value = value.replace(ResourceSymbols.hyphen, ResourceSymbols.minus);
         value = value.trim();
 
-        if(stringNumberValidator.isNumber(value)){
+        if(stringAsNumberValidator.isNumber(value)){
             try {
                 return Integer.parseInt(value);
             }

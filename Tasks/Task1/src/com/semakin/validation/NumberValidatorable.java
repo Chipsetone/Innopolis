@@ -1,7 +1,8 @@
 package com.semakin.validation;
 
 /**
- * Created by Chi on 06.02.2017.
+ * Валидатор целых чисел по условиям задания
+ * @author Виктор Семакин
  */
 public interface NumberValidatorable {
     boolean isNumberValid(int number);

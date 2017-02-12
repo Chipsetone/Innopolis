@@ -1,7 +1,7 @@
 package com.semakin.resourceGetters;
 
 /**
- * Created by Chi on 09.02.2017.
+ * @au
  */
 public class ReaderGetterFactory {
     /**

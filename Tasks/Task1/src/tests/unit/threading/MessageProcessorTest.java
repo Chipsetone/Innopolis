@@ -5,6 +5,7 @@ import com.semakin.threading.MessageProcessor;
 import com.semakin.threading.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import tests.mocks.ResultPrinterMock;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +17,7 @@ class MessageProcessorTest {
 
     @Test
     void pushMessage_AddingValidMessages() {
-        List<String> printerTarget = new LinkedList<>();
+        LinkedList<String> printerTarget = new LinkedList<>();
         MessageProcessor processor = getMessageProcessor(printerTarget);
 
         int expectedProcessingMessages = 5;
@@ -30,7 +31,7 @@ class MessageProcessorTest {
 
     @Test
     void pushMessage_AddingInvalidMessage_Stop() {
-        List<String> printerTarget = new LinkedList<>();
+        LinkedList<String> printerTarget = new LinkedList<>();
         MessageProcessor processor = getMessageProcessor(printerTarget);
 
         int expectedProcessingMessagesCount = 7;
@@ -46,46 +47,44 @@ class MessageProcessorTest {
 
     @Test
     void getLastMessage_AllValidMessages_ContainNumber() {
-        List<String> printerTarget = new LinkedList<>();
+        LinkedList<String> printerTarget = new LinkedList<>();
         MessageProcessor processor = getMessageProcessor(printerTarget);
 
-        int someMessagesCount = 7;
-        pushValidMessages(processor, someMessagesCount);
-
-        int expectedLastMessageValue = 100500;
-        Message expectedLastMessage = new Message(expectedLastMessageValue);
-        processor.pushMessage(expectedLastMessage);
+        int expectedProcessedMessagesCount = 8;
+        pushValidMessages(processor, expectedProcessedMessagesCount);
 
         processor.runProcessingMessages();
-        Message actualMessage = processor.getLastMessage();
-        int actualMessageValue = actualMessage.getMessage();
 
-        Assertions.assertEquals(expectedLastMessage, actualMessage);
-        Assertions.assertEquals(expectedLastMessageValue, actualMessageValue);
+        int actualMessagesCount = printerTarget.size();
+
+        Assertions.assertEquals(expectedProcessedMessagesCount, actualMessagesCount);
     }
 
     @Test
-    void getLastMessage_InvalidMessageInMiddle_FirstInvalidMessage(){
-        List<String> printerTarget = new LinkedList<>();
+    void getLastMessage_InvalidMessageInMiddle_StopQueueBeforeInvalid(){
+        LinkedList<String> printerTarget = new LinkedList<>();
         MessageProcessor processor = getMessageProcessor(printerTarget);
 
-        Exception expectedException = new Exception("smthg bad");
-        Message expectedInvalidMessage = new Message(expectedException);
-        int expectedProcessedCount = 7;
-        int expectedUnprocessedCount = 20;
-        pushValidMessages(processor, expectedProcessedCount);
-        processor.pushMessage(expectedInvalidMessage);
-        pushValidMessages(processor, expectedUnprocessedCount);
+        int expectedLastMessageValue = 999;
+        Message expectedLastValidMessage = new Message(expectedLastMessageValue);
+        processor.pushMessage(expectedLastValidMessage);
+
+        Exception somethingBadException = new Exception("smthg bad");
+        Message invalidMessage = new Message(somethingBadException);
+        processor.pushMessage(invalidMessage);
+
+        int unExpectedMessageValue = 674897234;
+        String unExpectedMessageString = "" + unExpectedMessageValue;
+        Message unExpectedMessage = new Message(unExpectedMessageValue);
+        processor.pushMessage(unExpectedMessage);
 
         processor.runProcessingMessages();
-        Message actualMessage = processor.getLastMessage();
-        Exception actualMessageException = actualMessage.getException();
+        String actualLastPrintedString = printerTarget.getLast();
 
-        int actualProcessedCount = printerTarget.size();
+        int actualPrintedCount = printerTarget.size();
 
-        Assertions.assertEquals(expectedInvalidMessage, actualMessage);
-        Assertions.assertEquals(expectedException, actualMessageException);
-        Assertions.assertEquals(expectedProcessedCount, actualProcessedCount);
+        Assertions.assertNotEquals(unExpectedMessageString, actualLastPrintedString);
+        Assertions.assertEquals(1, actualPrintedCount);
     }
 
     private void pushValidMessages(MessageProcessor messageProcessor, int countOfMessages){
@@ -103,18 +102,13 @@ class MessageProcessorTest {
         }
     }
 
-    private MessageProcessor getMessageProcessor(List<String> printerTarget){
+    private MessageProcessor getMessageProcessor(LinkedList<String> printerTarget){
         ResultPrinter printer = getFakeLogPrinter(printerTarget);
         return new MessageProcessor(printer);
     }
 
-    private ResultPrinter getFakeLogPrinter(List<String> fakePrinterTarget){
-        return new ResultPrinter(){
-            @Override
-            public void println(String message) {
-                fakePrinterTarget.add(message);
-            }
-        };
+    private ResultPrinter getFakeLogPrinter(LinkedList<String> fakePrinterTarget){
+        return new ResultPrinterMock(fakePrinterTarget);
     }
 
 }
