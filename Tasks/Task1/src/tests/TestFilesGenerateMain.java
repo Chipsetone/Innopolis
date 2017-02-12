@@ -16,7 +16,7 @@ public class TestFilesGenerateMain {
 
         try {
             for (int i = 0; i < FILE_COUNT; i++) {
-                    generator.generateValidFile("testGenarator" + i +".txt", 500);
+                generator.generateValidFile("validData" + i +".txt", 500);
             }
         } catch (IOException e) {
             e.printStackTrace();

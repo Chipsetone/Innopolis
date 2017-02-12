@@ -70,8 +70,6 @@ public class MessageProcessor implements  IMessageProcessorable {
     private void updateAndPrintSum(int added, String description){
         sum += added;
         resultPrinter.println("" + sum);
-        System.out.println("description: " + description + " added: " + added + " sum: " + sum);
+        //System.out.println("description: " + description + " added: " + added + " sum: " + sum);
     }
-
-
 }

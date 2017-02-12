@@ -4,8 +4,8 @@ import com.semakin.ApplicationFacade;
 import com.semakin.ResultPrinter;
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.resourceGetters.ReaderGetterable;
-import tests.unit.ResultPrinterMock;
-import tests.unit.mocks.ReaderGetterMock;
+import tests.mocks.ResultPrinterMock;
+import tests.mocks.ReaderGetterMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * Created by Chi on 08.02.2017.
+ * тесты приложения.
+ * В качестве входых и выходных данных используются заглушки
+ * ReaderGetterMock и ResultPrinterMock
+ * и эти тесты не проходят =)
  */
 class ApplicationFacadeTest {
     @Test

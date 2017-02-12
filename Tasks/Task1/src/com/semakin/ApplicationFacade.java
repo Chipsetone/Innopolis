@@ -15,35 +15,39 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Created by Chi on 07.02.2017.
+ * Фасад приложения для обработки ресурсов,
+ * скрывает в себе всю инициализацию/конфигурацию
  */
 public class ApplicationFacade {
     private SumCalculatorFactory sumCalculatorFactory;
     private RunnableService runService;
     private IMessageProcessorable messageProcessor;
     private AtomicBoolean isComplete = new AtomicBoolean(false);
-    private final ResultPrinter resultPrinter;
+    private final ResultPrinter resultKeeper;
 
-    public ApplicationFacade(ResultPrinter resultPrinter) {
-        this.resultPrinter = resultPrinter;
-        init(resultPrinter);
+    /**
+     * Инициализатор приложения для обработки
+     * @param resultKeeper
+     */
+    public ApplicationFacade(ResultPrinter resultKeeper) {
+        this.resultKeeper = resultKeeper;
+        init(resultKeeper);
     }
 
     public void Run(String resourceAddresses[]) {
-        List<ResourceCalculator> resourceCalculators = new ArrayList<ResourceCalculator>();
-        for (String resourceAddress : resourceAddresses) {
-            ResourceCalculator resourceCalculator = getNewResourceCalculator(resourceAddress);
-            resourceCalculators.add(resourceCalculator);
-        }
+        List<ResourceCalculator> resourceCalculators = getResourceCalculators(resourceAddresses);
 
         Runnable run = new Runnable() {
             @Override
             public void run() {
-                while (!isComplete.get()) {
+                while (true){
+                    if(isComplete.get()){
+                        break;
+                    }
                     messageProcessor.runProcessingMessages();
                     Message lastMessage = messageProcessor.getLastMessage();
-                    Thread.yield();
 
+                    //TODO подумать над правильностью условия для выхода из цикла
                     if ((lastMessage != null) && lastMessage.isInvalidMessage()) {
                         int result = messageProcessor.getSum();
                         System.out.println("Выполнение программы прервано.");
@@ -54,9 +58,16 @@ public class ApplicationFacade {
                 System.out.println("Завершено. Результат " + result);
             }
         };
-        runService.addAction(run);
+        Thread thread = new Thread(run);
+        thread.setDaemon(true);
+        thread.start();
 
         calculateResources(resourceCalculators);
+    }
+
+    protected ReaderGetterable getReaderGetter() {
+        ReaderGetterFactory readerGetterFactory = new ReaderGetterFactory();
+        return readerGetterFactory.getReaderGetter();
     }
 
     private void init(ResultPrinter resultPrinter) {
@@ -74,11 +85,6 @@ public class ApplicationFacade {
         return new SumCalculatorFactory(readerGetter, stringConverter, messageProcessor);
     }
 
-    protected ReaderGetterable getReaderGetter() {
-        ReaderGetterFactory readerGetterFactory = new ReaderGetterFactory();
-        return readerGetterFactory.getReaderGetter();
-    }
-
 
     private void calculateResources(List<ResourceCalculator> resourceCalculators){
         try {
@@ -88,10 +94,15 @@ public class ApplicationFacade {
         }
 
         isComplete.set(true);
-
     }
 
-    private ResourceCalculator getNewResourceCalculator(String resourceAddress){
-        return new ResourceCalculator(resourceAddress, sumCalculatorFactory);
+    private List<ResourceCalculator> getResourceCalculators(String resourceAddresses[]) {
+        List<ResourceCalculator> resourceCalculators = new ArrayList<ResourceCalculator>();
+        for (String resourceAddress : resourceAddresses) {
+            ResourceCalculator resourceCalculator = new ResourceCalculator(resourceAddress, sumCalculatorFactory);
+            resourceCalculators.add(resourceCalculator);
+        }
+
+        return resourceCalculators;
     }
 }

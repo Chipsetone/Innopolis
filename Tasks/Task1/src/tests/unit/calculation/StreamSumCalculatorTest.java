@@ -1,7 +1,7 @@
 package tests.unit.calculation;
 
 import com.semakin.calculation.StreamSumCalculator;
-import com.semakin.calculation.SumAccumulator;
+import com.semakin.calculation.SumBufferAccumulator;
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.parsers.StringConverter;
 import com.semakin.parsers.StringValidConverter;
@@ -9,8 +9,8 @@ import com.semakin.resourceGetters.ReaderGetterable;
 import com.semakin.validation.EvenPositiveNumberValidator;
 import com.semakin.validation.NumberValidatorable;
 import com.semakin.validation.StringNumberValidator;
-import tests.unit.mocks.MessagePusherMock;
-import tests.unit.mocks.ReaderGetterMock;
+import tests.mocks.MessagePusherMock;
+import tests.mocks.ReaderGetterMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -74,8 +74,8 @@ class StreamSumCalculatorTest {
         StringConverter stringConverter = new StringValidConverter(stringNumberValidator, evenValidator);
         ReaderGetterable readerGetter = new ReaderGetterMock(resourceStub);
 
-        SumAccumulator sumAccumulator = new SumAccumulator(stringConverter, messagePusher, resourceName);
-        return new StreamSumCalculator(readerGetter, resourceName, sumAccumulator, messagePusher);
+        SumBufferAccumulator sumBufferAccumulator = new SumBufferAccumulator(stringConverter, messagePusher, resourceName);
+        return new StreamSumCalculator(readerGetter, resourceName, sumBufferAccumulator, messagePusher);
     }
 
     private MessagePusherMock getMessagePusherMock(){
