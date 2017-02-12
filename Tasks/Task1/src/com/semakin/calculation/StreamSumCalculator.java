@@ -18,6 +18,12 @@ public class StreamSumCalculator{
     private SumBufferAccumulator sumBufferAccumulator;
     private IMessagePushable messagePusher;
 
+    /**
+     * @param readerGetter получатель доступа к ресурсу
+     * @param resourceAddress адрес обрабатываемого ресурса
+     * @param sumBufferAccumulator строковый буфер для этого потока
+     * @param messagePusher Добавлятор обработанных буфером сообщений в очередь расчета
+     */
     public StreamSumCalculator(ReaderGetterable readerGetter, String resourceAddress, SumBufferAccumulator sumBufferAccumulator, IMessagePushable messagePusher){
         this.readerGetter = readerGetter;
         this.resourceAddress = resourceAddress;

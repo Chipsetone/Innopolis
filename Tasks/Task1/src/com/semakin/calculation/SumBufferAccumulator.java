@@ -18,6 +18,11 @@ public class SumBufferAccumulator {
     private boolean isStopped = false;
     private String resourceAddress;
 
+    /**
+     * @param stringConverter преобразователь слова буфера в число
+     * @param messagePusher заталкиватель подготовленных сообщений в очередь
+     * @param resourceAddress адрес ресурса
+     */
     public SumBufferAccumulator(StringConverter stringConverter, IMessagePushable messagePusher, String resourceAddress){
         this.stringConverter = stringConverter;
         this.messagePusher = messagePusher;
@@ -26,7 +31,7 @@ public class SumBufferAccumulator {
 
     /**
      * Добавляет символ в обработчик. Последним вызовом буфера должно быть освобождение буфера tryReleaseBuffer()
-     * TODO перевести всё на finalize и использовать try-with-resources - понять как работает
+     * TODO перевести всё на finalize и использовать try-with-resources - понять как это всё работает здесь
      * @param symbol
      */
     public void processSymbol(char symbol) {

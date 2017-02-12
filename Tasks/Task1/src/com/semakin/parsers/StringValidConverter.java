@@ -5,10 +5,17 @@ import com.semakin.validation.NumberValidatorable;
 import com.semakin.validation.StringAsNumberValidator;
 
 /**
- * Created by Chi on 10.02.2017.
+ * {@inheritDoc}
+ * Преобразователь числа с пост-валидацией
+ * @author Виктор Семакин
  */
 public class StringValidConverter extends StringConverter{
     NumberValidatorable numberValidator;
+
+    /**
+     * @param stringValidator проверятор еще непреобразованной строки
+     * @param numberValidator проверятор преобразованного числа
+     */
     public StringValidConverter(StringAsNumberValidator stringValidator, NumberValidatorable numberValidator){
         super(stringValidator);
         this.numberValidator = numberValidator;
@@ -18,6 +25,10 @@ public class StringValidConverter extends StringConverter{
         super(stringValidator);
     }
 
+    /**
+     * {@inheritDoc}
+     * Также после преобразования проверяет число с помощью NumberValidatorable
+     */
     @Override
     public int toInt(String value) throws InnerResourceException {
         int intResult = super.toInt(value);
