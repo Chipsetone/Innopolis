@@ -26,7 +26,7 @@ public class Thread2UniqueChecker extends Thread{
             if((currentTime - prevTime) >= secondsInterval){
                 // обсчитать очередь
                 HashSet<Integer> generatedMessages = messageQueue.getMessagesAndClean();
-                print("" + generatedMessages.size());
+                print("Уникальных нагенерено " + generatedMessages.size());
 
                 for (int generatedNumber :
                         generatedMessages) {
@@ -37,6 +37,7 @@ public class Thread2UniqueChecker extends Thread{
                     }
                     allGeneratednumbers.add(generatedNumber);
                 }
+                print("Уникальных всего " + allGeneratednumbers.size());
                 prevTime = currentTime;
             }
             currentTime = msCounter.getTime();
@@ -48,6 +49,6 @@ public class Thread2UniqueChecker extends Thread{
     }
 
     private void print(String message){
-        System.out.println(Thread.currentThread().getName() + " " + message);
+        System.out.println(message);
     }
 }
