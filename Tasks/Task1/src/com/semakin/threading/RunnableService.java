@@ -1,5 +1,6 @@
 package com.semakin.threading;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,10 +26,9 @@ public class RunnableService {
      * Запускает обработку ресурсов в параллельном режиме
      * @param todoList список обработчиков ресурсов
      * @return массив результатов работы каждого обработчика после окончания их обработки
-     * @throws InterruptedException
+     * @throws InterruptedException при прерывании потока
      */
     public List<Future<Boolean>> invokeAll(List<ResourceCalculator> todoList) throws InterruptedException {
-
         return service.invokeAll(todoList);
     }
 

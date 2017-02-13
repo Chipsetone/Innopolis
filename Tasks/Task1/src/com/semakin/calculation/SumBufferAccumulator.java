@@ -60,9 +60,7 @@ public class SumBufferAccumulator {
         if(strAsNumberBuffer.length() > 0){
             pullBuffer();
         }
-        else{
-            return;
-        }
+        return;
     }
 
     private void pullBuffer(){

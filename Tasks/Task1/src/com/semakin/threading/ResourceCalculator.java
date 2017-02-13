@@ -9,7 +9,7 @@ import java.util.concurrent.Callable;
  * Обработчик ресурса. Требуется для многопоточной обработки
  * @author Виктор Семакин
  */
-public class ResourceCalculator implements Callable<Boolean>{
+public class ResourceCalculator implements Callable<Boolean>, Runnable{
     private String resourceAddress;
     private SumCalculatorFactory sumCalculatorFactory;
 
@@ -23,7 +23,8 @@ public class ResourceCalculator implements Callable<Boolean>{
     }
 
     /**
-     * Обрабатывает ресурс
+     * Обрабатывает ресурс.
+     * Реализация интерфейса {@link Callable}
      * @return true после обработки ресурса
      */
     @Override
@@ -31,5 +32,14 @@ public class ResourceCalculator implements Callable<Boolean>{
         StreamSumCalculator sumCalculator = sumCalculatorFactory.getResourceSumCalculator(resourceAddress);
         sumCalculator.calculateSum();
         return true;
+    }
+
+    /**
+     * Реализация интерфейса {@link  Runnable}
+     * @see ResourceCalculator#call
+     */
+    @Override
+    public void run() {
+        call();
     }
 }

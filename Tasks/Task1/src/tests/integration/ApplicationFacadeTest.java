@@ -4,14 +4,13 @@ import com.semakin.ApplicationFacade;
 import com.semakin.ResultPrinter;
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.resourceGetters.ReaderGetterable;
-import tests.mocks.ResultPrinterMock;
-import tests.mocks.ReaderGetterMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import tests.mocks.ReaderGetterMock;
+import tests.mocks.ResultPrinterMock;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 /**
  * тесты приложения.
@@ -61,6 +60,8 @@ class ApplicationFacadeTest {
 
         Assertions.assertNotEquals(unExpectedSum, actualLastSum);
     }
+
+    // TODO проверить остановку всех потоков при ошибочных данных в одном из потоков
 
     private void runApp(HashMap<String, String> resourcesStub, ResultPrinter resultPrinter){
         ApplicationFacade app = getApplicationFacadeByMockResources(resourcesStub, resultPrinter);

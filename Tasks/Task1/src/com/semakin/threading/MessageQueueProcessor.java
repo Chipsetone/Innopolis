@@ -10,9 +10,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * @author Виктор Семакин
  */
 public class MessageQueueProcessor implements IMessageQueueProcessorable, IMessagePushable {
+    //TODO перевести с ConcurrentCollection на ReentrantLock
     private ConcurrentLinkedQueue<Message> messageQueue = new ConcurrentLinkedQueue<>();
     private ResultPrinter resultPrinter;
-    private volatile int sum = 0;
+    private int sum = 0;
     private boolean isError = false;
 
     /**

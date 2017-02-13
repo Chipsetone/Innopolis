@@ -11,7 +11,7 @@ public class ResultPrinterMock extends ResultPrinter {
     private LinkedList<String> printedMessages;
 
     public ResultPrinterMock() {
-        this(new LinkedList<String>());
+        this(new LinkedList<>());
     }
 
     public ResultPrinterMock(LinkedList<String> printedTarget) {

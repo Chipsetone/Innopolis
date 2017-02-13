@@ -2,16 +2,12 @@ package tests.mocks;
 
 import com.semakin.exceptions.InnerResourceException;
 import com.semakin.resourceGetters.ReaderGetterable;
-import sun.misc.IOUtils;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Chi on 09.02.2017.
- */
 public class ReaderGetterMock implements ReaderGetterable{
     private Map<String, String> readerVictimStub;
 

@@ -55,11 +55,10 @@ class StreamSumCalculatorTest {
 
     @Test
     void getCalculatedSum_InvalidResourceContent_NotStartedNotStopped() {
-        Map<String, String> invalidResource = null;
         String resourceAddress = "someAddress";
         MessagePusherMock messagePusher = getMessagePusherMock();
 
-        StreamSumCalculator sumCalculator = getStreamSumCalculator(invalidResource, resourceAddress, messagePusher);
+        StreamSumCalculator sumCalculator = getStreamSumCalculator(null, resourceAddress, messagePusher);
 
         sumCalculator.calculateSum();
 

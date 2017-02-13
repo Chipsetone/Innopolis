@@ -18,8 +18,7 @@ public class FileGenerator{
                 int number = getRandomNumber();
                 fileWriter.write(number + " ");
             }
-
-        };
+        }
         System.out.println(fileName + " generated");
     }
 

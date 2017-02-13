@@ -80,7 +80,6 @@ public class ApplicationFacade {
         return new SumCalculatorFactory(readerGetter, stringConverter, messageProcessor);
     }
 
-
     private void calculateResources(List<ResourceCalculator> resourceCalculators){
         try {
             runService.invokeAll(resourceCalculators);
@@ -92,7 +91,7 @@ public class ApplicationFacade {
     }
 
     private List<ResourceCalculator> getResourceCalculators(String resourceAddresses[]) {
-        List<ResourceCalculator> resourceCalculators = new ArrayList<ResourceCalculator>();
+        List<ResourceCalculator> resourceCalculators = new ArrayList<>();
 
         for (String resourceAddress : resourceAddresses) {
 

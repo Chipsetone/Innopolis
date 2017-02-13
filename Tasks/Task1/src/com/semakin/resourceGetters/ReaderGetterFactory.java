@@ -16,8 +16,7 @@ public class ReaderGetterFactory {
     public ReaderGetterable getReaderGetter(){
         ReaderGetterable invalidResource = new InvalidResourceGetter();
         ReaderGetterable httpReaderGetter = new HttpReaderGetterDecorator(invalidResource);
-        ReaderGetterable fileReaderGetter = new FileReaderGetterDecorator(httpReaderGetter);
 
-        return fileReaderGetter;
+        return new FileReaderGetterDecorator(httpReaderGetter);
     }
 }

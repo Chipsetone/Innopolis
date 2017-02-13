@@ -14,17 +14,14 @@ class RunnableServiceTest {
 
         for (int i = 0; i < actionsCount; i++) {
             final Integer threadnumber = i;
-            Runnable actionToAdd = new Runnable() {
-                @Override
-                public void run() {
-                    Thread current = Thread.currentThread();
-                    log(threadnumber + " дочерний поток! name: " + current.getName());
-                }
+            Runnable actionToAdd = () -> {
+                Thread current = Thread.currentThread();
+                log(threadnumber + " дочерний поток! name: " + current.getName());
             };
 
             service.addAction(actionToAdd);
         }
-
+        //TODO в этом классе тестов дописать на завершение потоков
         log("Добавление потоков закончено. Главный поток завершен.");
     }
 

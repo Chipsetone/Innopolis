@@ -44,12 +44,11 @@ public class StreamSumCalculator{
                 sumBufferAccumulator.processSymbol(currentChar);
             }
             sumBufferAccumulator.tryReleaseBuffer();
-        } catch (IOException e) {
-            pushException(e);
-        } catch (InnerResourceException e) {
+        } catch (Exception e) {
             pushException(e);
         }
     }
+    // TODO NIO2 парсинг файлов использовать оттуда через многопоточный парсинг каждого файла
 
     private void pushException(Exception exception){
         Message message = new Message(exception);

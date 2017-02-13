@@ -1,19 +1,13 @@
 package tests.unit.resourceGetters;
 
 import com.semakin.exceptions.InnerResourceException;
-import com.semakin.resourceGetters.FileReaderGetterDecorator;
-import com.semakin.resourceGetters.HttpReaderGetterDecorator;
 import com.semakin.resourceGetters.ReaderGetterFactory;
 import com.semakin.resourceGetters.ReaderGetterable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.nio.Buffer;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by Chi on 09.02.2017.
@@ -26,7 +20,7 @@ class ReaderGetterFactoryTest {
 
         ReaderGetterable readerGetter = factory.getReaderGetter();
         try(Reader reader = readerGetter.getBufferedReader(invalidResource)) {
-
+            Assertions.fail("ожидался InnerResourceException");
         } catch (InnerResourceException e) {
             System.out.println("то что нужно - исключение");
             return;

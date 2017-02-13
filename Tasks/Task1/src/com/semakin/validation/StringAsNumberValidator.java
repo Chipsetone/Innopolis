@@ -5,7 +5,7 @@ package com.semakin.validation;
  * @author Виктор Семакин
  */
 public class StringAsNumberValidator {
-    private final String positiveNumberRegex = "^-?[0-9]{1,}$";
+    private final String positiveNumberRegex = "^-?[0-9]+$";
 
     /**
      * Проверяет является ли строка числом

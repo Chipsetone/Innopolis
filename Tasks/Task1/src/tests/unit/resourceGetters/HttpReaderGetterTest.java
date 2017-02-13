@@ -7,12 +7,8 @@ import com.semakin.resourceGetters.ReaderGetterable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
 import java.io.Reader;
 
-/**
- * Created by Chi on 06.02.2017.
- */
 class HttpReaderGetterTest {
     @Test
     void getResourceReader_alwaysValidResource_somethingStringResult() throws InnerResourceException {
