@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ControlWorks/ControlWork1/ControlWork1.iml" filepath="$PROJECT_DIR$/ControlWorks/ControlWork1/ControlWork1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lections/Lection3/Lection3_CarShop/Lection3_CarShop.iml" filepath="$PROJECT_DIR$/Lections/Lection3/Lection3_CarShop/Lection3_CarShop.iml" group="Lection3" />
+      <module fileurl="file://$PROJECT_DIR$/Lections/Lection4/Lection4_DoubleTask_Semakin/Lection4_DoubleTask_Semakin.iml" filepath="$PROJECT_DIR$/Lections/Lection4/Lection4_DoubleTask_Semakin/Lection4_DoubleTask_Semakin.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection5/Lection5_Serializer/Lection5_Serializer.iml" filepath="$PROJECT_DIR$/Lections/Lection5/Lection5_Serializer/Lection5_Serializer.iml" group="Lection5" />
       <module fileurl="file://$PROJECT_DIR$/Tasks/Task1/Task1.iml" filepath="$PROJECT_DIR$/Tasks/Task1/Task1.iml" group="Tasks" />
     </modules>
