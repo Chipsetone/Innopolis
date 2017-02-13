@@ -17,11 +17,10 @@ import java.util.LinkedList;
  * тесты приложения.
  * В качестве входых и выходных данных используются заглушки
  * ReaderGetterMock и ResultPrinterMock
- * и эти тесты не проходят =)
  */
 class ApplicationFacadeTest {
     @Test
-    void run_Valid() throws InnerResourceException {
+    void run_Valid_RepeatableResult() throws InnerResourceException {
         HashMap<String, String> resourcesStub = new HashMap<String, String>(){{
             put("abc","1 1 1 1 1 1 1 1 ");
             put("def","2 0 2 5 6 4 57");
