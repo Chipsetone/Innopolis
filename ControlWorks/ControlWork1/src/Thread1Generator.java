@@ -3,7 +3,6 @@ import java.util.Random;
 /**
  * @author Семакин Виктор
  */
-
 public class Thread1Generator extends Thread {
     private MillisecondsCounter msCounter;
     private MessageQueue messageQueue;

@@ -33,6 +33,7 @@ public class Thread2UniqueChecker extends Thread{
                     if (isStopped()) {
                         // остановить остальных
                         msCounter.stop(true);
+                        print("Уникальных всего " + allGeneratednumbers.size());
                         return;
                     }
                     allGeneratednumbers.add(generatedNumber);
