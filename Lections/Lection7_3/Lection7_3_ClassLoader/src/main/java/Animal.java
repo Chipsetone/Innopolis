@@ -1,5 +1,3 @@
-package com.semakin.pojo;
-
 /**
  * @author Семакин Виктор
  */
@@ -24,5 +22,6 @@ public class Animal {
 
     private void print(String message){
         System.out.println(message);
+
     }
 }

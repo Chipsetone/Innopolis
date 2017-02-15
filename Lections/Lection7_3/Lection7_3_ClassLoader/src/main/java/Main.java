@@ -1,5 +1,3 @@
-import com.semakin.pojo.Animal;
-
 /**
  * @author Семакин Виктор
  */
