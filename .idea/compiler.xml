@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Lection3_CarShop" />
+        <module name="Lection4_DoubleTask_Semakin" />
         <module name="Lection7_2" />
         <module name="Lection7_2_Loggers" />
         <module name="Lection7_2_loggers" />
@@ -15,6 +16,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Lection3_CarShop" target="1.8" />
+      <module name="Lection4_DoubleTask_Semakin" target="1.5" />
       <module name="Lection7_2" target="1.5" />
       <module name="Lection7_2_Loggers" target="1.5" />
       <module name="Lection7_2_loggers" target="1.5" />
