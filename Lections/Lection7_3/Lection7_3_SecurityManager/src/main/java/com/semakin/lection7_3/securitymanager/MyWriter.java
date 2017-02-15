@@ -17,7 +17,7 @@ public class MyWriter {
     }
 
     public void writeMy(int i) throws IOException {
-        try(OutputStream outputStream = new FileOutputStream("myFile.txt")){
+        try(OutputStream outputStream = new FileOutputStream(fileName)){
             outputStream.write(i);
         }
     }

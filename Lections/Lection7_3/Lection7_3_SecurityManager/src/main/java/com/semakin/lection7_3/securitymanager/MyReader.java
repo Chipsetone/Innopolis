@@ -17,7 +17,7 @@ public class MyReader {
     }
 
     public int readMy() throws IOException {
-        try(InputStream inputStream = new FileInputStream("myFile.txt")){
+        try(InputStream inputStream = new FileInputStream(fileName)){
             return inputStream.read();
         }
     }
