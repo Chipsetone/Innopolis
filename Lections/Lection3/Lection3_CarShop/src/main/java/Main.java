@@ -8,10 +8,12 @@ import org.apache.log4j.xml.DOMConfigurator;
  * @author Семакин Виктор
  */
 public class Main {
+
+    private static final String loggerConfigFile = "src/main/resources/log4j.xml";
     public static final Logger logger = Logger.getLogger(Main.class);
 
     static {
-        DOMConfigurator.configure("src/main/resources/log4j.xml");
+        DOMConfigurator.configure(loggerConfigFile);
     }
 
     public static void main(String[] args) throws CarNotFoundException {

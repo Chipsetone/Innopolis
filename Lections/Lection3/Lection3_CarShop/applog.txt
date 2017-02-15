@@ -26,3 +26,9 @@ ERROR   2017-02-14 10:54:12,121 [main] datamanager.DataManager  - something
 TRACE   2017-02-14 11:01:07,762 [main] Main  - store created
 ERROR   2017-02-14 11:01:07,768 [main] datamanager.DataManager  - something
 ERROR   2017-02-14 11:01:07,768 [main] datamanager.DataManager  - something
+TRACE   2017-02-16 00:27:55,495 [main] Main  - store created
+ERROR   2017-02-16 00:27:55,525 [main] datamanager.DataManager  - something
+ERROR   2017-02-16 00:27:55,526 [main] datamanager.DataManager  - something
+TRACE   2017-02-16 00:28:14,284 [main] Main  - store created
+ERROR   2017-02-16 00:28:14,300 [main] datamanager.DataManager  - something
+ERROR   2017-02-16 00:28:14,300 [main] datamanager.DataManager  - something

@@ -16,7 +16,6 @@ import java.util.Random;
  *
  * @author Семакин Виктор
  */
-
 public class Store {
     private HashMap<Order, Client> contractList = new HashMap<>(256);
     private HashSet<Car> cars = new HashSet<>(32);
