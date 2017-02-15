@@ -5,10 +5,9 @@ import java.util.List;
 /**
  * @author Семакин Виктор
  */
-
 public class MessageQueue {
     private List<Integer> generatedNumbers = new LinkedList<>();
-    private Object generatedNumberslocker = new Object();
+    private final Object generatedNumberslocker = new Object();
 
     public void pushMessage(int number){
         synchronized (generatedNumberslocker){
