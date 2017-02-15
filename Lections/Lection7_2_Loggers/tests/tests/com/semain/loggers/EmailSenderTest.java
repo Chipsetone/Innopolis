@@ -11,7 +11,7 @@ class EmailSenderTest {
     void send() {
         String fromAddress = "v.semakin.stc@innopolis.ru";
 
-        String login = fromAddress;
+        String login = "v.semakin.stc@innopolis.ru";
         String password = "xUku8ePhaG";
         String smtpHost = "mail.innopolis.ru";
         String smtpPort = "587";
