@@ -15,7 +15,7 @@ public class TestFilesGenerateMain {
 
         FileGenerator generator = new FileGenerator(150);
 
-        try(FileWriter fileListWriter = new FileWriter("validFileNames.txt")) {
+        try(FileWriter fileListWriter = new FileWriter("ValidFileNames.txt")) {
             for (int i = 0; i < FILE_COUNT; i++) {
                 String fileName = "validData" + i +".txt";
                 generator.generateValidFile(fileName, 500);

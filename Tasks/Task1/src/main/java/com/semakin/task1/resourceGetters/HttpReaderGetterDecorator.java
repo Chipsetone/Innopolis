@@ -30,7 +30,7 @@ public class HttpReaderGetterDecorator extends ReaderGetterDecorator {
             InputStream inputStream = getInputStream(resourceAddress);
             return new InputStreamReader(inputStream);
         }
-        catch(IOException ex){
+        catch(Exception ex){
             throw new InnerResourceException("Ошибка при работе с удаленным узлом сети", ex);
         }
     }

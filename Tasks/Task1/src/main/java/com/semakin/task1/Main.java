@@ -1,5 +1,8 @@
 package com.semakin.task1;
 
+/**
+ *
+ */
 public class Main {
     /*Необходимо разработать программу,
     которая получает на вход список ресурсов,
@@ -11,6 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         // в папке тестов есть генератор валидных файлов, запускаемый из TestFilesGenerateMain.java
+
         ResultPrinter printer = new ResultPrinter();
         ApplicationFacade application = new ApplicationFacade(printer);
         application.Run(args);
