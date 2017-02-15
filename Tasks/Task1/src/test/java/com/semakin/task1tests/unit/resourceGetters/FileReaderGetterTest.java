@@ -15,7 +15,7 @@ class FileReaderGetterTest {
 
     @Test
     void getResourceReader() throws Exception {
-        final String VALID_FILE_PATH = "C:\\temp\\forTest.txt"; // нужен такой файл и всё тут. можно конечно поменять =)
+        final String VALID_FILE_PATH =  "TestLocalData\\validData0.txt"; // нужен такой файл и всё тут. можно конечно поменять =)
         ReaderGetterable invalidResourceGetter = new InvalidResourceGetter();
         FileReaderGetterDecorator fileReaderGetter = new FileReaderGetterDecorator(invalidResourceGetter);
 

@@ -4,10 +4,10 @@ import com.semakin.task1.ApplicationFacade;
 import com.semakin.task1.ResultPrinter;
 import com.semakin.task1.exceptions.InnerResourceException;
 import com.semakin.task1.resourceGetters.ReaderGetterable;
+import com.semakin.task1tests.mocks.ResultPrinterMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import com.semakin.task1tests.mocks.ReaderGetterMock;
-import com.semakin.task1tests.mocks.ResultPrinterMock;
 
 import java.util.Arrays;
 import java.util.HashMap;
