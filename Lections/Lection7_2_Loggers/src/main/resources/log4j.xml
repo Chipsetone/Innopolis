@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+    
+    <appender name="" class=""
+
+    <!--<appender name="CustomAppender" class="com.log4j.examples.CustomJdbcAppender">-->
+        <!--<param name="url" value="jdbc:mysql://localhost:3306/Application_Logs"/>-->
+        <!--<param name="driver" value="com.mysql.jdbc.Driver"/>-->
+        <!--<param name="user" value="root"/>-->
+        <!--<param name="pass" value="password"/>-->
+
+        <!--<layout class="com.log4j.examples.CustomLogLayout">-->
+        <!--</layout>-->
+    <!--</appender>-->
+
+    <root>
+        <level value="DEBUG" />
+        <appender-ref ref="CustomAppender" />
+    </root>
+
+</log4j:configuration>
