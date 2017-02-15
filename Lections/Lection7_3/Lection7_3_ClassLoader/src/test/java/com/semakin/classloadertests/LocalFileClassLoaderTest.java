@@ -1,7 +1,5 @@
 package com.semakin.classloadertests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.semakin.classloader.LocalFileClassLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

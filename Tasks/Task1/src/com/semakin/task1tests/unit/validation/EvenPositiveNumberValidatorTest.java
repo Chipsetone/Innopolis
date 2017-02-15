@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Created by Chi on 06.02.2017.
+ *
+ * @author Семакин Виктор
  */
 class EvenPositiveNumberValidatorTest {
     @Test

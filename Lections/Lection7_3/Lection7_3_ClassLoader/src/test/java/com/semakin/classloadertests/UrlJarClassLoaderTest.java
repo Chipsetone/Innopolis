@@ -4,8 +4,6 @@ import com.semakin.classloader.UrlJarClassLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author Семакин Виктор
  */
