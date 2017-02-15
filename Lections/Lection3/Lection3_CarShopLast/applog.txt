@@ -1,0 +1,28 @@
+ERROR   2017-02-14 10:44:05,516 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:44:05,517 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:44:36,561 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:44:36,562 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:45:37,488 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:45:37,490 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:46:08,547 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:46:08,549 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:51:36,417 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:51:36,418 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:52:20,569 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:52:20,571 [main] datamanager.DataManager  - something
+TRACE   2017-02-14 10:52:30,082 [main] Main  - store created
+ERROR   2017-02-14 10:52:30,089 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:52:30,089 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:52:47,279 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:52:47,281 [main] datamanager.DataManager  - something
+TRACE   2017-02-14 10:53:00,882 [main] Main  - store created
+ERROR   2017-02-14 10:53:00,889 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:53:00,889 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:53:50,070 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:53:50,072 [main] datamanager.DataManager  - something
+TRACE   2017-02-14 10:54:12,111 [main] Main  - store created
+ERROR   2017-02-14 10:54:12,121 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 10:54:12,121 [main] datamanager.DataManager  - something
+TRACE   2017-02-14 11:01:07,762 [main] Main  - store created
+ERROR   2017-02-14 11:01:07,768 [main] datamanager.DataManager  - something
+ERROR   2017-02-14 11:01:07,768 [main] datamanager.DataManager  - something
