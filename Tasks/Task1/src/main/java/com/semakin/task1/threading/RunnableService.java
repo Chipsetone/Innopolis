@@ -28,7 +28,12 @@ public class RunnableService {
      * @throws InterruptedException при прерывании потока
      */
     public List<Future<Boolean>> invokeAll(List<ResourceCalculator> todoList) throws InterruptedException {
-        return service.invokeAll(todoList);
+        List<Future<Boolean>> invokeResult = service.invokeAll(todoList);
+        for (Future<Boolean> item :
+                invokeResult) {
+            
+        }
+        return invokeResult;
     }
 
 }

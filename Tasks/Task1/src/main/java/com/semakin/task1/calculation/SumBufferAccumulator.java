@@ -5,6 +5,7 @@ import com.semakin.task1.parsers.StringConverter;
 import com.semakin.task1.threading.IMessagePushable;
 import com.semakin.task1.threading.Message;
 import com.semakin.task1.validation.ValidSymbols;
+import org.apache.log4j.Logger;
 
 /**
  * Буфер символов.
@@ -17,6 +18,8 @@ public class SumBufferAccumulator {
     private IMessagePushable messagePusher;
     private boolean isStopped = false;
     private String resourceAddress;
+
+    public static final Logger logger = Logger.getLogger(SumBufferAccumulator.class);
 
     /**
      * @param stringConverter преобразователь слова буфера в число
@@ -34,13 +37,16 @@ public class SumBufferAccumulator {
      * TODO перевести всё на finalize и использовать try-with-resources - понять как это всё работает здесь
      * @param symbol
      */
-    public void processSymbol(char symbol) {
+    public void pushToBufferOrRelease(char symbol) {
         if(isStopped){
             return;
         }
 
         if(isNotAllowedChar(symbol)){
-            Message message = new Message(new InnerResourceException("Недопустимый символ '" + symbol + "' ресурс: " + resourceAddress));
+            final String forbiddenSymbolMessage = "Недопустимый символ '" + symbol + "' ресурс: " + resourceAddress;
+            logger.error(forbiddenSymbolMessage);
+
+            Message message = new Message(new InnerResourceException(forbiddenSymbolMessage));
             messagePusher.pushMessage(message);
             isStopped = true;
             return;
@@ -58,24 +64,27 @@ public class SumBufferAccumulator {
      */
     public void tryReleaseBuffer() {
         if(strAsNumberBuffer.length() > 0){
-            pullBuffer();
+            pullBuffer(strAsNumberBuffer);
         }
         return;
     }
 
-    private void pullBuffer(){
+    private void pullBuffer(String convertableToInteger){
         Message message;
         try {
-            // TODO вытащить сюда проверку и конвертацию когда-нибудь
-            int number = stringConverter.toInt(strAsNumberBuffer);
+            // TODO вытащить сюда отдельно проверку и конвертацию когда-нибудь
+            int number = stringConverter.toInt(convertableToInteger);
             if(number == 0){
                 releaseBuffer();
                 return;
             }
-            message = new Message(number, strAsNumberBuffer);
+            message = new Message(number, convertableToInteger);
         } catch (InnerResourceException e) {
-            message = new Message(e, "ресурс: " + resourceAddress);
+            String messageText = "ресурс: " + resourceAddress;
+            logger.error("ошибка " + messageText);
+            message = new Message(e, messageText);
             isStopped = true;
+
         }
 
         messagePusher.pushMessage(message);

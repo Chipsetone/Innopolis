@@ -1,6 +1,7 @@
 package com.semakin.task1.threading;
 
 import com.semakin.task1.ResultPrinter;
+import org.apache.log4j.Logger;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -15,6 +16,7 @@ public class MessageQueueProcessor implements IMessageQueueProcessorable, IMessa
     private ResultPrinter resultPrinter;
     private int sum = 0;
     private boolean isError = false;
+    private Logger logger = Logger.getLogger(MessageQueueProcessor.class);
 
     /**
      * @param resultPrinter отображатель результата
@@ -38,6 +40,7 @@ public class MessageQueueProcessor implements IMessageQueueProcessorable, IMessa
     @Override
     public void runProcessingMessages() {
         if(isError){
+            logger.error("Ошибка - обработка сообщений остановлена.");
             return;
         }
         Message currentMessage = pollMessage();
@@ -45,13 +48,14 @@ public class MessageQueueProcessor implements IMessageQueueProcessorable, IMessa
         while(currentMessage != null){
 
             if(currentMessage.isInvalidMessage()){
+
                 isError = true;
 
                 String description = currentMessage.getDescription();
-                System.out.println("Ошибка! " + description);
+                logger.error("Ошибка! " + description);
 
                 Exception exception = currentMessage.getException();
-                System.out.println(exception.getMessage());
+                logger.error(exception.getMessage());
                 return;
             }
             int messageValue = currentMessage.getMessage();
@@ -59,6 +63,7 @@ public class MessageQueueProcessor implements IMessageQueueProcessorable, IMessa
 
             currentMessage = pollMessage();
         }
+        logger.debug("Обработка сообщений опустошила очередь");
     }
 
     /**

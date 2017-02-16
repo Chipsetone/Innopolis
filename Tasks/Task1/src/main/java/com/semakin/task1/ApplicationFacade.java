@@ -2,15 +2,16 @@ package com.semakin.task1;
 
 import com.semakin.task1.calculation.SumCalculatorFactory;
 import com.semakin.task1.parsers.StringConverter;
+import com.semakin.task1.parsers.StringValidConverter;
 import com.semakin.task1.resourceGetters.ReaderGetterFactory;
+import com.semakin.task1.resourceGetters.ReaderGetterable;
 import com.semakin.task1.threading.MessageQueueProcessor;
 import com.semakin.task1.threading.ResourceCalculator;
-import com.semakin.task1.validation.NumberValidatorable;
-import com.semakin.task1.validation.StringAsNumberValidator;
-import com.semakin.task1.parsers.StringValidConverter;
-import com.semakin.task1.resourceGetters.ReaderGetterable;
 import com.semakin.task1.threading.RunnableService;
 import com.semakin.task1.validation.EvenPositiveNumberValidator;
+import com.semakin.task1.validation.NumberValidatorable;
+import com.semakin.task1.validation.StringAsNumberValidator;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +27,17 @@ public class ApplicationFacade {
     private RunnableService runService;
     private MessageQueueProcessor messageProcessor;
     private AtomicBoolean isComplete = new AtomicBoolean(false);
-    private final ResultPrinter resultKeeper;
+    private final ResultPrinter resultPrinter;
+
+    public static final Logger logger = Logger.getLogger(ApplicationFacade.class);
 
     /**
      * Инициализатор приложения для обработки
-     * @param resultKeeper
+     * @param resultPrinter
      */
-    public ApplicationFacade(ResultPrinter resultKeeper) {
-        this.resultKeeper = resultKeeper;
-        init(resultKeeper);
+    public ApplicationFacade(ResultPrinter resultPrinter) {
+        this.resultPrinter = resultPrinter;
+        init(resultPrinter);
     }
 
     /**
@@ -48,11 +51,11 @@ public class ApplicationFacade {
         while (true){
             messageProcessor.runProcessingMessages();
 
-            if (isComplete.get() && messageProcessor.isStopped()){
+            if (isCalculatingDone()){
                 break;
             }
         }
-        System.out.println("Завершено.");
+        logger.trace("Очередь обработки завершена");
     }
 
     /**
@@ -69,6 +72,7 @@ public class ApplicationFacade {
         runService = new RunnableService();
         messageProcessor = new MessageQueueProcessor(resultPrinter);
         sumCalculatorFactory = newSumCalculationFactory();
+        logger.debug("ApplicationFacade инициализирован.");
     }
 
     private SumCalculatorFactory newSumCalculationFactory() {
@@ -82,11 +86,13 @@ public class ApplicationFacade {
 
     private void calculateResources(List<ResourceCalculator> resourceCalculators){
         try {
+            logger.trace("Запуск обработки " + resourceCalculators.size() + " ресурсов");
             runService.invokeAll(resourceCalculators);
         } catch (InterruptedException e) {
+            logger.error("Ошибка при работе с потоками", e);
             e.printStackTrace();
         }
-
+        logger.debug("Обработка ресурсов завершена");
         isComplete.set(true);
     }
 
@@ -97,6 +103,7 @@ public class ApplicationFacade {
 
             resourceAddress = resourceAddress.trim();
             if(resourceAddress.length() == 0){
+                logger.error("Обнаружен ресурс с пустым именем!");
                 continue;
             }
 
@@ -105,5 +112,15 @@ public class ApplicationFacade {
         }
 
         return resourceCalculators;
+    }
+
+    private boolean isCalculatingDone(){
+        // TODO вместо isComplete обрабатывать службу запуска потоков
+        return isComplete.get() && messageProcessor.isStopped();
+    }
+
+    private void setComplete(){
+        logger.debug("Обработка ресурсов завершена");
+        isComplete.set(true);
     }
 }
