@@ -12,15 +12,17 @@
         <module name="Lection7_2_Loggers" />
         <module name="Lection7_2_loggers" />
         <module name="Lection7_3_ClassLoader" />
+        <module name="Lection7_4_jdbc" />
         <module name="Task1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="Lection3_CarShop" target="1.8" />
-      <module name="Lection4_DoubleTask_Semakin" target="1.8" />
-      <module name="Lection7_2_Loggers" target="1.8" />
-      <module name="Lection7_3_ClassLoader" target="1.8" />
-      <module name="Task1" target="1.8" />
+      <module name="Lection4_DoubleTask_Semakin" target="1.5" />
+      <module name="Lection7_2_Loggers" target="1.5" />
+      <module name="Lection7_3_ClassLoader" target="1.5" />
+      <module name="Lection7_4_jdbc" target="1.5" />
+      <module name="Task1" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
