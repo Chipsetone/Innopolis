@@ -18,10 +18,10 @@ public class ThreadingState {
 
         for (Future<Boolean> futureResult :
                 futureResults) {
-            System.out.println("проверяется " + futureResult.isDone());
-            if(!futureResult.isDone()){
-                return false;
-            }
+            System.out.println("isDone: " + futureResult.isDone() + " isCanceled: " + futureResult.isCancelled());
+//            if(!futureResult.isCancelled()){//isDone()){
+//                return false;
+//            }
         }
 
         return true;

@@ -1,8 +1,6 @@
 package com.semakin.task1tests.unit.threading;
 
-import com.semakin.task1.threading.RunnableService;
 import com.semakin.task1.threading.ThreadingState;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;

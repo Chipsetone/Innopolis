@@ -1,6 +1,5 @@
 package com.semakin.task1.calculation;
 
-import com.semakin.task1.ApplicationFacade;
 import com.semakin.task1.resourceGetters.ReaderGetterable;
 import com.semakin.task1.threading.IMessagePushable;
 import com.semakin.task1.threading.Message;
