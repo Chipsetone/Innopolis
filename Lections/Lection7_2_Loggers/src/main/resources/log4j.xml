@@ -2,40 +2,32 @@
 <!DOCTYPE log4j:configuration PUBLIC "-//log4j/log4j Configuration//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
     <appender name="Appender1" class="org.apache.log4j.ConsoleAppender">
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%-7p %d [%t] %c %x - %m%n"/>
+        <layout class="com.semakin.loggers.EmailLayout">
         </layout>
     </appender>
     <appender name="Appender2" class="org.apache.log4j.FileAppender">
         <param name="File" value="applog.txt" />
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%-7p %d [%t] %c %x - %m%n"/>
+
+        <layout class="com.semakin.loggers.EmailLayout">
         </layout>
     </appender>
 
-    <appender name="EmailAppender" class="EmailAppender">
+    <appender name="EmailAppenderGmail" class="com.semakin.loggers.EmailAppender">
         <param name="fromAddress" value=""/>
         <param name="login" value=""/>
         <param name="password" value=""/>
-        <param name="smtpHost" value=""/>
-        <param name="smtpPort" value=""/>
+        <param name="smtpHost" value="smtp.gmail.com"/>
+        <param name="smtpPort" value="465"/>
         <param name="toAddress" value=""/>
-        <param name="messageTheme" value=""/>
-        private String fromAddress;
-        private String login;
-        private String password;
-        private String smtpHost;
-        private String smtpPort;
+        <param name="messageTheme" value="Log from Logger!"/>
 
-        private String toAddress;
-        private String messageTheme;
-        <layout class="EmailLayout">
-
+        <layout class="com.semakin.loggers.EmailLayout">
         </layout>
     </appender>
     <root>
         <priority value="TRACE"/>
         <appender-ref ref="Appender1" />
         <appender-ref ref="Appender2" />
+        <appender-ref ref="EmailAppenderGmail" />
     </root>
 </log4j:configuration>
