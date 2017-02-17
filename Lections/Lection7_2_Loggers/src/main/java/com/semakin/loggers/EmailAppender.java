@@ -1,5 +1,6 @@
 package com.semakin.loggers;
 
+import com.semakin.loggers.emailer.EmailSender;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;
 

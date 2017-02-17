@@ -1,4 +1,6 @@
-package com.semakin.loggers;
+package com.semakin.loggers.emailer;
+
+import com.semakin.loggers.emailer.EmailSender;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -13,7 +15,7 @@ import javax.mail.internet.MimeMultipart;
 /**
  * @author Семакин Виктор
  */
-public class EmailFileSender extends  EmailSender{
+public class EmailFileSender extends EmailSender {
     public EmailFileSender(String fromAddress, String login, String password, String smtpHost, String smtpPort) {
         super(fromAddress, login, password, smtpHost, smtpPort);
     }

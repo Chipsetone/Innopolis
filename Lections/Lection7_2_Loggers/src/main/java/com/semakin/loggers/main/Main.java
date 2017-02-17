@@ -1,5 +1,6 @@
 package com.semakin.loggers.main;
 
+import com.semakin.loggers.LoggerMessage;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
@@ -13,7 +14,20 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        logger.trace("тестовый лог!");
+        advancedEmailLogger();
+
         System.out.println("завершено");
+    }
+
+    private static void simpleEmailLogger(){
+        LoggerMessage message = new LoggerMessage("тестовый лог!");
+        logger.trace(message);
+    }
+
+    private static void advancedEmailLogger(){
+        for (int i = 0; i < 1000; i++) {
+            LoggerMessage message = new LoggerMessage("тестовый лог " + i);
+            logger.trace(message);
+        }
     }
 }

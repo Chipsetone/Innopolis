@@ -12,7 +12,6 @@ public class EmailLayout extends PatternLayout{
     @Override
     public String format(LoggingEvent event) {
         LoggerMessage message = (LoggerMessage) event.getMessage();
-
         return message.getMessage();
     }
 }
