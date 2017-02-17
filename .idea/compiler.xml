@@ -8,9 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Lection3_CarShop" />
         <module name="Lection4_DoubleTask_Semakin" />
-        <module name="Lection7_2" />
-        <module name="Lection7_2_Loggers" />
         <module name="Lection7_2_loggers" />
+        <module name="Lection7_2_Loggers" />
         <module name="Lection7_3_ClassLoader" />
         <module name="Lection7_4_jdbc" />
       </profile>

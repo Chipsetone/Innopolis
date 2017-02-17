@@ -15,50 +15,33 @@ public class EmailAppender extends AppenderSkeleton{
 
     private String toAddress;
     private String messageTheme;
-    private String defaultMessageText = "";
 
     @Override
     protected void append(LoggingEvent loggingEvent) {
-        String preparedMessage = getDefaultMessageText() + layout.format(loggingEvent);
-
+        String preparedMessage = layout.format(loggingEvent);
         send(preparedMessage);
-
-
     }
 
-    public void send(String message){
+    private void send(String message){
         EmailSender sender = new EmailSender(fromAddress, login, password, smtpHost, smtpPort);
-
         sender.send(message, getMessageTheme(), getToAddress());
     }
 
-    @Override
     public void close() {
         System.out.println("custom appender closed");
     }
 
-    @Override
     public boolean requiresLayout() {
         return true;
     }
 
+    // Getters And Setters
     public String getToAddress() {
         return toAddress;
     }
 
     public void setToAddress(String toAddress) {
         this.toAddress = toAddress;
-    }
-
-    public String getDefaultMessageText() {
-        if(defaultMessageText == null){
-            return "";
-        }
-        return defaultMessageText;
-    }
-
-    public void setDefaultMessageText(String defaultMessageText) {
-        this.defaultMessageText = defaultMessageText;
     }
 
     public String getMessageTheme() {

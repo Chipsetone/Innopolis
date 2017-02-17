@@ -12,6 +12,27 @@
             <param name="ConversionPattern" value="%-7p %d [%t] %c %x - %m%n"/>
         </layout>
     </appender>
+
+    <appender name="EmailAppender" class="EmailAppender">
+        <param name="fromAddress" value=""/>
+        <param name="login" value=""/>
+        <param name="password" value=""/>
+        <param name="smtpHost" value=""/>
+        <param name="smtpPort" value=""/>
+        <param name="toAddress" value=""/>
+        <param name="messageTheme" value=""/>
+        private String fromAddress;
+        private String login;
+        private String password;
+        private String smtpHost;
+        private String smtpPort;
+
+        private String toAddress;
+        private String messageTheme;
+        <layout class="EmailLayout">
+
+        </layout>
+    </appender>
     <root>
         <priority value="TRACE"/>
         <appender-ref ref="Appender1" />
