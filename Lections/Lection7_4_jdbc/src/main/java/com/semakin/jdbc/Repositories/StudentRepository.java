@@ -4,10 +4,7 @@ import com.semakin.jdbc.DTO.Student;
 import com.semakin.jdbc.entitylogic.ConnectionFactory;
 import com.semakin.jdbc.entitylogic.EntityRepository;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -21,21 +18,30 @@ public class StudentRepository extends EntityRepository<Student> {
 
     @Override
     public void insert(Student entity) throws SQLException, IllegalAccessException {
-
-
-        Connection conn = ConnectionFactory.getInstance().getConnection();
         String sqlQuery = "INSERT INTO student (name, birthdate, sex)" +
                 "VALUES(?,?,?)";
 
-        PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
-        preparedStatement.setString(1, "Arnold");
+        PreparedStatement preparedStatement = getConnection().prepareStatement(sqlQuery);
+        preparedStatement.setString(1, entity.getName());
         preparedStatement.setDate(2, entity.getBirthDate());
-        preparedStatement.setBoolean(3, true);
+        preparedStatement.setBoolean(3, entity.getSex());
         preparedStatement.executeUpdate();
     }
 
     @Override
-    public Student selectById(long id) {
+    public Student selectById(long id) throws SQLException {
+        //return null;
+        String sqlQuery = getSelectByIdQueryString();
+
+        PreparedStatement statement = getConnection().prepareStatement(sqlQuery);//createStatement();
+        ResultSet resultSet = statement.getResultSet(); //executeQuery(sqlQuery);
+
+        while(resultSet.next()){
+            String readedName = resultSet.getString("name");
+            Student student = getStudentFromResultSet(resultSet);
+            System.out.println(readedName);
+            return student;
+        }
         return null;
     }
 
@@ -52,5 +58,14 @@ public class StudentRepository extends EntityRepository<Student> {
     @Override
     public void deleteById(Student entity) {
 
+    }
+
+    private Student getStudentFromResultSet(ResultSet resultSet) throws SQLException {
+        String name = resultSet.getString("name");
+        boolean sex = resultSet.getBoolean("sex");
+        Date birthDate = resultSet.getDate("birthDate");
+        long id = resultSet.getLong("id");
+
+        return new Student(id, name, birthDate, sex);
     }
 }

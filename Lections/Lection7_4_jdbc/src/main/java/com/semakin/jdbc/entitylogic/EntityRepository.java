@@ -8,7 +8,7 @@ import java.util.List;
  * @author Семакин Виктор
  */
 public abstract class EntityRepository<T extends Entity>  implements IEntityQueryable<T>{
-    protected Connection connection = ConnectionFactory.getInstance().getConnection();
+    private Connection connection = ConnectionFactory.getInstance().getConnection();
     private String tableName;
     private Class entityClass;
 
@@ -29,21 +29,12 @@ public abstract class EntityRepository<T extends Entity>  implements IEntityQuer
         return "DELETE FROM " + tableName + " WHERE id = " + id;
     }
 
-    protected String getSelectByIdQueryString(long id){
-        return "SELECT TOP 1 * FROM " + tableName + " where id = " + id;
+    protected String getSelectByIdQueryString(){
+        return "SELECT TOP 1 * FROM " + tableName + " where id = (?)";
     }
 
-    private static void insertDb() throws SQLException {
-        Connection conn = ConnectionFactory.getInstance().getConnection();
-        String sqlQuery = "INSERT INTO student (name, birthdate, sex)" + //, id_group)" +
-                "VALUES(?,?,?)";
-
-        PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
-        preparedStatement.setString(1, "Arnold");
-        preparedStatement.setDate(2, new Date(1978, 2,5));
-        preparedStatement.setBoolean(3, true);
-        //preparedStatement.setInt(4, 1);
-        preparedStatement.executeUpdate();
+    protected Connection getConnection(){
+        return connection;
     }
 
 //    public void insert(T entity) throws SQLException, IllegalAccessException {

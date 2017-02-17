@@ -8,7 +8,7 @@ import java.util.List;
  */
 public interface IEntityQueryable<T extends Entity> {
     void insert(T entity) throws SQLException, IllegalAccessException;
-    T selectById(long id);
+    T selectById(long id) throws SQLException;
     List<T> selectAll();
     void update(T entity);
     void deleteById(T entity);

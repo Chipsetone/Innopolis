@@ -2,7 +2,8 @@ package com.semakin.jdbc.DTO;
 
 import com.semakin.jdbc.entitylogic.Entity;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 /**
  * @author Семакин Виктор

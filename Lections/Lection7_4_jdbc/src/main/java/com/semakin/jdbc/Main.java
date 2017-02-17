@@ -1,6 +1,7 @@
 package com.semakin.jdbc;
 
 import com.semakin.jdbc.DTO.Student;
+import com.semakin.jdbc.Repositories.StudentRepository;
 import com.semakin.jdbc.entitylogic.ConnectionFactory;
 import com.semakin.jdbc.entitylogic.SQLQueryFactory;
 
@@ -18,8 +19,13 @@ import java.sql.*;
 public class Main {
     public static void main(String[] args) throws ClassNotFoundException, SQLException, IllegalAccessException {
         Student stud = new Student(1, "Арни", new Date(2017, 02, 16), true);
-        SQLQueryFactory factory = new SQLQueryFactory();
-        factory.InsertObjectIntoDb(stud);
+
+        StudentRepository studentRepository = new StudentRepository();
+        studentRepository.insert(stud);
+
+        Student student = studentRepository.selectById(0);
+//        SQLQueryFactory factory = new SQLQueryFactory();
+//        factory.InsertObjectIntoDb(stud);
 //        insertDb();
         //selectDb();
     }

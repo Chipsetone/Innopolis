@@ -12,7 +12,7 @@ class EmailSenderTest {
         String fromAddress = "v.semakin.stc@innopolis.ru";
 
         String login = "v.semakin.stc@innopolis.ru";
-        String password = "xUku8ePhaG";
+        String password = "";
         String smtpHost = "mail.innopolis.ru";
         String smtpPort = "587";
 
