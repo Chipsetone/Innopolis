@@ -1,0 +1,33 @@
+СРОК - до ЭТОГО воскресенья (19.02) 23:59
+
+Лабораторная номер 2:
+1) Создать структуру БД в соответствии с бизнес-требованиями своего проекта (минимум 4-5 таблиц, в каждой минимум 4 поля, ключи обязательны, связи между таблицами прописаны)
+2) Сделать многопоточную выгрузку из БД в xml по принципу- 1 таблица-1файл xml.
+Пример:
+<Students>
+ <Student>
+  <name type=”String”>Vasya</name>
+<age type=”age”>27</name>
+ </Student>
+<Student>
+  <name type=”String”>Petya</name>
+<age type=”age”>29</name>
+ </Student>
+</Students>
+3) Минимум 1 выгрузка должна подразумевать вложенность.
+Пример:
+<Journals>
+ <Journal>
+  <Student>
+   <name type=”String”>Vasya</name>
+<age type=”age”>27</name>
+  </Student>
+<Lection>
+   <name type=”String”>OOP</name>
+<age type=”text”>lkfjdjflkdjflksj</name>
+  </Lection>
+ </ Journal >
+</ Journals >
+4) Сделать многопоточную загрузку данных обратно в БД из xml.
+Целевой результат- делаем выгрузку из БД. Удаляем все записи в БД. Делаем прогрузку в БД. Результат не изменился.
+Для работы с xml можно использовать JAXB https://www.mkyong.com/java/jaxb-hello-world-example/ (подсказка- классы JAXB можно не писать вручную а сгенерировать из xml с помощью jaxb.exe)
