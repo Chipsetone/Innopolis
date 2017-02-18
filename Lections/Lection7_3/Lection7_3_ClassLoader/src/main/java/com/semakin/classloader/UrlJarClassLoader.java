@@ -1,8 +1,10 @@
 package com.semakin.classloader;
 
-import java.io.IOException;
-import java.net.JarURLConnection;
-import java.net.URL;
+import java.io.*;
+import java.net.*;
+//import java.nio.file.Files;
+import java.nio.file.*;
+import java.util.Iterator;
 import java.util.jar.JarFile;
 
 /**
@@ -10,21 +12,46 @@ import java.util.jar.JarFile;
  */
 public class UrlJarClassLoader extends ExternalClassLoader {
     private static final String gitArtifactsRepoUrl = "https://github.com/Chipsetone/Innopolis/blob/master/Lections/Lection7_3/Lection7_3_ClassLoader/out/artifacts/jar/";
-    private static final String urlForJarFile = gitArtifactsRepoUrl + "Lection7_3_ClassLoader.jar?raw=true";
+    private static final String urlForJarFile = gitArtifactsRepoUrl + "Lection7_3_ClassLoaderOrigin.jar?raw=true";
 
     @Override
-    protected JarFile getJarFile() throws IOException {
-        return getJarFileFromUrl(urlForJarFile);
+    protected JarFile getJarFile() throws IOException, URISyntaxException {
+        return getJarFileFromUrlWithJarUrlConnection(urlForJarFile);
     }
-
-    private JarFile getJarFileFromUrl(String url) throws IOException {
-        JarURLConnection connection = getJarUrlConnection(url);
+    // способ 1
+    private JarFile getJarFileFromUrlWithJarUrlConnection(String url) throws IOException {
+        JarURLConnection connection = (JarURLConnection) getUrlConnection(url);
         return connection.getJarFile();
     }
 
-    private JarURLConnection getJarUrlConnection(String url) throws IOException {
-        final URL jarUrl = new URL(url);
+    private URLConnection getUrlConnection(String url) throws IOException {
+        final URL urlObj = new URL(url);
+        return urlObj.openConnection();
+    }
 
-        return (JarURLConnection) jarUrl.openConnection();
+    // способ 2 - с заморочками
+    private JarFile getJarFileFromUrlDirectDownload(String url) throws URISyntaxException, IOException {
+        JarFile jarFile = new JarFile(getFileFromHttp(url));
+        return jarFile;
+    }
+
+    private File getFileFromHttp(String url) throws IOException {
+        try (InputStream inputStream = getUrlConnection(url).getInputStream()) {
+            final String tempFileName = "tempClassLoaderFile.jar";
+            File fileResult = new File(tempFileName);
+            try(FileOutputStream outputStream = new FileOutputStream(fileResult)) {
+                pipeStreams(inputStream, outputStream);
+            }
+            return fileResult;
+        }
+    }
+
+    private void pipeStreams(InputStream input, OutputStream output) throws IOException {
+        int read = 0;
+        byte[] bytes = new byte[1024];
+
+        while ((read = input.read(bytes)) != -1) {
+            output.write(bytes, 0, read);
+        }
     }
 }

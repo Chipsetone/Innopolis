@@ -3,6 +3,10 @@
  */
 public class Animal {
     private String name;
+    private boolean isEatable = false;
+
+    public Animal() {
+    }
 
     public Animal(String name) {
         this.name = name;

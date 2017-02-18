@@ -1,4 +1,7 @@
+import com.semakin.classloader.ExternalClassLoader;
+import com.semakin.classloader.LocalFileClassLoader;
 import com.semakin.classloader.UrlJarClassLoader;
+import com.semakin.lection5.serializer.ReflectionSerializator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -9,25 +12,21 @@ import java.lang.reflect.InvocationTargetException;
 public class Main {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        UrlJarClassLoader loader = new UrlJarClassLoader();
+        ExternalClassLoader loader = new LocalFileClassLoader();
         Class animalClass = loader.findClass("Animal");
         Constructor constructor = animalClass.getConstructor(String.class);
 
-        Object objBeaver = constructor.newInstance("beaver");
-        Animal beaver = (Animal)objBeaver;
-       // ReflectionSerializer
-        System.out.println(animalClass);
-        System.out.println(beaver);
+        Object beaver = constructor.newInstance("beaver");
+        //Object beaver = animalClass.newInstance();
+        printSerializedObject(beaver);
 
-        animalInAction(beaver);
+
     }
 
-    private static void animalInAction(Animal animal){
+    public static void printSerializedObject(Object serializeVictim) throws IllegalAccessException {
+        ReflectionSerializator serializator = new ReflectionSerializator();
+        String serializedBeaver = serializator.serialize(serializeVictim);
 
-        System.out.println("do something in main");
-
-        animal.eat();
-        animal.doCrap();
-        animal.sleep();
+        System.out.println(serializedBeaver);
     }
 }

@@ -3,6 +3,7 @@ package com.semakin.classloader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.Hashtable;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -10,7 +11,7 @@ import java.util.jar.JarFile;
 /**
  * @author Семакин Виктор
  */
-abstract class ExternalClassLoader extends ClassLoader{
+public abstract class ExternalClassLoader extends ClassLoader{
     private Hashtable classes = new Hashtable(); //used to cache already defined classes
 
     public ExternalClassLoader() {
@@ -25,19 +26,10 @@ abstract class ExternalClassLoader extends ClassLoader{
     @Override
     public Class findClass(String className) {
         byte classByte[];
-        Class result = getCachedClass(className); //checks in cached classes
-
-        if (result != null) {
-            return result;
-        }
+        Class result;
 
         try {
-            return findSystemClass(className);
-        } catch (Exception e) {
-        }
-
-        try {
-            JarFile jar = getJarFile(); //getJarFileFromUrl(urlForJarFile); //getJarFileLocal(jarFile);
+            JarFile jar = getJarFile();
             JarEntry entry = jar.getJarEntry(className + ".class");
             InputStream is = jar.getInputStream(entry);
             ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
@@ -60,5 +52,5 @@ abstract class ExternalClassLoader extends ClassLoader{
         return (Class) classes.get(className);
     }
 
-    protected abstract JarFile getJarFile() throws IOException;
+    protected abstract JarFile getJarFile() throws IOException, URISyntaxException;
 }
