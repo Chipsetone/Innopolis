@@ -14,7 +14,6 @@ public abstract class Entity {
      * Конструктор по умолчанию. Должен присутствовать во всех наследниках для рефлексии
      */
     public Entity() {
-
     }
 
     public long getId() {

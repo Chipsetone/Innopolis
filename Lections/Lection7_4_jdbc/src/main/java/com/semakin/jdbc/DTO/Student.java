@@ -11,9 +11,12 @@ import java.sql.Date;
 public class Student extends Entity {
     private String name;
     private Date birthDate;
-    private Boolean sex;
+    private Character sex;
 
-    public Student(long id, String name, Date birthDate, Boolean sex) {
+    public Student() {
+    }
+
+    public Student(String name, Date birthDate, Character sex) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -44,11 +47,11 @@ public class Student extends Entity {
         this.birthDate = birthDate;
     }
 
-    public Boolean getSex() {
+    public Character getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Character sex) {
         this.sex = sex;
     }
 }
