@@ -30,14 +30,9 @@ public class Main {
     }
 
     private static void presentStudentWork() throws IllegalAccessException, SQLException, NoSuchFieldException {
-        // сначала надо будет создать сущность
-        // добавить
-        // выбрать
-        // выбрать все
-        // удалить
+        StudentRepository repo = new StudentRepository();
 
         // INSERT
-        StudentRepository repo = new StudentRepository();
         System.out.println("***\nINSERT Student");
         String insertingName = "Somebody inserted";
         Student insertingStudent = new Student(insertingName, new Date(2017,02,17), 'M');
@@ -55,7 +50,6 @@ public class Main {
         long lastStudentId = allStudents.get(lastStudentArrayIndex).getId();
         //UPDATE
         System.out.println("***\nUPDATE By student with id " + lastStudentId);
-
         Student updatedStudent = allStudents.get(lastStudentArrayIndex);
         updatedStudent.setName("some another name");
         repo.update(updatedStudent);
@@ -74,9 +68,8 @@ public class Main {
         }
 
         // DELETE BY ID
-        long deletedId = lastStudentId;
-        System.out.println("***\nDELETE BY Id " + deletedId );
-        repo.deleteById(deletedId);
+        System.out.println("***\nDELETE BY Id " + lastStudentId );
+        repo.deleteById(lastStudentId);
 
 
         // SELECT ALL FOR check
@@ -90,38 +83,9 @@ public class Main {
     }
 
     private static void printStudent(Student stud){
-
         System.out.println("id= " + stud.getId() +
                 " name= '" + stud.getName() +
                 "' birthdate= " + stud.getBirthDate() +
                 " sex = " + stud.getSex());
     }
-
-    private static void selectDb(){
-        try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM student");
-
-            while(resultSet.next()){
-                String readedName = resultSet.getString("name");
-                System.out.println(readedName);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void insertDb() throws SQLException {
-        Connection conn = ConnectionFactory.getInstance().getConnection();
-            String sqlQuery = "INSERT INTO student (name, birthdate, sex)" + //, id_group)" +
-                    "VALUES(?,?,?)";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(sqlQuery);
-            preparedStatement.setString(1, "Arnold");
-            preparedStatement.setDate(2, new Date(1978, 2,5));
-            preparedStatement.setBoolean(3, true);
-            //preparedStatement.setInt(4, 1);
-            preparedStatement.executeUpdate();
-    }
-
 }

@@ -30,9 +30,8 @@ public abstract class GodEntityRepository<T extends Entity>  implements IEntityQ
 
         ResultSet resultSet = statement.getResultSet();
 
-        while(resultSet.next()){
-            T entity = getEntityFromResultSet(resultSet);
-            return entity;
+        if(resultSet.next()){
+            return getEntityFromResultSet(resultSet);
         }
         return null;
     }
