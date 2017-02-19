@@ -1,32 +1,18 @@
 package com.semakin.classloader;
 
 import java.io.*;
-import java.net.*;
-//import java.nio.file.Files;
-import java.nio.file.*;
-import java.util.Iterator;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.jar.JarFile;
-
 /**
  * @author Семакин Виктор
  */
 public class UrlJarClassLoader extends ExternalClassLoader {
-    private static final String gitArtifactsRepoUrl = "https://github.com/Chipsetone/Innopolis/blob/master/Lections/Lection7_3/Lection7_3_ClassLoader/out/artifacts/jar/";
-    private static final String urlForJarFile = gitArtifactsRepoUrl + "Lection7_3_ClassLoaderOrigin.jar?raw=true";
+    private static final String urlForJarFile = "https://github.com/Chipsetone/Innopolis/blob/master/Lections/Lection7_3/Lection7_3_ClassLoader/out/artifacts/jar/Lection7_3_ClassLoaderOrigin.jar?raw=true";
 
     @Override
     protected JarFile getJarFile() throws IOException, URISyntaxException {
-        return getJarFileFromUrlWithJarUrlConnection(urlForJarFile);
-    }
-    // способ 1
-    private JarFile getJarFileFromUrlWithJarUrlConnection(String url) throws IOException {
-        JarURLConnection connection = (JarURLConnection) getUrlConnection(url);
-        return connection.getJarFile();
-    }
-
-    private URLConnection getUrlConnection(String url) throws IOException {
-        final URL urlObj = new URL(url);
-        return urlObj.openConnection();
+        return getJarFileFromUrlDirectDownload(urlForJarFile);
     }
 
     // способ 2 - с заморочками
@@ -36,7 +22,9 @@ public class UrlJarClassLoader extends ExternalClassLoader {
     }
 
     private File getFileFromHttp(String url) throws IOException {
-        try (InputStream inputStream = getUrlConnection(url).getInputStream()) {
+        URL webSite = new URL(url);
+
+        try (InputStream inputStream = webSite.openStream() ){
             final String tempFileName = "tempClassLoaderFile.jar";
             File fileResult = new File(tempFileName);
             try(FileOutputStream outputStream = new FileOutputStream(fileResult)) {

@@ -8,7 +8,7 @@ import java.util.jar.JarFile;
  */
 public class LocalFileClassLoader extends ExternalClassLoader {
 //    private static final String filePath = "D:\\tempGit\\git\\Innopolis\\Lections\\Lection7_3\\Lection7_3_ClassLoader\\out\\artifacts\\jar\\Lection7_3_ClassLoader.jar";
-    private static final String filePath = "D:\\git\\Innopolis\\Lections\\Lection7_3\\Lection7_3_ClassLoader\\out\\artifacts\\jar\\Lection7_3_ClassLoader.jar";
+    private static final String filePath = "D:\\git\\Innopolis\\Lections\\Lection7_3\\Lection7_3_ClassLoader\\out\\artifacts\\jar\\Lection7_3_ClassLoaderOrigin.jar";
 
     @Override
     protected JarFile getJarFile() throws IOException {
@@ -17,6 +17,13 @@ public class LocalFileClassLoader extends ExternalClassLoader {
 
     // для файла
     private JarFile getJarFileLocal(String fileName) throws IOException {
-        return new JarFile(fileName);
+
+        JarFile file =  new JarFile(fileName);
+        if(file == null){
+            System.out.println("file == null");
+        }
+
+        System.out.println(file);
+        return file;
     }
 }

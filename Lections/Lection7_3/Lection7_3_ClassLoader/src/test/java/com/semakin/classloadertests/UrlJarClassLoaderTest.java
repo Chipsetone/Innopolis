@@ -11,7 +11,6 @@ class UrlJarClassLoaderTest {
     @Test
     void getJarFile() {
         UrlJarClassLoader urlLoader = new UrlJarClassLoader();
-        //Class expectedClass = Animal.class;
 
         Class actual = urlLoader.findClass("Animal");
 
