@@ -26,7 +26,16 @@ public abstract class ExternalClassLoader extends ClassLoader{
     @Override
     public Class findClass(String className) {
         byte classByte[];
-        Class result;
+        Class result = getCachedClass(className); //checks in cached classes
+
+        if (result != null) {
+            return result;
+        }
+
+        try {
+            return findSystemClass(className);
+        } catch (Exception e) {
+        }
 
         try {
             JarFile jar = getJarFile();
