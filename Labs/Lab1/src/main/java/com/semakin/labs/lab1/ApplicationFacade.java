@@ -5,9 +5,7 @@ import com.semakin.labs.lab1.parsers.StringConverter;
 import com.semakin.labs.lab1.parsers.StringValidConverter;
 import com.semakin.labs.lab1.resourceGetters.ReaderGetterFactory;
 import com.semakin.labs.lab1.resourceGetters.ReaderGetterable;
-import com.semakin.labs.lab1.threading.MessageQueueProcessor;
-import com.semakin.labs.lab1.threading.ResourceCalculator;
-import com.semakin.labs.lab1.threading.RunnableService;
+import com.semakin.labs.lab1.threading.*;
 import com.semakin.labs.lab1.validation.EvenPositiveNumberValidator;
 import com.semakin.labs.lab1.validation.NumberValidatorable;
 import com.semakin.labs.lab1.validation.StringAsNumberValidator;
@@ -26,17 +24,15 @@ public class ApplicationFacade {
     private SumCalculatorFactory sumCalculatorFactory;
     private RunnableService runService;
     private MessageQueueProcessor messageProcessor;
-    private AtomicBoolean isComplete = new AtomicBoolean(false);
-    private final ResultPrinter resultPrinter;
+    private ThreadsCompleteCalculator threadsCompleteCalculator;
 
-    public static final Logger logger = Logger.getLogger(ApplicationFacade.class);
+    private static final Logger logger = Logger.getLogger(ApplicationFacade.class);
 
     /**
      * Инициализатор приложения для обработки
      * @param resultPrinter
      */
     public ApplicationFacade(ResultPrinter resultPrinter) {
-        this.resultPrinter = resultPrinter;
         init(resultPrinter);
     }
 
@@ -51,7 +47,9 @@ public class ApplicationFacade {
         while (true){
             messageProcessor.runProcessingMessages();
 
-            if (isCalculatingDone()){
+            ThreadsCompleteType completeResult = getCompleteResult();
+            if (!isAnyCalculatorsProcessing() && isProcessorStopped() ){
+                logger.trace("результат работы расчетчиков: " + completeResult.toString());
                 break;
             }
         }
@@ -87,13 +85,22 @@ public class ApplicationFacade {
     private void calculateResources(List<ResourceCalculator> resourceCalculators){
         try {
             logger.trace("Запуск обработки " + resourceCalculators.size() + " ресурсов");
-            runService.invokeAll(resourceCalculators);
+            threadsCompleteCalculator = runService.getInvokeAllResult(resourceCalculators);
         } catch (InterruptedException e) {
             logger.error("Ошибка при работе с потоками", e);
             e.printStackTrace();
         }
-        logger.debug("Обработка ресурсов завершена");
-        isComplete.set(true);
+        threadsCompleteCalculator();
+    }
+
+    private void threadsCompleteCalculator(){
+        Runnable threadCompleteObserver = new Runnable() {
+            @Override
+            public void run() {
+                threadsCompleteCalculator.calcThreadCompletes();
+            }
+        };
+        runService.addAction(threadCompleteObserver);
     }
 
     private List<ResourceCalculator> getResourceCalculators(String resourceAddresses[]) {
@@ -114,13 +121,15 @@ public class ApplicationFacade {
         return resourceCalculators;
     }
 
-    private boolean isCalculatingDone(){
-        // TODO вместо isComplete обрабатывать службу запуска потоков
-        return isComplete.get() && messageProcessor.isStopped();
+    private boolean isAnyCalculatorsProcessing(){
+        return getCompleteResult() == ThreadsCompleteType.processing;
     }
 
-    private void setComplete(){
-        logger.debug("Обработка ресурсов завершена");
-        isComplete.set(true);
+    private boolean isProcessorStopped(){
+        return messageProcessor.isStopped();
+    }
+
+    private ThreadsCompleteType getCompleteResult(){
+        return threadsCompleteCalculator.getCompleteResult();
     }
 }

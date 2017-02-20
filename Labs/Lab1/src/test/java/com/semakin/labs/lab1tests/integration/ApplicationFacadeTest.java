@@ -61,7 +61,7 @@ class ApplicationFacadeTest {
         Assertions.assertNotEquals(unExpectedSum, actualLastSum);
     }
 
-    // TODO проверить остановку всех потоков при ошибочных данных в одном из потоков
+
 
     private void runApp(HashMap<String, String> resourcesStub, ResultPrinter resultPrinter){
         ApplicationFacade app = getApplicationFacadeByMockResources(resourcesStub, resultPrinter);
