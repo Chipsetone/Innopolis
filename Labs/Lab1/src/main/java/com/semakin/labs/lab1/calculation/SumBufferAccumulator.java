@@ -34,7 +34,6 @@ public class SumBufferAccumulator {
 
     /**
      * Добавляет символ в обработчик. Последним вызовом буфера должно быть освобождение буфера tryReleaseBuffer()
-     * TODO перевести всё на finalize и использовать try-with-resources - понять как это всё работает здесь
      * @param symbol
      */
     public void pushToBufferOrRelease(char symbol) {
