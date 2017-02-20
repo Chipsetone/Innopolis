@@ -21,7 +21,6 @@ class RunnableServiceTest {
 
             service.addAction(actionToAdd);
         }
-        //TODO в этом классе тестов дописать на завершение потоков
         log("Добавление потоков закончено. Главный поток завершен.");
     }
 

@@ -10,13 +10,12 @@ import java.util.concurrent.Future;
  * @author Виктор Семакин
  */
 public class RunnableService {
-    private ExecutorService service = Executors.newCachedThreadPool(); // newWorkStealingPool(8);
+    private ExecutorService service = Executors.newWorkStealingPool(4); // единственное узкое место пока что
 
     /**
-     *
+     *Запуск {@link Runnable} на выполнение
      * @param action
      */
-    @Deprecated
     public synchronized void addAction(Runnable action){
         service.submit(action);
     }
@@ -29,11 +28,22 @@ public class RunnableService {
      */
     public List<Future<Boolean>> invokeAll(List<ResourceCalculator> todoList) throws InterruptedException {
         List<Future<Boolean>> invokeResult = service.invokeAll(todoList);
-        for (Future<Boolean> item :
-                invokeResult) {
-            
-        }
+
         return invokeResult;
+    }
+
+    /**
+     * Расширяет метод {@link RunnableService#invokeAll(List)}
+     * Возвращает расчетчик завершения потоков
+     * @param todoList
+     * @return {@link ThreadsCompleteCalculator}
+     * @throws InterruptedException
+     */
+    public ThreadsCompleteCalculator getInvokeAllResult(List<ResourceCalculator> todoList) throws InterruptedException {
+        List<Future<Boolean>> invokeResult = invokeAll(todoList);
+        ThreadsCompleteCalculator result = new ThreadsCompleteCalculator(invokeResult);
+
+        return result;
     }
 
 }
