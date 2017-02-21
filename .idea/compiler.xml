@@ -11,8 +11,8 @@
         <module name="Lection3_CarShop" />
         <module name="Lection4_DoubleTask_Semakin" />
         <module name="Lection5_Serializer" />
-        <module name="Lection7_2_loggers" />
         <module name="Lection7_2_Loggers" />
+        <module name="Lection7_2_loggers" />
         <module name="Lection7_3_ClassLoader" />
         <module name="Lection7_4_jdbc" />
       </profile>
@@ -20,8 +20,8 @@
     <bytecodeTargetLevel target="1.8">
       <module name="ControlWork1" target="" />
       <module name="ExercisesAndTasks" target="" />
-      <module name="Lab1" target="1.5" />
-      <module name="Lab2" target="1.5" />
+      <module name="Lab1" target="" />
+      <module name="Lab2" target="" />
       <module name="Lection3_CarShop" target="" />
       <module name="Lection4_DoubleTask_Semakin" target="" />
       <module name="Lection5_Serializer" target="" />

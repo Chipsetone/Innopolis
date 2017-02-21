@@ -8,37 +8,19 @@ import com.semakin.labs.lab2.entities.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Семакин Виктор
  */
 public class UserDAO extends AbstractDAO<User> implements IEntityQueryable<User> {
-    private static final String SELECT_QUERY = "SELECT * FROM USER";
+    private static final String TABLE_NAME = "stc.public.user";
 
     public UserDAO(ConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
 
-    public User selectById(long id) throws SQLException, IllegalAccessException, NoSuchFieldException {
-        String sqlQuery = SELECT_QUERY + " WHERE id = ?";
-        PreparedStatement statement = getPreparedStatement(sqlQuery);
-        statement.setLong(1, id);
-
-        try{
-            ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()){
-                return getUserFromResultSet(resultSet);
-            }
-        }
-        finally {
-            closePrepareStatement(statement);
-        }
-        return null;
-    }
-
-    private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
+    @Override
+    protected User getEntityFromResultSet(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getLong("id"));
         user.setBitrix_id(resultSet.getLong("bitrix_id"));
@@ -51,32 +33,10 @@ public class UserDAO extends AbstractDAO<User> implements IEntityQueryable<User>
 
         return user;
     }
-    private List<User> getUserListFromPreparedStatement(PreparedStatement statement){
-        List<User> users = new ArrayList<User>();
-        try{
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                users.add(getUserFromResultSet(resultSet));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closePrepareStatement(statement);
-        }
-        return users;
-    }
-
-    public List<User> selectAll() throws SQLException, NoSuchFieldException, IllegalAccessException {
-        String sqlQuery = SELECT_QUERY;
-        PreparedStatement statement = getPreparedStatement(sqlQuery);
-
-        return getUserListFromPreparedStatement(statement);
-    }
 
     public void insert(User user) throws SQLException, IllegalAccessException {
         final String INSERT_QUERY_NAMES = "bitrix_id,firstName,middleName,lastName, email, phone, birthDate";
-        final String INSERT_QUERY = "INSERT INTO stc.public.user("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?,?,?,?)";
+        final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?,?,?,?)";
 
         PreparedStatement statement = getPreparedStatement(INSERT_QUERY);
 
@@ -87,18 +47,13 @@ public class UserDAO extends AbstractDAO<User> implements IEntityQueryable<User>
         statement.setString(5, user.getEmail());
         statement.setString(6, user.getPhone());
         statement.setDate(7, user.getBirthDate());
-        System.out.println(statement);
-        try{
-            statement.execute();
-        }
-        finally {
-            closePrepareStatement(statement);
-        }
+
+        executePreparedStatement(statement);
     }
 
     public void update(User user) throws SQLException, IllegalAccessException {
         final String UPDATE_VALUE_PAIRS = "bitrix_id =?,firstName =?, middleName =?,lastName =?, email =?, phone =?, birthDate =?";
-        String sqlQuery = "UPDATE USER SET " + UPDATE_VALUE_PAIRS + " WHERE id = ?";
+        String sqlQuery = "UPDATE " + getTableName() + " SET " + UPDATE_VALUE_PAIRS + " WHERE id = ?";
 
         PreparedStatement statement = getPreparedStatement(sqlQuery);
         statement.setLong(1, user.getBitrix_id());
@@ -109,15 +64,11 @@ public class UserDAO extends AbstractDAO<User> implements IEntityQueryable<User>
         statement.setDate(6, user.getBirthDate());
         statement.setLong(7,user.getId());
 
-        try{
-            statement.execute();
-        }
-        finally {
-            closePrepareStatement(statement);
-        }
+        executePreparedStatement(statement);
     }
 
-    public void deleteById(long id) throws SQLException {
-        throw new UnsupportedOperationException();
+    protected String getTableName() {
+        return TABLE_NAME;
     }
+
 }
