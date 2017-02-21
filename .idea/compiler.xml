@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Lab1" />
+        <module name="Lab2" />
         <module name="Lection3_CarShop" />
         <module name="Lection4_DoubleTask_Semakin" />
         <module name="Lection5_Serializer" />
@@ -19,7 +20,8 @@
     <bytecodeTargetLevel target="1.8">
       <module name="ControlWork1" target="" />
       <module name="ExercisesAndTasks" target="" />
-      <module name="Lab1" target="" />
+      <module name="Lab1" target="1.5" />
+      <module name="Lab2" target="1.5" />
       <module name="Lection3_CarShop" target="" />
       <module name="Lection4_DoubleTask_Semakin" target="" />
       <module name="Lection5_Serializer" target="" />
