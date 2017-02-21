@@ -1,0 +1,23 @@
+-XX:+UnlockDiagnosticVMOptions
+
+i. -Xmx- память для Heap
+ii. -XmsN- min Heap
+iii. -XmxN- max Heap
+iv. -NewRatio- разница между OLD и YOUNG
+v. -NewSize- начальное значение Young
+vi. -MaxNewSize- максимальное значение Young
+vii. -XmnN- разница между newsize и maxsize
+viii. -XX:InitialTenuringThreshold
+ix. -XX:MaxTenuringThreshold
+x. -XX:+MaxGCPauseMillis
+xi. -XX:+GCTimeRatio
+xii. -XX:+UseAdaptiveSizePolicy
+xiii. -XX:CMSInitiatingOccupancyFraction=<percent>
+xiv. -XX:+UseCMSInitiatingOccupancyOnly
+xv. -XX:+CMSInitiatingPermOccupancyFraction
+xvi. -XX:+CMSClassUnloadingEnabled
+xvii. -XX:+CMSPermGenSweepingEnabled
+xviii. -XX:TargetSurvivorRatio
+
+-XX:+AggressiveHeap
+-XX:+AggressiveHeap
