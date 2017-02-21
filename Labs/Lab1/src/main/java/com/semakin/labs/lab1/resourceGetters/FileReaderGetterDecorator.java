@@ -24,10 +24,10 @@ public class FileReaderGetterDecorator extends ReaderGetterDecorator {
         super(readerGetter);
     }
 
-    @Override
-    public BufferedReader getBufferedReader(String resourceAddress) throws InnerResourceException {
-        return (BufferedReader)getResourceReader(resourceAddress);
-    }
+//    @Override
+//    public BufferedReader getBufferedReader(String resourceAddress) throws InnerResourceException {
+//        return (BufferedReader)getResourceReader(resourceAddress);
+//    }
 
     /**
      * {@inheritDoc}
@@ -35,9 +35,9 @@ public class FileReaderGetterDecorator extends ReaderGetterDecorator {
     @Override
     public final Reader getResourceReader(String resourceAddress) throws InnerResourceException {
         try{
-            //return new FileReader(resourceAddress);
-            Path filePath = Paths.get(resourceAddress);
-            return Files.newBufferedReader(filePath);
+            return new FileReader(resourceAddress);
+//            Path filePath = Paths.get(resourceAddress);
+//            return Files.newBufferedReader(filePath);
         }
         catch(Exception ex){
             throw new InnerResourceException("Ошибка при работе с ресурсным файлом", ex);
