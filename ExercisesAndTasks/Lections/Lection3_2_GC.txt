@@ -21,3 +21,5 @@ xviii. -XX:TargetSurvivorRatio
 
 -XX:+AggressiveHeap
 -XX:+AggressiveHeap
+-XX:+UseISM
+-Xms512m -Xmx512m
