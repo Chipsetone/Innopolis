@@ -11,7 +11,7 @@ public class ConnectionFactory {
     private static ConnectionFactory ourInstance = new ConnectionFactory();
     private Connection dbConnection;
 
-    private static final String url = "jdbc:postgresql://localhost:5433/students";
+    private static final String url = "jdbc:postgresql://localhost:5432/students";
     private static final String login = "postgres";
     private static final String password = "admin";
 
