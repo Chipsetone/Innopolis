@@ -1,12 +1,14 @@
-package com.semakin.labs.lab2.entities;/**
- * Created by Chi on 21.02.2017.
- */
+package com.semakin.labs.lab2.entities;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Date;
 
 /**
+ * Результат собеседования
  * @author Семакин Виктор
  */
+@XmlRootElement
 public class InterviewResult {
     private long id;
     private long userId;
@@ -17,7 +19,7 @@ public class InterviewResult {
     public long getId() {
         return id;
     }
-
+    @XmlElement
     public void setId(long id) {
         this.id = id;
     }
@@ -26,6 +28,7 @@ public class InterviewResult {
         return userId;
     }
 
+    @XmlElement
     public void setUserId(long userId) {
         this.userId = userId;
     }
@@ -34,6 +37,7 @@ public class InterviewResult {
         return superUserId;
     }
 
+    @XmlElement
     public void setSuperUserId(long superUserId) {
         this.superUserId = superUserId;
     }
@@ -42,6 +46,7 @@ public class InterviewResult {
         return createdAt;
     }
 
+    @XmlElement
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
@@ -50,6 +55,7 @@ public class InterviewResult {
         return totalRating;
     }
 
+    @XmlElement
     public void setTotalRating(short totalRating) {
         this.totalRating = totalRating;
     }

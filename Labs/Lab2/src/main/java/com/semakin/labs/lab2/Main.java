@@ -20,17 +20,37 @@ import java.util.Random;
  */
 public class Main {
     public static void main(String[] args) throws SQLException, NoSuchFieldException, IllegalAccessException {
+        presentDbWork();
+    }
 
+    private static void presentXML(){
+        Random rand = new Random();
+        int randNumber = rand.nextInt();
+
+        Interview interview = new Interview() {{
+            setName("" + randNumber);
+        }};
+
+        XMLSerializer serializer = new XMLSerializer();
+
+        serializer.serializeToFile(Interview.class, interview, "file.xml");
+        Interview deserializedInterview = (Interview) serializer.deserializeFromFile(Interview.class, "file.xml");
+
+        printInterview(deserializedInterview);
+
+    }
+
+    private static void presentDbWork() throws IllegalAccessException, SQLException, NoSuchFieldException {
         ConnectionFactory factory = ConnectionFactory.getInstance();
 
-//        System.out.println("user");
-//        presentUser(factory);
-//
-//        System.out.println("\n\n\n---------\nsuperuser");
-//        presentSuperUser(factory);
+        System.out.println("user");
+        presentUser(factory);
 
-//        System.out.println("\n\n\n---------\ninterview");
-//        presentInterview(factory);
+        System.out.println("\n\n\n---------\nsuperuser");
+        presentSuperUser(factory);
+
+        System.out.println("\n\n\n---------\ninterview");
+        presentInterview(factory);
 
         System.out.println("\n\n\n---------\ninterview_result");
         presentInterviewResult(factory);
@@ -217,6 +237,5 @@ public class Main {
         System.out.println(" id=" + user.getId() +
                 " firstName= " + user.getFirstName() +
                 " lastname=" + user.getLastName());
-
     }
 }

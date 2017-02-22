@@ -1,7 +1,5 @@
 package com.semakin.labs.lab2.db;
 
-import org.postgresql.jdbc2.optional.ConnectionPool;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

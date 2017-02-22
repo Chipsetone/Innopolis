@@ -1,10 +1,14 @@
 package com.semakin.labs.lab2.entities;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Date;
 
 /**
+ * Пользователь из битрикса - абитуриент, студент
  * @author Семакин Виктор
  */
+@XmlRootElement
 public class User {
     private long id;
     private long bitrix_id;
@@ -19,6 +23,7 @@ public class User {
         return id;
     }
 
+    @XmlElement
     public void setId(long id) {
         this.id = id;
     }
@@ -27,6 +32,7 @@ public class User {
         return bitrix_id;
     }
 
+    @XmlElement
     public void setBitrix_id(long bitrix_id) {
         this.bitrix_id = bitrix_id;
     }
@@ -35,6 +41,7 @@ public class User {
         return firstName;
     }
 
+    @XmlElement
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -43,6 +50,7 @@ public class User {
         return middleName;
     }
 
+    @XmlElement
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
@@ -51,6 +59,7 @@ public class User {
         return lastName;
     }
 
+    @XmlElement
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -59,6 +68,7 @@ public class User {
         return email;
     }
 
+    @XmlElement
     public void setEmail(String email) {
         this.email = email;
     }
@@ -67,6 +77,7 @@ public class User {
         return phone;
     }
 
+    @XmlElement
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -75,6 +86,7 @@ public class User {
         return birthDate;
     }
 
+    @XmlElement
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }

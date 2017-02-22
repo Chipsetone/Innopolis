@@ -1,10 +1,13 @@
-package com.semakin.labs.lab2.entities;/**
- * Created by Chi on 21.02.2017.
- */
+package com.semakin.labs.lab2.entities;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * Суперпользователь - оператор в программе
  * @author Семакин Виктор
  */
+@XmlRootElement
 public class Superuser {
     private long id;
     private String firstName;
@@ -16,6 +19,7 @@ public class Superuser {
         return id;
     }
 
+    @XmlElement
     public void setId(long id) {
         this.id = id;
     }
@@ -24,6 +28,7 @@ public class Superuser {
         return firstName;
     }
 
+    @XmlElement
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -32,6 +37,7 @@ public class Superuser {
         return middleName;
     }
 
+    @XmlElement
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
@@ -40,6 +46,7 @@ public class Superuser {
         return lastName;
     }
 
+    @XmlElement
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -48,6 +55,7 @@ public class Superuser {
         return email;
     }
 
+    @XmlElement
     public void setEmail(String email) {
         this.email = email;
     }
