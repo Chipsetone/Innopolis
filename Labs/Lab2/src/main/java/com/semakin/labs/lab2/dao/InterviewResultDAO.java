@@ -1,6 +1,6 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.ConnectionFactory;
+import com.semakin.labs.lab2.db.IConnectionFactory;
 import com.semakin.labs.lab2.entities.InterviewResult;
 
 import java.sql.PreparedStatement;
@@ -13,12 +13,12 @@ import java.sql.SQLException;
 public class InterviewResultDAO extends AbstractDAO<InterviewResult> implements IEntityQueryable<InterviewResult> {
     private static final String TABLE_NAME = "stc.public.interview_result";
 
-    public InterviewResultDAO(ConnectionFactory connectionFactory) {
+    public InterviewResultDAO(IConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
 
     @Override
-    public void insert(InterviewResult interviewResult) throws SQLException, IllegalAccessException {
+    public void insert(InterviewResult interviewResult) throws SQLException {
         final String INSERT_QUERY_NAMES = "user_id, superuser_id, created_at, total_rating";
         final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?)";
 

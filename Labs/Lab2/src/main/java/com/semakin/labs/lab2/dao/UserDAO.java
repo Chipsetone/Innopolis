@@ -1,6 +1,6 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.ConnectionFactory;
+import com.semakin.labs.lab2.db.IConnectionFactory;
 import com.semakin.labs.lab2.entities.User;
 
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class UserDAO extends AbstractDAO<User> implements IEntityQueryable<User> {
     private static final String TABLE_NAME = "stc.public.user";
 
-    public UserDAO(ConnectionFactory connectionFactory) {
+    public UserDAO(IConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
 
@@ -32,7 +32,7 @@ public class UserDAO extends AbstractDAO<User> implements IEntityQueryable<User>
         return user;
     }
 
-    public void insert(User user) throws SQLException, IllegalAccessException {
+    public void insert(User user) throws SQLException {
         final String INSERT_QUERY_NAMES = "bitrix_id,firstName,middleName,lastName, email, phone, birthDate";
         final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?,?,?,?)";
 

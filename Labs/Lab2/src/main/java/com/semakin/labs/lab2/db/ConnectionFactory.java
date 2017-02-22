@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * @author Семакин Виктор
  */
 public class ConnectionFactory implements IConnectionFactory {
-    private static ConnectionFactory ourInstance = new ConnectionFactory();
+    private static final IConnectionFactory ourInstance = new ConnectionFactory();
     private Connection dbConnection;
 
     //private ConnectionPool connectionPool;
@@ -19,7 +19,7 @@ public class ConnectionFactory implements IConnectionFactory {
 
 
 
-    public static ConnectionFactory getInstance() {
+    public static IConnectionFactory getInstance() {
         return ourInstance;
     }
 
@@ -31,9 +31,7 @@ public class ConnectionFactory implements IConnectionFactory {
             dbConnection = DriverManager.getConnection(url, login, password);
             // TODO инициализировать ConnectionPool по url, логину и паролю
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
@@ -42,7 +40,7 @@ public class ConnectionFactory implements IConnectionFactory {
         return dbConnection;
     }
 
-    public void returnConnectionToPool(Connection connection) {
-        throw new UnsupportedOperationException("реализовать это!");
-    }
+//    public void returnConnectionToPool(Connection connection) {
+//        throw new UnsupportedOperationException("реализовать это!");
+//    }
 }

@@ -5,6 +5,7 @@ import com.semakin.labs.lab2.dao.InterviewResultDAO;
 import com.semakin.labs.lab2.dao.SuperuserDAO;
 import com.semakin.labs.lab2.dao.UserDAO;
 import com.semakin.labs.lab2.db.ConnectionFactory;
+import com.semakin.labs.lab2.db.IConnectionFactory;
 import com.semakin.labs.lab2.entities.Interview;
 import com.semakin.labs.lab2.entities.InterviewResult;
 import com.semakin.labs.lab2.entities.Superuser;
@@ -40,8 +41,8 @@ public class Main {
 
     }
 
-    private static void presentDbWork() throws IllegalAccessException, SQLException, NoSuchFieldException {
-        ConnectionFactory factory = ConnectionFactory.getInstance();
+    private static void presentDbWork() throws SQLException {
+        IConnectionFactory factory = ConnectionFactory.getInstance();
 
         System.out.println("user");
         presentUser(factory);
@@ -56,7 +57,7 @@ public class Main {
         presentInterviewResult(factory);
     }
 
-    private static void presentInterviewResult(ConnectionFactory factory) throws IllegalAccessException, SQLException, NoSuchFieldException {
+    private static void presentInterviewResult(IConnectionFactory factory) throws SQLException {
         InterviewResultDAO interviewResultDAO = new InterviewResultDAO(factory);
         Random rand = new Random();
 
@@ -104,7 +105,7 @@ public class Main {
                 " total_rating=" + item.getTotalRating());
     }
 
-    private static void presentInterview(ConnectionFactory factory) throws SQLException, IllegalAccessException, NoSuchFieldException {
+    private static void presentInterview(IConnectionFactory factory) throws SQLException {
         InterviewDAO interviewDAO = new InterviewDAO(factory);
         Random rand = new Random();
 
@@ -145,7 +146,7 @@ public class Main {
         System.out.println("id=" + item.getId() + " name=" + item.getName() );
     }
 
-    private static void presentSuperUser(ConnectionFactory factory) throws SQLException, IllegalAccessException, NoSuchFieldException {
+    private static void presentSuperUser(IConnectionFactory factory) throws SQLException {
         SuperuserDAO superuserDAO = new SuperuserDAO(factory);
         Random rand = new Random();
         int randNumber = rand.nextInt();
@@ -190,7 +191,7 @@ public class Main {
                 " lastname=" + superuser.getLastName());
     }
 
-    private static void presentUser(ConnectionFactory factory) throws SQLException, IllegalAccessException, NoSuchFieldException {
+    private static void presentUser(IConnectionFactory factory) throws SQLException {
         UserDAO userDao = new UserDAO(factory);
         // INSERT
         User newUser = new User(){{
@@ -200,7 +201,7 @@ public class Main {
             setLastName("Фамилия");
             setFirstName("Имя");
             setMiddleName("Отчество");
-            setBirthDate(new Date(2017, 02, 02));
+            setBirthDate(new Date(2017, 2, 2));
             setPhone("999123123123");
             setEmail("mail@mail.mail");
 

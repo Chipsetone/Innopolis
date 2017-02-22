@@ -9,5 +9,5 @@ import java.sql.Connection;
 public interface IConnectionFactory {
     Connection getConnection();
 
-    void returnConnectionToPool(Connection connection);
+    //void returnConnectionToPool(Connection connection);
 }

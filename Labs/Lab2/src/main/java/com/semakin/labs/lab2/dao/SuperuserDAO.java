@@ -1,6 +1,6 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.ConnectionFactory;
+import com.semakin.labs.lab2.db.IConnectionFactory;
 import com.semakin.labs.lab2.entities.Superuser;
 
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class SuperuserDAO extends AbstractDAO<Superuser> implements IEntityQueryable<Superuser>{
     private static final String TABLE_NAME = "stc.public.superuser";
 
-    public SuperuserDAO(ConnectionFactory connectionFactory) {
+    public SuperuserDAO(IConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
 
@@ -36,7 +36,7 @@ public class SuperuserDAO extends AbstractDAO<Superuser> implements IEntityQuery
     }
 
     @Override
-    public void insert(Superuser superuser) throws SQLException, IllegalAccessException {
+    public void insert(Superuser superuser) throws SQLException {
         final String INSERT_QUERY_NAMES = "firstName,middleName,lastName, email";
         final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?)";
 

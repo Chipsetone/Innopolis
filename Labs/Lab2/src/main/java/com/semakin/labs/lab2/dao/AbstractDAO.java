@@ -1,8 +1,11 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.ConnectionFactory;
+import com.semakin.labs.lab2.db.IConnectionFactory;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,16 +13,14 @@ import java.util.List;
  * @author Семакин Виктор
  */
 public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
-    private ConnectionFactory connectionFactory;
-    private Connection connection;
+    private final Connection connection;
     private static final String SELECT_QUERY = "SELECT * FROM ";
 
-    public AbstractDAO(ConnectionFactory connectionFactory) {
-        this.connectionFactory = connectionFactory;
+    AbstractDAO(IConnectionFactory connectionFactory) {
         this.connection = connectionFactory.getConnection();
     }
 
-    protected PreparedStatement getPreparedStatement(String sqlQuery){
+    PreparedStatement getPreparedStatement(String sqlQuery){
         try {
             return connection.prepareStatement(sqlQuery);
         } catch (SQLException e) {
@@ -34,7 +35,7 @@ public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
 //        connectionFactory.returnConnectionToPool(connection);
 //    }
 
-    protected void closePrepareStatement(PreparedStatement ps) {
+    private void closePrepareStatement(PreparedStatement ps) {
         if (ps != null) {
             try {
                 ps.close();
@@ -44,7 +45,7 @@ public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
         }
     }
 
-    protected String getSelectAllFieldsTemplate(){
+    private String getSelectAllFieldsTemplate(){
         return SELECT_QUERY + getTableName();
     }
 
@@ -57,33 +58,34 @@ public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
         statement.executeUpdate();
     }
 
-    public List<T> selectAll() throws SQLException, NoSuchFieldException, IllegalAccessException {
+    public List<T> selectAll() {
         String sqlQuery = getSelectAllFieldsTemplate();
         PreparedStatement statement = getPreparedStatement(sqlQuery);
         System.out.println(sqlQuery);
         return getListEntitiesFromPreparedStatement(statement);
     }
 
-    public T selectById(long id) throws SQLException, IllegalAccessException, NoSuchFieldException {
+    public T selectById(long id) {
         String sqlQuery = getSelectAllFieldsTemplate() + " WHERE id = ?";
         PreparedStatement statement = getPreparedStatement(sqlQuery);
-        statement.setLong(1, id);
-        System.out.println(sqlQuery + " id=" + id);
+        try {
+            statement.setLong(1, id);
+            System.out.println(sqlQuery + " id=" + id);
 
-        try{
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()) {
                 return getEntityFromResultSet(resultSet);
             }
-        }
-        finally {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
             closePrepareStatement(statement);
         }
         return null;
     }
 
 
-    protected List<T> getListEntitiesFromPreparedStatement(PreparedStatement statement){
+    private List<T> getListEntitiesFromPreparedStatement(PreparedStatement statement){
         List<T> entities = getEmptyEntityList();
         try{
             ResultSet resultSet = statement.executeQuery();
@@ -99,7 +101,7 @@ public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
         return entities;
     }
 
-    protected List<T> getEmptyEntityList(){
+    private List<T> getEmptyEntityList(){
         return new ArrayList<>();
     }
 

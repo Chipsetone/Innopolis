@@ -14,7 +14,6 @@ public class XMLSerializer {
 
     public void serializeToFile(Class objClass, Object object, String filePath){
         try {
-
             File file = new File(filePath);
             JAXBContext jaxbContext = JAXBContext.newInstance(objClass);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -33,15 +32,13 @@ public class XMLSerializer {
         try {
             File file = new File(filePath);
             JAXBContext jaxbContext = JAXBContext.newInstance(targetObjClass);
-
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            Object obj = jaxbUnmarshaller.unmarshal(file);
-            return obj;
+
+            return jaxbUnmarshaller.unmarshal(file);
 
         } catch (JAXBException e) {
             e.printStackTrace();
         }
         return null;
     }
-
 }

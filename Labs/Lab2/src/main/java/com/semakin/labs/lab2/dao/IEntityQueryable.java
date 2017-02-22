@@ -7,8 +7,8 @@ import java.util.List;
  * @author Семакин Виктор
  */
 public interface IEntityQueryable<T> {
-    T selectById(long id) throws SQLException, IllegalAccessException, NoSuchFieldException;
-    List<T> selectAll() throws SQLException, NoSuchFieldException, IllegalAccessException;
-    void insert(T entity) throws SQLException, IllegalAccessException;
+    T selectById(long id);
+    List<T> selectAll();
+    void insert(T entity) throws SQLException;
     void deleteById(long id) throws SQLException;
 }
