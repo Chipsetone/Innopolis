@@ -1,8 +1,6 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.AbstractDAO;
 import com.semakin.labs.lab2.db.ConnectionFactory;
-import com.semakin.labs.lab2.db.IEntityQueryable;
 import com.semakin.labs.lab2.entities.Interview;
 
 import java.sql.PreparedStatement;

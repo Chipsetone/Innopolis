@@ -1,8 +1,6 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.AbstractDAO;
 import com.semakin.labs.lab2.db.ConnectionFactory;
-import com.semakin.labs.lab2.db.IEntityQueryable;
 import com.semakin.labs.lab2.entities.User;
 
 import java.sql.PreparedStatement;
@@ -47,22 +45,6 @@ public class UserDAO extends AbstractDAO<User> implements IEntityQueryable<User>
         statement.setString(5, user.getEmail());
         statement.setString(6, user.getPhone());
         statement.setDate(7, user.getBirthDate());
-
-        executePreparedStatement(statement);
-    }
-
-    public void update(User user) throws SQLException, IllegalAccessException {
-        final String UPDATE_VALUE_PAIRS = "bitrix_id =?,firstName =?, middleName =?,lastName =?, email =?, phone =?, birthDate =?";
-        String sqlQuery = "UPDATE " + getTableName() + " SET " + UPDATE_VALUE_PAIRS + " WHERE id = ?";
-
-        PreparedStatement statement = getPreparedStatement(sqlQuery);
-        statement.setLong(1, user.getBitrix_id());
-        statement.setString(2, user.getFirstName());
-        statement.setString(3, user.getMiddleName());
-        statement.setString(4, user.getLastName());
-        statement.setString(5, user.getEmail());
-        statement.setDate(6, user.getBirthDate());
-        statement.setLong(7,user.getId());
 
         executePreparedStatement(statement);
     }

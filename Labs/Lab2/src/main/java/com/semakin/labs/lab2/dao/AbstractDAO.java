@@ -1,4 +1,6 @@
-package com.semakin.labs.lab2.db;
+package com.semakin.labs.lab2.dao;
+
+import com.semakin.labs.lab2.db.ConnectionFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.List;
 /**
  * @author Семакин Виктор
  */
-public abstract class AbstractDAO<T> implements IEntityQueryable<T>{
+public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
     private ConnectionFactory connectionFactory;
     private Connection connection;
     private static final String SELECT_QUERY = "SELECT * FROM ";

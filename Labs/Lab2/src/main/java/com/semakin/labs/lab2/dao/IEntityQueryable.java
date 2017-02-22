@@ -1,4 +1,4 @@
-package com.semakin.labs.lab2.db;
+package com.semakin.labs.lab2.dao;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,6 +10,5 @@ public interface IEntityQueryable<T> {
     T selectById(long id) throws SQLException, IllegalAccessException, NoSuchFieldException;
     List<T> selectAll() throws SQLException, NoSuchFieldException, IllegalAccessException;
     void insert(T entity) throws SQLException, IllegalAccessException;
-//    void update(T entity) throws SQLException, IllegalAccessException;
     void deleteById(long id) throws SQLException;
 }
