@@ -22,8 +22,8 @@
       <module name="ExercisesAndTasks" target="" />
       <module name="Lab1" target="" />
       <module name="Lab2" target="" />
-      <module name="Lection3_3_Servlet1_main" target="1.5" />
-      <module name="Lection3_3_Servlet1_test" target="1.5" />
+      <module name="Lection3_3_Servlet1_main" target="1.8" />
+      <module name="Lection3_3_Servlet1_test" target="1.8" />
       <module name="Lection3_CarShop" target="" />
       <module name="Lection4_DoubleTask_Semakin" target="" />
       <module name="Lection5_Serializer" target="" />

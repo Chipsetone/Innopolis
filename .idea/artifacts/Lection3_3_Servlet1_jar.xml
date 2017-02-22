@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact name="Lection3_3_Servlet1:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lection3_3_Servlet1_jar</output-path>
+    <root id="root">
+      <element id="archive" name="Lection3_3_Servlet1.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/Lections/Lection3_3/Lection3_3_Servlet1/src/webapp/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="Lection3_3_Servlet1_main" />
+      </element>
+      <element id="library" level="project" name="Gradle: javax.servlet:javax.servlet-api:3.0.1" />
+    </root>
+  </artifact>
+</component>
