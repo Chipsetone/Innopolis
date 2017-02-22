@@ -1,7 +1,7 @@
 package com.semakin.labs.lab2.dao;
 
 import com.semakin.labs.lab2.db.IConnectionFactory;
-import com.semakin.labs.lab2.entities.Superuser;
+import com.semakin.labs.lab2.entitiessimple.Superuser;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

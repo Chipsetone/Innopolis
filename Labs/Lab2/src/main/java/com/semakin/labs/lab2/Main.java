@@ -6,10 +6,14 @@ import com.semakin.labs.lab2.dao.SuperuserDAO;
 import com.semakin.labs.lab2.dao.UserDAO;
 import com.semakin.labs.lab2.db.ConnectionFactory;
 import com.semakin.labs.lab2.db.IConnectionFactory;
-import com.semakin.labs.lab2.entities.Interview;
-import com.semakin.labs.lab2.entities.InterviewResult;
-import com.semakin.labs.lab2.entities.Superuser;
-import com.semakin.labs.lab2.entities.User;
+import com.semakin.labs.lab2.dbMarshallers.InterviewDbMarshaller;
+import com.semakin.labs.lab2.dbMarshallers.InterviewResultDbMarshaller;
+import com.semakin.labs.lab2.dbMarshallers.SuperuserDbMarshaller;
+import com.semakin.labs.lab2.dbMarshallers.UserDbMarshaller;
+import com.semakin.labs.lab2.entitiessimple.Interview;
+import com.semakin.labs.lab2.entitiessimple.InterviewResult;
+import com.semakin.labs.lab2.entitiessimple.Superuser;
+import com.semakin.labs.lab2.entitiessimple.User;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -21,7 +25,28 @@ import java.util.Random;
  */
 public class Main {
     public static void main(String[] args) throws SQLException, NoSuchFieldException, IllegalAccessException {
-        presentDbWork();
+        PresentSerializeList();
+    }
+
+    private static void PresentSerializeList(){
+        IConnectionFactory connectionFactory = ConnectionFactory.getInstance();
+        XmlSerializer serializer = new XmlSerializer();
+
+        InterviewDbMarshaller interviewMarshaller = new InterviewDbMarshaller(serializer);
+        InterviewDAO interviewDAO = new InterviewDAO(connectionFactory);
+        interviewMarshaller.marshalTable(interviewDAO, "interviews.xml");
+
+        UserDbMarshaller userMarshaller = new UserDbMarshaller(serializer);
+        UserDAO userDAO = new UserDAO(connectionFactory);
+        userMarshaller.marshalTable(userDAO, "users.xml");
+
+        SuperuserDbMarshaller superuserDbMarshaller = new SuperuserDbMarshaller(serializer);
+        SuperuserDAO superuserDAO = new SuperuserDAO(connectionFactory);
+        superuserDbMarshaller.marshalTable(superuserDAO, "superusers.xml");
+
+        InterviewResultDbMarshaller interviewResultMarshaller = new InterviewResultDbMarshaller(serializer);
+        InterviewResultDAO interviewResultDAO = new InterviewResultDAO(connectionFactory);
+        interviewResultMarshaller.marshalTable(interviewResultDAO, "interviewresults.xml");
     }
 
     private static void presentXML(){
@@ -32,7 +57,7 @@ public class Main {
             setName("" + randNumber);
         }};
 
-        XMLSerializer serializer = new XMLSerializer();
+        XmlSerializer serializer = new XmlSerializer();
 
         serializer.serializeToFile(Interview.class, interview, "file.xml");
         Interview deserializedInterview = (Interview) serializer.deserializeFromFile(Interview.class, "file.xml");

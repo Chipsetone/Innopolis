@@ -10,7 +10,7 @@ import java.io.File;
  * Xml-сериализатор
  * @author Семакин Виктор
  */
-public class XMLSerializer {
+public class XmlSerializer {
 
     public void serializeToFile(Class objClass, Object object, String filePath){
         try {
