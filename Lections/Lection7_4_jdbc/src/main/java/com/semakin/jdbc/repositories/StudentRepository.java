@@ -1,4 +1,4 @@
-package com.semakin.jdbc.Repositories;
+package com.semakin.jdbc.repositories;
 
 import com.semakin.jdbc.DTO.Student;
 import com.semakin.jdbc.entitylogic.GodEntityRepository;

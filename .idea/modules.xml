@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lection3_3_Servlet1.iml" filepath="$PROJECT_DIR$/.idea/modules/Lection3_3_Servlet1.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lection3_3_Servlet1_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lection3_3_Servlet1_main.iml" group="Lection3_3_Servlet1" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lection3_3_Servlet1_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lection3_3_Servlet1_test.iml" group="Lection3_3_Servlet1" />
+      <module fileurl="file://$PROJECT_DIR$/Lections/Lection3_3/Lection3_3_StudentsForWeb/Lection3_3_StudentsForWeb.iml" filepath="$PROJECT_DIR$/Lections/Lection3_3/Lection3_3_StudentsForWeb/Lection3_3_StudentsForWeb.iml" group="Lections/Week3" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection3/Lection3_CarShop/Lection3_CarShop.iml" filepath="$PROJECT_DIR$/Lections/Lection3/Lection3_CarShop/Lection3_CarShop.iml" group="Lections/Week1" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection4/Lection4_DoubleTask_Semakin/Lection4_DoubleTask_Semakin.iml" filepath="$PROJECT_DIR$/Lections/Lection4/Lection4_DoubleTask_Semakin/Lection4_DoubleTask_Semakin.iml" group="Lections/Week1" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection5/Lection5_Serializer/Lection5_Serializer.iml" filepath="$PROJECT_DIR$/Lections/Lection5/Lection5_Serializer/Lection5_Serializer.iml" group="Lections/Week1" />

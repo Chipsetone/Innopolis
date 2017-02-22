@@ -1,8 +1,7 @@
 package com.semakin.jdbc;
 
 import com.semakin.jdbc.DTO.Student;
-import com.semakin.jdbc.Repositories.StudentRepository;
-import com.semakin.jdbc.entitylogic.ConnectionFactory;
+import com.semakin.jdbc.repositories.StudentRepository;
 
 import java.sql.*;
 import java.util.List;
