@@ -34,8 +34,8 @@
       <module name="Lection7_4_jdbc" target="" />
       <module name="servlet_main" target="1.5" />
       <module name="servlet_test" target="1.5" />
-      <module name="students_web_main" target="1.5" />
-      <module name="students_web_test" target="1.5" />
+      <module name="students_web_main" target="1.8" />
+      <module name="students_web_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
