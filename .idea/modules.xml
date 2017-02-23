@@ -6,6 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/ExercisesAndTasks/ExercisesAndTasks.iml" filepath="$PROJECT_DIR$/ExercisesAndTasks/ExercisesAndTasks.iml" />
       <module fileurl="file://$PROJECT_DIR$/Labs/Lab1/Lab1.iml" filepath="$PROJECT_DIR$/Labs/Lab1/Lab1.iml" group="Labs" />
       <module fileurl="file://$PROJECT_DIR$/Labs/Lab2/Lab2.iml" filepath="$PROJECT_DIR$/Labs/Lab2/Lab2.iml" group="Labs" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab3.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab3_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab3_main.iml" group="Lab3" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab3_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab3_test.iml" group="Lab3" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection3_2_GC/Lection3_2_GC.iml" filepath="$PROJECT_DIR$/Lections/Lection3_2_GC/Lection3_2_GC.iml" group="Lections/Week3" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection3/Lection3_CarShop/Lection3_CarShop.iml" filepath="$PROJECT_DIR$/Lections/Lection3/Lection3_CarShop/Lection3_CarShop.iml" group="Lections/Week1" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection4/Lection4_DoubleTask_Semakin/Lection4_DoubleTask_Semakin.iml" filepath="$PROJECT_DIR$/Lections/Lection4/Lection4_DoubleTask_Semakin/Lection4_DoubleTask_Semakin.iml" group="Lections/Week1" />
@@ -13,14 +16,12 @@
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection7_2_Loggers/Lection7_2_Loggers.iml" filepath="$PROJECT_DIR$/Lections/Lection7_2_Loggers/Lection7_2_Loggers.iml" group="Lections/Week2" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection7_3/Lection7_3_ClassLoader/Lection7_3_ClassLoader.iml" filepath="$PROJECT_DIR$/Lections/Lection7_3/Lection7_3_ClassLoader/Lection7_3_ClassLoader.iml" group="Lections/Week2" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection7_4_jdbc/Lection7_4_jdbc.iml" filepath="$PROJECT_DIR$/Lections/Lection7_4_jdbc/Lection7_4_jdbc.iml" group="Lections/Week2" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/servlet.iml" filepath="$PROJECT_DIR$/.idea/modules/servlet.iml" group="Lections/Week3" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/servlet.iml" filepath="$PROJECT_DIR$/.idea/modules/servlet.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/servlet_main.iml" filepath="$PROJECT_DIR$/.idea/modules/servlet_main.iml" group="servlet" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/servlet_test.iml" filepath="$PROJECT_DIR$/.idea/modules/servlet_test.iml" group="servlet" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/student.iml" filepath="$PROJECT_DIR$/.idea/modules/student.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/student_main.iml" filepath="$PROJECT_DIR$/.idea/modules/student_main.iml" group="student" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/student_test.iml" filepath="$PROJECT_DIR$/.idea/modules/student_test.iml" group="student" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/student_web_servlet.iml" filepath="$PROJECT_DIR$/.idea/modules/student_web_servlet.iml" group="Lections/Week3" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/students_web_main.iml" filepath="$PROJECT_DIR$/.idea/modules/students_web_main.iml" group="students_web" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/students_web_test.iml" filepath="$PROJECT_DIR$/.idea/modules/students_web_test.iml" group="students_web" />
     </modules>
   </component>
 </project>

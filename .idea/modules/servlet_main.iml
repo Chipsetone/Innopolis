@@ -9,7 +9,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/../../Lections/Lection3_3/romanlex-servlet/src/main/webapp" relative="/" />
         </webroots>
-        <sourceRoots />
       </configuration>
     </facet>
   </component>
