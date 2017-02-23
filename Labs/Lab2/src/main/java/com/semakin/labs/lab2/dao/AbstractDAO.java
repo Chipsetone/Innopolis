@@ -15,8 +15,10 @@ import java.util.List;
 public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
     private final Connection connection;
     private static final String SELECT_QUERY = "SELECT * FROM ";
+    private IConnectionFactory connectionFactory;
 
     AbstractDAO(IConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
         this.connection = connectionFactory.getConnection();
     }
 
@@ -114,6 +116,10 @@ public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
         finally {
             closePrepareStatement(statement);
         }
+    }
+
+    public IConnectionFactory getConnectionFactory() {
+        return connectionFactory;
     }
 
     protected abstract T getEntityFromResultSet(ResultSet resultSet) throws SQLException;

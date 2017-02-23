@@ -73,8 +73,8 @@ public class Main {
         InterviewResult interviewResult = new InterviewResult() {{
             setCreatedAt(new Date(randNumber));
             setTotalRating((short)randNumber);
-            setUserId(10);
-            setSuperUserId(27);
+            setUserId(new Long(10));
+            setSuperUserId(new Long(27));
         }};
 
         interviewResultDAO.insert(interviewResult);

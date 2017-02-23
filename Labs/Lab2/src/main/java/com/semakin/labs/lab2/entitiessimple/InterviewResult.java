@@ -2,6 +2,7 @@ package com.semakin.labs.lab2.entitiessimple;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.sql.Date;
 
 /**
@@ -9,12 +10,16 @@ import java.sql.Date;
  * @author Семакин Виктор
  */
 @XmlRootElement
+
 public class InterviewResult {
     private long id;
-    private long userId;
-    private long superUserId;
+    private Long userId;
+    private Long superUserId;
     private Date createdAt;
     private short totalRating;
+
+    private User user;
+    private Superuser superuser;
 
     public long getId() {
         return id;
@@ -22,24 +27,6 @@ public class InterviewResult {
     @XmlElement
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    @XmlElement
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public long getSuperUserId() {
-        return superUserId;
-    }
-
-    @XmlElement
-    public void setSuperUserId(long superUserId) {
-        this.superUserId = superUserId;
     }
 
     public Date getCreatedAt() {
@@ -58,5 +45,41 @@ public class InterviewResult {
     @XmlElement
     public void setTotalRating(short totalRating) {
         this.totalRating = totalRating;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    @XmlElement
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @XmlElement
+    public Superuser getSuperuser() {
+        return superuser;
+    }
+
+    public void setSuperuser(Superuser superuser) {
+        this.superuser = superuser;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    @XmlTransient()
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public long getSuperUserId() {
+        return superUserId;
+    }
+
+    @XmlTransient
+    public void setSuperUserId(Long superUserId) {
+        this.superUserId = superUserId;
     }
 }

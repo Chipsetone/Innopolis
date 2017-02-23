@@ -22,18 +22,18 @@ public class AllTablesMarshaller {
 
         InterviewDbMarshaller interviewMarshaller = new InterviewDbMarshaller(serializer);
         InterviewDAO interviewDAO = new InterviewDAO(connectionFactory);
-        interviewMarshaller.marshalTable(interviewDAO, "interviews.xml");
+        interviewMarshaller.marshalTable(interviewDAO, FileNames.interviewFileName);
 
         UserDbMarshaller userMarshaller = new UserDbMarshaller(serializer);
         UserDAO userDAO = new UserDAO(connectionFactory);
-        userMarshaller.marshalTable(userDAO, "users.xml");
+        userMarshaller.marshalTable(userDAO, FileNames.userFilename);
 
         SuperuserDbMarshaller superuserDbMarshaller = new SuperuserDbMarshaller(serializer);
         SuperuserDAO superuserDAO = new SuperuserDAO(connectionFactory);
-        superuserDbMarshaller.marshalTable(superuserDAO, "superusers.xml");
+        superuserDbMarshaller.marshalTable(superuserDAO, FileNames.superUserFileName);
 
         InterviewResultDbMarshaller interviewResultMarshaller = new InterviewResultDbMarshaller(serializer);
         InterviewResultDAO interviewResultDAO = new InterviewResultDAO(connectionFactory);
-        interviewResultMarshaller.marshalTable(interviewResultDAO, "interviewresults.xml");
+        interviewResultMarshaller.marshalTable(interviewResultDAO, FileNames.interviewResultFileName);
     }
 }
