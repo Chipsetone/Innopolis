@@ -32,6 +32,10 @@
       <module name="Lection7_2_Loggers" target="" />
       <module name="Lection7_3_ClassLoader" target="" />
       <module name="Lection7_4_jdbc" target="" />
+      <module name="servlet_main" target="1.5" />
+      <module name="servlet_test" target="1.5" />
+      <module name="students_web_main" target="1.5" />
+      <module name="students_web_test" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
