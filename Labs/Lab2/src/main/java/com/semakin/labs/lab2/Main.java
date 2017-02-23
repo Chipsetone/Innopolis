@@ -15,20 +15,11 @@ import java.util.List;
 public class Main {
     private static final Logger logger = Logger.getLogger(Main.class);
     public static void main(String[] args)  {
-//       serializeTables();
-
         //ExecutorService service = Executors.newFixedThreadPool(4);
 
+        serializeTables();
         cleanTables();
-//        deserializeTables();
-
-
-//        presentDeserialize();
-
-        // вставить таблицу user
-        // superuser
-        // interview
-        // interviewResult - ждет user и superuser
+        deserializeTables();
     }
 
     private static void serializeTables(){
