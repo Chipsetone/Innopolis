@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Lab1" />
         <module name="Lab2" />
-        <module name="Lection3_3_StudentsForWeb" />
         <module name="Lection3_CarShop" />
         <module name="Lection4_DoubleTask_Semakin" />
         <module name="Lection5_Serializer" />
@@ -34,6 +33,8 @@
       <module name="Lection7_4_jdbc" target="" />
       <module name="servlet_main" target="1.5" />
       <module name="servlet_test" target="1.5" />
+      <module name="student_main" target="1.8" />
+      <module name="student_test" target="1.8" />
       <module name="students_web_main" target="1.8" />
       <module name="students_web_test" target="1.8" />
     </bytecodeTargetLevel>

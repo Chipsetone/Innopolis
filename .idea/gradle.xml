@@ -12,6 +12,17 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Lections/Lection3_4/student_web_servlet" />
+        <option name="gradleHome" value="C:/Program Files/gradle-3.3" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/Lections/Lection3_4/student_web_servlet" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/Lections/Lection3_4/students_web" />
         <option name="gradleJvm" value="1.8" />
