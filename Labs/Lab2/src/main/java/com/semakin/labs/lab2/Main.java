@@ -7,10 +7,10 @@ import com.semakin.labs.lab2.dao.UserDAO;
 import com.semakin.labs.lab2.db.ConnectionFactory;
 import com.semakin.labs.lab2.db.IConnectionFactory;
 import com.semakin.labs.lab2.dbMarshallers.*;
-import com.semakin.labs.lab2.entitiessimple.Interview;
-import com.semakin.labs.lab2.entitiessimple.InterviewResult;
-import com.semakin.labs.lab2.entitiessimple.Superuser;
-import com.semakin.labs.lab2.entitiessimple.User;
+import com.semakin.labs.lab2.entities.Interview;
+import com.semakin.labs.lab2.entities.InterviewResult;
+import com.semakin.labs.lab2.entities.Superuser;
+import com.semakin.labs.lab2.entities.User;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -22,10 +22,16 @@ import java.util.Random;
  */
 public class Main {
     public static void main(String[] args) throws SQLException, NoSuchFieldException, IllegalAccessException {
-        PresentSerializeList();
+        presentSerializeList();
+        presentDeserialize();
     }
 
-    private static void PresentSerializeList(){
+    private static void presentDeserialize(){
+        AllTablesMarshaller allTablesMarshaller = new AllTablesMarshaller(ConnectionFactory.getInstance());
+        allTablesMarshaller.unmarshallTables();
+    }
+
+    private static void presentSerializeList(){
         AllTablesMarshaller allTablesMarshaller = new AllTablesMarshaller(ConnectionFactory.getInstance());
         allTablesMarshaller.marshallTables();
     }

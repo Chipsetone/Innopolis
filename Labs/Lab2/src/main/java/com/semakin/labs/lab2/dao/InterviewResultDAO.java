@@ -1,10 +1,11 @@
 package com.semakin.labs.lab2.dao;
 
 import com.semakin.labs.lab2.db.IConnectionFactory;
-import com.semakin.labs.lab2.entitiessimple.InterviewResult;
-import com.semakin.labs.lab2.entitiessimple.Superuser;
-import com.semakin.labs.lab2.entitiessimple.User;
+import com.semakin.labs.lab2.entities.InterviewResult;
+import com.semakin.labs.lab2.entities.Superuser;
+import com.semakin.labs.lab2.entities.User;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,8 +17,13 @@ import java.util.List;
 public class InterviewResultDAO extends AbstractDAO<InterviewResult> implements IEntityQueryable<InterviewResult> {
     private static final String TABLE_NAME = "stc.public.interview_result";
 
+    private UserDAO userDAO;
+    private SuperuserDAO superuserDAO;
+
     public InterviewResultDAO(IConnectionFactory connectionFactory) {
         super(connectionFactory);
+        this.userDAO = new UserDAO(connectionFactory);
+        this.superuserDAO = new SuperuserDAO(connectionFactory);
     }
 
     @Override
@@ -69,6 +75,20 @@ public class InterviewResultDAO extends AbstractDAO<InterviewResult> implements 
         interviewResult.setUserId(resultSet.getLong("user_id"));
         interviewResult.setSuperUserId(resultSet.getLong("superuser_id"));
         interviewResult.setTotalRating(resultSet.getShort("total_rating"));
+
+        Long userId = interviewResult.getUserId();
+        Long superUserId = interviewResult.getSuperUserId();
+
+        if (userId != null) {
+            User user = userDAO.selectById(userId);
+            interviewResult.setUser(user);
+        }
+
+        if(superUserId != null){
+            Superuser superuser = superuserDAO.selectById(superUserId);
+            interviewResult.setSuperuser(superuser);
+        }
+
 
         return interviewResult;
     }

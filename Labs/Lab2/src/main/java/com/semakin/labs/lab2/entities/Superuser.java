@@ -1,4 +1,4 @@
-package com.semakin.labs.lab2.entitiessimple;
+package com.semakin.labs.lab2.entities;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

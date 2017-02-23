@@ -1,7 +1,8 @@
-package com.semakin.labs.lab2.entitiessimple;
+package com.semakin.labs.lab2.entities;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.sql.Date;
 
 /**
@@ -17,6 +18,7 @@ public class User {
     private String lastName;
     private String email;
     private String phone;
+    private String birthDateString;
     private Date birthDate;
 
     public long getId() {
@@ -86,8 +88,19 @@ public class User {
         return birthDate;
     }
 
-    @XmlElement
+    @XmlTransient
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+
+    public String getBirthDateString() {
+        return getBirthDate().toString();
+//        return birthDateString;
+    }
+    @XmlElement(name="birthdate")
+    public void setBirthDateString(String birthDateString) {
+        this.birthDateString = birthDateString;
+        this.setBirthDate(Date.valueOf(birthDateString));
     }
 }

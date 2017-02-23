@@ -36,4 +36,20 @@ public class AllTablesMarshaller {
         InterviewResultDAO interviewResultDAO = new InterviewResultDAO(connectionFactory);
         interviewResultMarshaller.marshalTable(interviewResultDAO, FileNames.interviewResultFileName);
     }
+
+    public void unmarshallTables(){
+        XmlSerializer serializer = new XmlSerializer();
+
+        InterviewDbMarshaller interviewDbMarshaller = new InterviewDbMarshaller(serializer);
+        UserDbMarshaller userDbMarshaller = new UserDbMarshaller(serializer);
+        SuperuserDbMarshaller superuserDbMarshaller = new SuperuserDbMarshaller(serializer);
+        InterviewResultDbMarshaller interviewResultDbMarshaller = new InterviewResultDbMarshaller(serializer);
+
+        interviewDbMarshaller.unmarshallTable(FileNames.interviewFileName);
+        superuserDbMarshaller.unmarshallTable(FileNames.superUserFileName);
+
+        userDbMarshaller.unmarshallTable(FileNames.userFilename);
+
+        interviewResultDbMarshaller.unmarshallTable(FileNames.interviewResultFileName);
+    }
 }

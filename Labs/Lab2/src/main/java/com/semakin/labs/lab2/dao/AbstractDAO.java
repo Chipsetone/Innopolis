@@ -1,6 +1,7 @@
 package com.semakin.labs.lab2.dao;
 
 import com.semakin.labs.lab2.db.IConnectionFactory;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,8 @@ import java.util.List;
  * @author Семакин Виктор
  */
 public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
+    private static Logger logger = Logger.getLogger(AbstractDAO.class);
+
     private final Connection connection;
     private static final String SELECT_QUERY = "SELECT * FROM ";
     private IConnectionFactory connectionFactory;
@@ -26,8 +29,7 @@ public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
         try {
             return connection.prepareStatement(sqlQuery);
         } catch (SQLException e) {
-            e.printStackTrace();
-            //TODO прилепить логгер не забыть
+            logger.error(e);
         }
         return null;
     }
@@ -56,8 +58,21 @@ public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
 
         PreparedStatement statement = getPreparedStatement(sqlQuery);
         statement.setLong(1, id);
-        System.out.println(statement + " id=" + id);
+        logger.info(statement + " id=" + id);
         statement.executeUpdate();
+    }
+
+    @Override
+    public void deleteAll() {
+        String sqlQuery = "DELETE FROM " + getTableName();
+
+        try(Connection conn = getConnectionFactory().getConnection();
+            PreparedStatement statement = conn.prepareStatement(sqlQuery)) {
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            logger.error(e);
+        }
     }
 
     public List<T> selectAll() {
@@ -72,14 +87,14 @@ public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
         PreparedStatement statement = getPreparedStatement(sqlQuery);
         try {
             statement.setLong(1, id);
-            System.out.println(sqlQuery + " id=" + id);
+            logger.info(sqlQuery + " id=" + id);
 
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()) {
                 return getEntityFromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -96,7 +111,7 @@ public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
                 entities.add(getEntityFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -109,7 +124,7 @@ public abstract class AbstractDAO<T> implements IEntityQueryable<T> {
 
 
     protected void executePreparedStatement(PreparedStatement statement) throws SQLException {
-        System.out.println(statement);
+        logger.info(statement);
         try{
             statement.execute();
         }

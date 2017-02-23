@@ -11,4 +11,5 @@ public interface IEntityQueryable<T> {
     List<T> selectAll();
     void insert(T entity) throws SQLException;
     void deleteById(long id) throws SQLException;
+    void deleteAll();
 }

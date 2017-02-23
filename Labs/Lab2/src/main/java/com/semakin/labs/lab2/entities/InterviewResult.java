@@ -1,8 +1,6 @@
-package com.semakin.labs.lab2.entitiessimple;
+package com.semakin.labs.lab2.entities;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 import java.sql.Date;
 
 /**
@@ -10,7 +8,7 @@ import java.sql.Date;
  * @author Семакин Виктор
  */
 @XmlRootElement
-
+//@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
 public class InterviewResult {
     private long id;
     private Long userId;
@@ -33,9 +31,18 @@ public class InterviewResult {
         return createdAt;
     }
 
-    @XmlElement
+    @XmlTransient
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getCreatedAtString() {
+        return getCreatedAt().toString();
+    }
+
+    @XmlTransient
+    public void setCreatedAtString(String createdAtString) {
+        setCreatedAt(Date.valueOf(createdAtString));
     }
 
     public short getTotalRating() {

@@ -1,6 +1,6 @@
 package com.semakin.labs.lab2.XmlListEntities;
 
-import com.semakin.labs.lab2.entitiessimple.Interview;
+import com.semakin.labs.lab2.entities.Interview;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
