@@ -16,7 +16,7 @@ public class ConnectionFactory implements IConnectionFactory {
     private static final String url = "jdbc:postgresql://localhost:5432/stc";
     private static final String login = "postgres";
     private static final String password = "admin";
-
+    private static final String className = "org.postgresql.Driver";
 
 
     public static IConnectionFactory getInstance() {
@@ -27,7 +27,7 @@ public class ConnectionFactory implements IConnectionFactory {
 
 
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName(className);
             dbConnection = DriverManager.getConnection(url, login, password);
             // TODO инициализировать ConnectionPool по url, логину и паролю
 

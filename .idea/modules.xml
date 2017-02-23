@@ -16,12 +16,9 @@
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection7_2_Loggers/Lection7_2_Loggers.iml" filepath="$PROJECT_DIR$/Lections/Lection7_2_Loggers/Lection7_2_Loggers.iml" group="Lections/Week2" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection7_3/Lection7_3_ClassLoader/Lection7_3_ClassLoader.iml" filepath="$PROJECT_DIR$/Lections/Lection7_3/Lection7_3_ClassLoader/Lection7_3_ClassLoader.iml" group="Lections/Week2" />
       <module fileurl="file://$PROJECT_DIR$/Lections/Lection7_4_jdbc/Lection7_4_jdbc.iml" filepath="$PROJECT_DIR$/Lections/Lection7_4_jdbc/Lection7_4_jdbc.iml" group="Lections/Week2" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/servlet.iml" filepath="$PROJECT_DIR$/.idea/modules/servlet.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/servlet_main.iml" filepath="$PROJECT_DIR$/.idea/modules/servlet_main.iml" group="servlet" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/servlet_test.iml" filepath="$PROJECT_DIR$/.idea/modules/servlet_test.iml" group="servlet" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/student.iml" filepath="$PROJECT_DIR$/.idea/modules/student.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/student_main.iml" filepath="$PROJECT_DIR$/.idea/modules/student_main.iml" group="student" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/student_test.iml" filepath="$PROJECT_DIR$/.idea/modules/student_test.iml" group="student" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WebStudents.iml" filepath="$PROJECT_DIR$/.idea/modules/WebStudents.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WebStudents_main.iml" filepath="$PROJECT_DIR$/.idea/modules/WebStudents_main.iml" group="WebStudents" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WebStudents_test.iml" filepath="$PROJECT_DIR$/.idea/modules/WebStudents_test.iml" group="WebStudents" />
     </modules>
   </component>
 </project>

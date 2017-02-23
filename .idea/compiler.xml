@@ -20,27 +20,18 @@
     <bytecodeTargetLevel target="1.8">
       <module name="ControlWork1" target="" />
       <module name="ExercisesAndTasks" target="" />
-      <module name="Lab1" target="1.5" />
-      <module name="Lab2" target="1.5" />
-      <module name="Lab3_main" target="1.5" />
-      <module name="lab3_main" target="1.5" />
-      <module name="lab3_test" target="1.5" />
-      <module name="Lab3_test" target="1.5" />
-      <module name="Lection3_3_Servlet1_main" target="" />
-      <module name="Lection3_3_Servlet1_test" target="" />
-      <module name="Lection3_3_StudentsForWeb" target="" />
+      <module name="Lab1" target="" />
+      <module name="Lab2" target="" />
+      <module name="Lab3_main" target="" />
+      <module name="Lab3_test" target="" />
       <module name="Lection3_CarShop" target="" />
       <module name="Lection4_DoubleTask_Semakin" target="" />
       <module name="Lection5_Serializer" target="" />
       <module name="Lection7_2_Loggers" target="" />
       <module name="Lection7_3_ClassLoader" target="" />
       <module name="Lection7_4_jdbc" target="" />
-      <module name="servlet_main" target="1.5" />
-      <module name="servlet_test" target="1.5" />
-      <module name="student_main" target="1.8" />
-      <module name="student_test" target="1.8" />
-      <module name="students_web_main" target="1.8" />
-      <module name="students_web_test" target="1.8" />
+      <module name="WebStudents_main" target="" />
+      <module name="WebStudents_test" target="" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

@@ -1,4 +1,4 @@
-group 'students_web'
+group 'students'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

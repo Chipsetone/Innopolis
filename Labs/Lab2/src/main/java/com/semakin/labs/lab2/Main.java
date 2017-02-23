@@ -6,10 +6,7 @@ import com.semakin.labs.lab2.dao.SuperuserDAO;
 import com.semakin.labs.lab2.dao.UserDAO;
 import com.semakin.labs.lab2.db.ConnectionFactory;
 import com.semakin.labs.lab2.db.IConnectionFactory;
-import com.semakin.labs.lab2.dbMarshallers.InterviewDbMarshaller;
-import com.semakin.labs.lab2.dbMarshallers.InterviewResultDbMarshaller;
-import com.semakin.labs.lab2.dbMarshallers.SuperuserDbMarshaller;
-import com.semakin.labs.lab2.dbMarshallers.UserDbMarshaller;
+import com.semakin.labs.lab2.dbMarshallers.*;
 import com.semakin.labs.lab2.entitiessimple.Interview;
 import com.semakin.labs.lab2.entitiessimple.InterviewResult;
 import com.semakin.labs.lab2.entitiessimple.Superuser;
@@ -29,29 +26,13 @@ public class Main {
     }
 
     private static void PresentSerializeList(){
-        IConnectionFactory connectionFactory = ConnectionFactory.getInstance();
-        XmlSerializer serializer = new XmlSerializer();
-
-        InterviewDbMarshaller interviewMarshaller = new InterviewDbMarshaller(serializer);
-        InterviewDAO interviewDAO = new InterviewDAO(connectionFactory);
-        interviewMarshaller.marshalTable(interviewDAO, "interviews.xml");
-
-        UserDbMarshaller userMarshaller = new UserDbMarshaller(serializer);
-        UserDAO userDAO = new UserDAO(connectionFactory);
-        userMarshaller.marshalTable(userDAO, "users.xml");
-
-        SuperuserDbMarshaller superuserDbMarshaller = new SuperuserDbMarshaller(serializer);
-        SuperuserDAO superuserDAO = new SuperuserDAO(connectionFactory);
-        superuserDbMarshaller.marshalTable(superuserDAO, "superusers.xml");
-
-        InterviewResultDbMarshaller interviewResultMarshaller = new InterviewResultDbMarshaller(serializer);
-        InterviewResultDAO interviewResultDAO = new InterviewResultDAO(connectionFactory);
-        interviewResultMarshaller.marshalTable(interviewResultDAO, "interviewresults.xml");
+        AllTablesMarshaller allTablesMarshaller = new AllTablesMarshaller(ConnectionFactory.getInstance());
+        allTablesMarshaller.marshallTables();
     }
 
     private static void presentXML(){
         Random rand = new Random();
-        int randNumber = rand.nextInt();
+        final int randNumber = rand.nextInt();
 
         Interview interview = new Interview() {{
             setName("" + randNumber);
@@ -86,7 +67,7 @@ public class Main {
         InterviewResultDAO interviewResultDAO = new InterviewResultDAO(factory);
         Random rand = new Random();
 
-        int randNumber = rand.nextInt();
+        final int randNumber = rand.nextInt();
 
         // INSERT
         InterviewResult interviewResult = new InterviewResult() {{
@@ -134,7 +115,7 @@ public class Main {
         InterviewDAO interviewDAO = new InterviewDAO(factory);
         Random rand = new Random();
 
-        int randNumber = rand.nextInt();
+        final int randNumber = rand.nextInt();
 
         // INSERT
         Interview interview = new Interview() {{
@@ -174,7 +155,7 @@ public class Main {
     private static void presentSuperUser(IConnectionFactory factory) throws SQLException {
         SuperuserDAO superuserDAO = new SuperuserDAO(factory);
         Random rand = new Random();
-        int randNumber = rand.nextInt();
+        final int randNumber = rand.nextInt();
         
         // INSERT
         Superuser superuser = new Superuser(){{
