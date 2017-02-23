@@ -1,6 +1,6 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.IConnectionFactory;
+import com.semakin.labs.lab2.connection.IConnectionFactory;
 import com.semakin.labs.lab2.entities.User;
 
 import java.sql.PreparedStatement;
@@ -33,8 +33,8 @@ public class UserDAO extends AbstractDAO<User> implements IEntityQueryable<User>
     }
 
     public void insert(User user) throws SQLException {
-        final String INSERT_QUERY_NAMES = "bitrix_id,firstName,middleName,lastName, email, phone, birthDate";
-        final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?,?,?,?)";
+        final String INSERT_QUERY_NAMES = "bitrix_id,firstName,middleName,lastName, email, phone, birthDate, id";
+        final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?,?,?,?,?)";
 
         PreparedStatement statement = getPreparedStatement(INSERT_QUERY);
 
@@ -45,7 +45,7 @@ public class UserDAO extends AbstractDAO<User> implements IEntityQueryable<User>
         statement.setString(5, user.getEmail());
         statement.setString(6, user.getPhone());
         statement.setDate(7, user.getBirthDate());
-
+        statement.setLong(8, user.getId());
         executePreparedStatement(statement);
     }
 

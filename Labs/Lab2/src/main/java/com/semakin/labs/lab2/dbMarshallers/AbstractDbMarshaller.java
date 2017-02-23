@@ -1,5 +1,6 @@
 package com.semakin.labs.lab2.dbMarshallers;
 
+import com.semakin.labs.lab2.XmlListEntities.IListEntities;
 import com.semakin.labs.lab2.XmlSerializer;
 import com.semakin.labs.lab2.dao.IEntityQueryable;
 
@@ -21,5 +22,5 @@ public abstract class AbstractDbMarshaller<T> {
 
     public abstract void marshalTable(IEntityQueryable<T> entityDao, String filePath);
 
-    public abstract void unmarshallTable(String filePath);
+    public abstract IListEntities<T> unmarshallTable(String filePath);
 }

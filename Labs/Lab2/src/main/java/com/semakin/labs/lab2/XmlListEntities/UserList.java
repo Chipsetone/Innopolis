@@ -10,15 +10,15 @@ import java.util.List;
  * @author Семакин Виктор
  */
 @XmlRootElement(name = "users")
-public class UserList{
+public class UserList implements  IListEntities<User>{
     private List<User> userList;
 
-    public List<User> getUserList() {
+    public List<User> getList() {
         return userList;
     }
 
     @XmlElement(name = "user")
-    public void setUserList(List<User> userList) {
+    public void setList(List<User> userList) {
         this.userList = userList;
     }
 }

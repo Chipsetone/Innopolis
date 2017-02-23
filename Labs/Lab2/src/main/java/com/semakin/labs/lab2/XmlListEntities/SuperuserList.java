@@ -10,15 +10,15 @@ import java.util.List;
  * @author Семакин Виктор
  */
 @XmlRootElement(name = "superusers")
-public class SuperuserList  {
+public class SuperuserList implements IListEntities<Superuser> {
     private List<Superuser> superusers;
 
-    public List<Superuser> getSuperusers() {
+    public List<Superuser> getList() {
         return superusers;
     }
 
     @XmlElement(name = "superuser")
-    public void setSuperusers(List<Superuser> superusers) {
+    public void setList(List<Superuser> superusers) {
         this.superusers = superusers;
     }
 }

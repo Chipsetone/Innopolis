@@ -1,6 +1,6 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.IConnectionFactory;
+import com.semakin.labs.lab2.connection.IConnectionFactory;
 import com.semakin.labs.lab2.entities.Interview;
 
 import java.sql.PreparedStatement;
@@ -19,11 +19,12 @@ public class InterviewDAO extends AbstractDAO<Interview> implements IEntityQuery
 
     @Override
     public void insert(Interview interview) throws SQLException {
-        final String INSERT_QUERY_NAMES = "name";
-        final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?)";
+        final String INSERT_QUERY_NAMES = "name, id";
+        final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?)";
 
         PreparedStatement statement = getPreparedStatement(INSERT_QUERY);
         statement.setString(1, interview.getName());
+        statement.setLong(2, interview.getId());
 
         executePreparedStatement(statement);
     }

@@ -1,6 +1,6 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.IConnectionFactory;
+import com.semakin.labs.lab2.connection.IConnectionFactory;
 import com.semakin.labs.lab2.entities.Superuser;
 
 import java.sql.PreparedStatement;
@@ -37,14 +37,15 @@ public class SuperuserDAO extends AbstractDAO<Superuser> implements IEntityQuery
 
     @Override
     public void insert(Superuser superuser) throws SQLException {
-        final String INSERT_QUERY_NAMES = "firstName,middleName,lastName, email";
-        final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?)";
+        final String INSERT_QUERY_NAMES = "firstName,middleName,lastName, email, id";
+        final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?,?)";
 
         PreparedStatement statement = getPreparedStatement(INSERT_QUERY);
         statement.setString(1, superuser.getFirstName());
         statement.setString(2, superuser.getMiddleName());
         statement.setString(3, superuser.getLastName());
         statement.setString(4, superuser.getEmail());
+        statement.setLong(5, superuser.getId());
 
         executePreparedStatement(statement);
     }

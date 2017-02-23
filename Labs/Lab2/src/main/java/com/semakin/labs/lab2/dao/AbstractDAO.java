@@ -1,6 +1,6 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.IConnectionFactory;
+import com.semakin.labs.lab2.connection.IConnectionFactory;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;

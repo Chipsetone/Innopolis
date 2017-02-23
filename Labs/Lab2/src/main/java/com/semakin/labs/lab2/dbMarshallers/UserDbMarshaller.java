@@ -1,5 +1,6 @@
 package com.semakin.labs.lab2.dbMarshallers;
 
+import com.semakin.labs.lab2.XmlListEntities.IListEntities;
 import com.semakin.labs.lab2.XmlSerializer;
 import com.semakin.labs.lab2.dao.IEntityQueryable;
 import com.semakin.labs.lab2.XmlListEntities.UserList;
@@ -20,18 +21,17 @@ public class UserDbMarshaller extends AbstractDbMarshaller<User>{
     public void marshalTable(IEntityQueryable<User> entityDao, String filePath) {
         List<User> entities = entityDao.selectAll();
         UserList entityList = new UserList();
-        entityList.setUserList(entities);
+        entityList.setList(entities);
 
         xmlSerializer.serializeToFile(getEntityListClass(), entityList, filePath);
     }
 
     @Override
-    public void unmarshallTable(String filePath) {
+    public IListEntities<User> unmarshallTable(String filePath) {
         UserList userList = (UserList)xmlSerializer.deserializeFromFile(getEntityListClass(), filePath);
 
-        for (User user :
-                userList.getUserList()) {
-            System.out.println(user);
-        }
+        return userList;
     }
+
+//    public void
 }

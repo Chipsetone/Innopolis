@@ -5,7 +5,7 @@ import com.semakin.labs.lab2.dao.InterviewDAO;
 import com.semakin.labs.lab2.dao.InterviewResultDAO;
 import com.semakin.labs.lab2.dao.SuperuserDAO;
 import com.semakin.labs.lab2.dao.UserDAO;
-import com.semakin.labs.lab2.db.IConnectionFactory;
+import com.semakin.labs.lab2.connection.IConnectionFactory;
 
 /**
  * @author Семакин Виктор
@@ -40,16 +40,14 @@ public class AllTablesMarshaller {
     public void unmarshallTables(){
         XmlSerializer serializer = new XmlSerializer();
 
-        InterviewDbMarshaller interviewDbMarshaller = new InterviewDbMarshaller(serializer);
-        UserDbMarshaller userDbMarshaller = new UserDbMarshaller(serializer);
-        SuperuserDbMarshaller superuserDbMarshaller = new SuperuserDbMarshaller(serializer);
-        InterviewResultDbMarshaller interviewResultDbMarshaller = new InterviewResultDbMarshaller(serializer);
+        AbstractDbMarshaller interviewDbMarshaller = new InterviewDbMarshaller(serializer);
+        AbstractDbMarshaller userDbMarshaller = new UserDbMarshaller(serializer);
+        AbstractDbMarshaller superuserDbMarshaller = new SuperuserDbMarshaller(serializer);
+        AbstractDbMarshaller interviewResultDbMarshaller = new InterviewResultDbMarshaller(serializer);
 
         interviewDbMarshaller.unmarshallTable(FileNames.interviewFileName);
         superuserDbMarshaller.unmarshallTable(FileNames.superUserFileName);
-
         userDbMarshaller.unmarshallTable(FileNames.userFilename);
-
         interviewResultDbMarshaller.unmarshallTable(FileNames.interviewResultFileName);
     }
 }

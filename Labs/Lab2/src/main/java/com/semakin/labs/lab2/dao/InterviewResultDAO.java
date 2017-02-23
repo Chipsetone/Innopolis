@@ -1,6 +1,6 @@
 package com.semakin.labs.lab2.dao;
 
-import com.semakin.labs.lab2.db.IConnectionFactory;
+import com.semakin.labs.lab2.connection.IConnectionFactory;
 import com.semakin.labs.lab2.entities.InterviewResult;
 import com.semakin.labs.lab2.entities.Superuser;
 import com.semakin.labs.lab2.entities.User;
@@ -55,14 +55,16 @@ public class InterviewResultDAO extends AbstractDAO<InterviewResult> implements 
 
     @Override
     public void insert(InterviewResult interviewResult) throws SQLException {
-        final String INSERT_QUERY_NAMES = "user_id, superuser_id, created_at, total_rating";
-        final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?)";
+        final String INSERT_QUERY_NAMES = "id, user_id, superuser_id, created_at, total_rating";
+        final String INSERT_QUERY = "INSERT INTO " + getTableName() + "("+ INSERT_QUERY_NAMES + ") VALUES(?,?,?,?,?)";
 
         PreparedStatement statement = getPreparedStatement(INSERT_QUERY);
-        statement.setLong(1, interviewResult.getUserId());
-        statement.setLong(2, interviewResult.getSuperUserId());
-        statement.setDate(3, interviewResult.getCreatedAt());
-        statement.setShort(4, interviewResult.getTotalRating());
+
+        statement.setLong(1, interviewResult.getId());
+        statement.setLong(2, interviewResult.getUserId());
+        statement.setLong(3, interviewResult.getSuperUserId());
+        statement.setDate(4, Date.valueOf(interviewResult.getCreatedAt()));
+        statement.setShort(5, interviewResult.getTotalRating());
 
         executePreparedStatement(statement);
     }
@@ -75,6 +77,7 @@ public class InterviewResultDAO extends AbstractDAO<InterviewResult> implements 
         interviewResult.setUserId(resultSet.getLong("user_id"));
         interviewResult.setSuperUserId(resultSet.getLong("superuser_id"));
         interviewResult.setTotalRating(resultSet.getShort("total_rating"));
+        interviewResult.setCreatedAt(resultSet.getDate("created_at").toString());
 
         Long userId = interviewResult.getUserId();
         Long superUserId = interviewResult.getSuperUserId();

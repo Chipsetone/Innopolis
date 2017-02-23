@@ -13,7 +13,7 @@ public class InterviewResult {
     private long id;
     private Long userId;
     private Long superUserId;
-    private Date createdAt;
+    private String createdAt;
     private short totalRating;
 
     private User user;
@@ -27,22 +27,23 @@ public class InterviewResult {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public Date getCreatedAtDate() {
+        return Date.valueOf(getCreatedAt());
+    }
+
+    @XmlTransient
+    public void setCreatedAtDate(Date createdAtDate) {
+        this.setCreatedAt(createdAtDate.toString());
+    }
+
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    @XmlTransient
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getCreatedAtString() {
-        return getCreatedAt().toString();
-    }
-
-    @XmlTransient
-    public void setCreatedAtString(String createdAtString) {
-        setCreatedAt(Date.valueOf(createdAtString));
+    @XmlElement(name = "createdAt")
+    public void setCreatedAt(String createdAtString) {
+//        setCreatedAt(Date.valueOf(createdAtString));
+        this.createdAt = createdAtString;
     }
 
     public short getTotalRating() {
@@ -61,6 +62,7 @@ public class InterviewResult {
     @XmlElement
     public void setUser(User user) {
         this.user = user;
+        this.setUserId(user.getId());
     }
 
     @XmlElement
@@ -70,6 +72,7 @@ public class InterviewResult {
 
     public void setSuperuser(Superuser superuser) {
         this.superuser = superuser;
+        this.setSuperUserId(superuser.getId());
     }
 
     public Long getUserId() {

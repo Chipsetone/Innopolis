@@ -10,15 +10,15 @@ import java.util.List;
  * @author Семакин Виктор
  */
 @XmlRootElement(name = "interviews")
-public class InterviewList {
+public class InterviewList implements IListEntities<Interview> {
     private List<Interview> interviewList;
 
     @XmlElement(name="interview")
-    public void setInterviewList(List<Interview> interviewList) {
+    public void setList(List<Interview> interviewList) {
         this.interviewList = interviewList;
     }
 
-    public List<Interview> getInterviewList(){
+    public List<Interview> getList(){
         return interviewList;
     }
 

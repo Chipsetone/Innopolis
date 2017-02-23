@@ -1,4 +1,4 @@
-package com.semakin.labs.lab2.db;
+package com.semakin.labs.lab2.connection;
 
 import com.semakin.labs.lab2.XmlSerializer;
 import com.semakin.labs.lab2.dao.InterviewDAO;
