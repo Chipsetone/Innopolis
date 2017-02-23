@@ -23,8 +23,24 @@ public class Main {
     }
 
     private static void serializeTables(){
-        AllTablesMarshaller allTablesMarshaller = new AllTablesMarshaller(ConnectionFactory.getInstance());
-        allTablesMarshaller.marshallTables();
+        XmlSerializer serializer = new XmlSerializer();
+        IConnectionFactory connectionFactory = ConnectionFactory.getInstance();
+
+        InterviewDbMarshaller interviewMarshaller = new InterviewDbMarshaller(serializer);
+        InterviewDAO interviewDAO = new InterviewDAO(connectionFactory);
+        interviewMarshaller.marshalTable(interviewDAO, FileNames.interviewFileName);
+
+        UserDbMarshaller userMarshaller = new UserDbMarshaller(serializer);
+        UserDAO userDAO = new UserDAO(connectionFactory);
+        userMarshaller.marshalTable(userDAO, FileNames.userFilename);
+
+        SuperuserDbMarshaller superuserDbMarshaller = new SuperuserDbMarshaller(serializer);
+        SuperuserDAO superuserDAO = new SuperuserDAO(connectionFactory);
+        superuserDbMarshaller.marshalTable(superuserDAO, FileNames.superUserFileName);
+
+        InterviewResultDbMarshaller interviewResultMarshaller = new InterviewResultDbMarshaller(serializer);
+        InterviewResultDAO interviewResultDAO = new InterviewResultDAO(connectionFactory);
+        interviewResultMarshaller.marshalTable(interviewResultDAO, FileNames.interviewResultFileName);
     }
 
     private static void cleanTables(){
