@@ -6,6 +6,8 @@ import com.semakin.labs.lab2.entities.InterviewResult;
 import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Семакин Виктор
@@ -26,6 +28,50 @@ public class InterviewResultTableRestorer extends AbstractTableRestorer<Intervie
     }
 
     @Override
+    protected void insertAllEntitiesInDb(List<InterviewResult> entities) {
+        boolean isNeedInsert = true;
+        while(isNeedInsert){
+            List<InterviewResult> notInsertedItems = insertAndGetNotInserted(entities);
+
+            if(notInsertedItems.size() <= 0){
+                logger.info("все объекты вставлены");
+                isNeedInsert = false;
+                return;
+            }
+            logger.info("отдаем процессорное время другим потокам");
+            Thread.yield();
+
+            if(isStoppedInsertToSubTables()){
+                logger.info("заполнение вложенных таблиц завершено");
+                isNeedInsert = false;
+            }
+        }
+
+        getInsertedObjects().setStopped(true);
+        logger.info(getFileName() + " заполнение таблицы БД завершено");
+    }
+
+    private List<InterviewResult> insertAndGetNotInserted(List<InterviewResult> entities){
+        List<InterviewResult> notInsertedItems = new LinkedList<>();
+        for (InterviewResult entity :
+                entities) {
+
+            if(insertEntityInDb(entity)){
+                markAsInserted(entity);
+            }
+            else{
+                notInsertedItems.add(entity);
+            }
+        }
+
+        return notInsertedItems;
+    }
+
+    private boolean isStoppedInsertToSubTables(){
+        return insertedUsers.isStopped() || insertedSuperUsers.isStopped();
+    }
+
+    @Override
     protected boolean insertEntityInDb(InterviewResult entity) {
         if(canInsertEntity(entity)) {
             try {
@@ -43,15 +89,14 @@ public class InterviewResultTableRestorer extends AbstractTableRestorer<Intervie
     }
 
     private boolean canInsertEntity(InterviewResult interviewResult){
-        return true;
-//        Long userId = interviewResult.getUser().getId();
-//        Long superuserId = interviewResult.getSuperuser().getId();
-//
-//        boolean isInsertItSelf = isYetInserted(interviewResult.getId());
-//        boolean result = insertedUsers.isInserted(userId) && insertedSuperUsers.isInserted(superuserId);
-//
-//        result = result & !isInsertItSelf;
-//        return result;
+        Long userId = interviewResult.getUser().getId();
+        Long superuserId = interviewResult.getSuperuser().getId();
+
+        boolean isInsertItSelf = isYetInserted(interviewResult.getId());
+        boolean result = insertedUsers.isInserted(userId) && insertedSuperUsers.isInserted(superuserId);
+
+        result = result & !isInsertItSelf;
+        return result;
     }
 
     @Override

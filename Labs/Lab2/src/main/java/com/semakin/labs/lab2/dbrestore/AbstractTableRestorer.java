@@ -13,11 +13,11 @@ import java.util.concurrent.Callable;
 public abstract class AbstractTableRestorer<T> implements Callable<Boolean> {
     private static final Logger logger = Logger.getLogger(AbstractTableRestorer.class);
 
-    private String fileName;
+    private final String fileName;
     private AbstractDbMarshaller<T> tableMarshaller;
     private InsertedObjects insertedObjects;
 
-    public AbstractTableRestorer(String fileName, AbstractDbMarshaller tableMarshaller) {
+    public AbstractTableRestorer(final String fileName, AbstractDbMarshaller tableMarshaller) {
         this.fileName = fileName;
         this.tableMarshaller = tableMarshaller;
         this.insertedObjects = new InsertedObjects();
@@ -39,7 +39,6 @@ public abstract class AbstractTableRestorer<T> implements Callable<Boolean> {
     }
 
     protected void insertAllEntitiesInDb(List<T> entities) {
-
         for (T entity :
                 entities) {
 
@@ -47,6 +46,8 @@ public abstract class AbstractTableRestorer<T> implements Callable<Boolean> {
                 markAsInserted(entity);
             }
         }
+        getInsertedObjects().setStopped(true);
+        logger.info(fileName + " заполнение таблицы БД завершено");
     }
 
     protected abstract boolean insertEntityInDb(T entity);
@@ -59,5 +60,9 @@ public abstract class AbstractTableRestorer<T> implements Callable<Boolean> {
 
     protected boolean isYetInserted(Long id){
         return insertedObjects.isInserted(id);
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 }

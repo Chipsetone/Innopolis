@@ -8,6 +8,8 @@ import java.util.HashSet;
 public final class InsertedObjects {
     private HashSet<Long> insertedObjects;
     private final Object locker = new Object();
+    private boolean isStopped = false;
+    private final Object isStoppedLocker = new Object();
 
     public InsertedObjects() {
         this.insertedObjects = new HashSet<>();
@@ -22,6 +24,18 @@ public final class InsertedObjects {
     public void markAsInserted(Long objectId){
         synchronized (locker) {
             insertedObjects.add(objectId);
+        }
+    }
+
+    public boolean isStopped() {
+        synchronized (isStoppedLocker) {
+            return isStopped;
+        }
+    }
+
+    public void setStopped(boolean stopped) {
+        synchronized (isStoppedLocker) {
+            isStopped = stopped;
         }
     }
 }
