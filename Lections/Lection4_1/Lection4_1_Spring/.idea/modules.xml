@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lection4_1_Spring.iml" filepath="$PROJECT_DIR$/.idea/modules/Lection4_1_Spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lection4_1_Spring_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lection4_1_Spring_main.iml" group="Lection4_1_Spring" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lection4_1_Spring_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lection4_1_Spring_test.iml" group="Lection4_1_Spring" />
+    </modules>
+  </component>
+</project>
