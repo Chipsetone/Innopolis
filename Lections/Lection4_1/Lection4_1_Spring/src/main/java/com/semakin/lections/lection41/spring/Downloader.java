@@ -1,4 +1,4 @@
-package com.semakin.lections.lection41.spring.interfaces;
+package com.semakin.lections.lection41.spring;
 
 /**
  * @author Семакин Виктор
