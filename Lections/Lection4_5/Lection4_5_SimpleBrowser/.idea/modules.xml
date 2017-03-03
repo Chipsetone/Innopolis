@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lection4_5_SimpleBrowser.iml" filepath="$PROJECT_DIR$/.idea/modules/Lection4_5_SimpleBrowser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lection4_5_SimpleBrowser_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lection4_5_SimpleBrowser_main.iml" group="Lection4_5_SimpleBrowser" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lection4_5_SimpleBrowser_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lection4_5_SimpleBrowser_test.iml" group="Lection4_5_SimpleBrowser" />
+    </modules>
+  </component>
+</project>
