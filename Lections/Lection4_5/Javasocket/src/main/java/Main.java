@@ -6,6 +6,9 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
+        ` lambda = a -> {
+            return a;
+        };
 
 
         Thread server = new Thread(new Runnable() {

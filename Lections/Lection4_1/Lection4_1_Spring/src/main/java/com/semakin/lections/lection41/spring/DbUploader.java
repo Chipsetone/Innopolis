@@ -1,5 +1,7 @@
 package com.semakin.lections.lection41.spring;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author Семакин Виктор
  */
