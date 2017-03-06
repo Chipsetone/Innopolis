@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>81be8b48-b801-410d-ba0f-182512574af2.SCHEMA:academ.Main</OriginalElement>
+  <nodes>
+    <node x="253.0" y="0.0">81be8b48-b801-410d-ba0f-182512574af2.TABLE:academ.Main.Student</node>
+    <node x="0.0" y="364.0">81be8b48-b801-410d-ba0f-182512574af2.TABLE:academ.Main.User</node>
+    <node x="30.0" y="0.0">81be8b48-b801-410d-ba0f-182512574af2.TABLE:academ.Main.Groups</node>
+    <node x="0.0" y="150.0">81be8b48-b801-410d-ba0f-182512574af2.TABLE:academ.Main.Lection</node>
+    <node x="233.0" y="364.0">81be8b48-b801-410d-ba0f-182512574af2.TABLE:academ.Main.journal</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="81be8b48-b801-410d-ba0f-182512574af2.TABLE:academ.Main.Lection" target="81be8b48-b801-410d-ba0f-182512574af2.TABLE:academ.Main.Groups">
+      <point x="0.0" y="-84.5" />
+      <point x="0.0" y="50.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="240.5" y="255.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+
