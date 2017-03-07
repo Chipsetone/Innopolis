@@ -69,6 +69,7 @@ public abstract class ObjectPool<T> implements IObjectPool<T>{
             if(busyObjects.contains(object)){
                 freeObjects.add(object);
                 busyObjects.remove(object);
+                releaseLocker.notify();
             }
         }
     }
