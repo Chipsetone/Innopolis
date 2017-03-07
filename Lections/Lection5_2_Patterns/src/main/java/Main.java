@@ -1,6 +1,6 @@
-import FactoryMethod.CreatorCar;
-import FactoryMethod.CreatorTrain;
-import FactoryMethod.Creator;
+import factoryMethod.CreatorCar;
+import factoryMethod.CreatorTrain;
+import factoryMethod.Creator;
 
 import java.util.ArrayList;
 

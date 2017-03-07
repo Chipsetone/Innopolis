@@ -1,4 +1,4 @@
-package FactoryMethod;
+package factoryMethod;
 
 /**
  * @author Семакин Виктор
