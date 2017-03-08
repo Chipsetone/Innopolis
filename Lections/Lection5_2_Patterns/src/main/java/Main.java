@@ -4,6 +4,10 @@ import cretionalPatterns.factoryMethod.Creator;
 import structurePatterns.adapter.AdapterCompositionVk;
 import structurePatterns.adapter.AdapterGeneralizeTelegram;
 import structurePatterns.adapter.Bot;
+import structurePatterns.bridge.GinekologyHospital;
+import structurePatterns.bridge.Patient;
+import structurePatterns.bridge.RussianPatient;
+import structurePatterns.bridge.SurgeryHospital;
 import structurePatterns.decorator.Cheese;
 import structurePatterns.decorator.Mushrooms;
 import structurePatterns.decorator.Pizza;
@@ -21,7 +25,21 @@ public class Main {
         //factoryMethodTest();
 //        decoratorMethodTest();
 //        adapterMethodTest();
-        facadeMethodTest();
+//        facadeMethodTest();
+        bridgeMethodTest();
+    }
+
+    private static void bridgeMethodTest() {
+        Patient kyleRease = new RussianPatient(new SurgeryHospital());
+        Patient sarahKonor = new RussianPatient(new GinekologyHospital());
+
+        Patient[] patients = {kyleRease, sarahKonor};
+
+        for (Patient patient :
+                patients) {
+            patient.heal();
+
+        }
     }
 
     private static void facadeMethodTest() {
