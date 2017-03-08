@@ -8,6 +8,7 @@ import structurePatterns.decorator.Cheese;
 import structurePatterns.decorator.Mushrooms;
 import structurePatterns.decorator.Pizza;
 import structurePatterns.decorator.Tomato;
+import structurePatterns.facade.HumanFacade;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,14 @@ public class Main {
     public static void main(String[] args) {
 
         //factoryMethodTest();
-//        decoratorMethoTest();
-        adapterMethodTest();
+//        decoratorMethodTest();
+//        adapterMethodTest();
+        facadeMethodTest();
+    }
+
+    private static void facadeMethodTest() {
+        HumanFacade human = new HumanFacade();
+        human.life();
     }
 
     private static void adapterMethodTest() {
@@ -37,7 +44,7 @@ public class Main {
     }
 
 
-    private static void decoratorMethoTest(){
+    private static void decoratorMethodTest(){
         Pizza pizza = new Pizza();
 
         Mushrooms mushrooms = new Mushrooms(pizza);
