@@ -7,8 +7,14 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/org.eclipse.osgi/org.eclipse.osgi
+    compile group: 'org.eclipse.osgi', name: 'org.eclipse.osgi', version: '3.6.0.v20100517'
+
 }

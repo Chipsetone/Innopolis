@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: HelloWorld OSGi
+Bundle-SymbolicName: test.osgi.HelloWorld
+Bundle-Version: 1.0.0
+Bundle-Activator: HelloOSGI
+Import-Package: org.osgi.framework
